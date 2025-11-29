@@ -1,13 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { StartPage } from './components/FirstPage';
+import { PreviousStoryPage } from './components/PreviousStoryPage';
 import { InstructionsPage } from './components/InstructionsPage';
 import { useEffect, useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 const backgroundImage = {
-  start:cfg.images.bgStart || '/images/page/jungle_escape_start_page.png',
+  start:cfg.images.bgStart || '/images/background/jungle_escape_room_01_FHD.png',
+  previousStory: cfg.images.bgPreviousStory || '/images/background/jungle_escape_room_02_FHD.png',
 }
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
     <div className="game-viewport">
       <div style={gameStyle}>
         {page === 'start' && <StartPage navigateTo={navigateTo} backgroundImage={backgroundImage.start} />}
+        {page === 'previousStory' && <PreviousStoryPage navigateTo={navigateTo} backgroundImage={backgroundImage.previousStory} />}
         {page === 'instructions' && <InstructionsPage navigateTo={navigateTo} backgroundImage={backgroundImage.start} />}
       </div>
     </div>

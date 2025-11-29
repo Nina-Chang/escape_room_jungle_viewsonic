@@ -47,7 +47,7 @@ export const StartPage = ({navigateTo,backgroundImage}) => {
   `
 
   const handleStartClick=()=>{
-    navigateTo('instructions');
+    navigateTo('previousStory');
   }
 
 
