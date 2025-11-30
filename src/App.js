@@ -3,6 +3,7 @@ import './App.css';
 import { StartPage } from './components/FirstPage';
 import { PreviousStoryPage } from './components/PreviousStoryPage';
 import { InstructionsPage } from './components/InstructionsPage';
+import { MapPage } from './components/MapPage';
 import { useEffect, useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -10,6 +11,8 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 const backgroundImage = {
   start:cfg.images.bgStart || '/images/background/jungle_escape_room_01_FHD.png',
   previousStory: cfg.images.bgPreviousStory || '/images/background/jungle_escape_room_02_FHD.png',
+  instructions:cfg.images.bgInstructions || '/images/background/jungle_escape_room_03_FHD.png',
+  map:cfg.images.bgMap || '/images/background/jungle_escape_room_04_FHD.png',
 }
 
 function App() {
@@ -39,7 +42,8 @@ function App() {
       <div style={gameStyle}>
         {page === 'start' && <StartPage navigateTo={navigateTo} backgroundImage={backgroundImage.start} />}
         {page === 'previousStory' && <PreviousStoryPage navigateTo={navigateTo} backgroundImage={backgroundImage.previousStory} />}
-        {page === 'instructions' && <InstructionsPage navigateTo={navigateTo} backgroundImage={backgroundImage.start} />}
+        {page === 'instructions' && <InstructionsPage navigateTo={navigateTo} backgroundImage={backgroundImage.instructions} />}
+        {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} />}
       </div>
     </div>
   );
