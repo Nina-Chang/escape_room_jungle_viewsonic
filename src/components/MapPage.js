@@ -123,26 +123,38 @@ export const MapPage = ({ navigateTo, backgroundImage }) => {
             </ExplanationText>
             <RiverCampIcon>
                 <PositionText style={RiverCampTextStyle}>River Camp</PositionText>
-                <img src='/images/object/jungle_escape_river_camp_gray.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93}/>
+                <button className='image-button' onClick={()=>navigateTo('true false item')}>
+                  <img src='/images/object/jungle_escape_river_camp_gray.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93}/>
+                </button>
             </RiverCampIcon>
             <SwampTrapIcon>
-                <img src='/images/object/jungle_escape_swamp_trap_gray.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108}/>
+                <button className='image-button' onClick={()=>navigateTo('wrong place')}>
+                  <img src='/images/object/jungle_escape_swamp_trap_gray.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108}/>
+                </button>
                 <PositionText style={SwampTrapTextStyle}>Swamp Trap</PositionText>
             </SwampTrapIcon>
             <StoneMazeIcon>
-                <img src='/images/object/jungle_escape_stone_maze_gray.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123}/>
+                <button className='image-button'>
+                   <img src='/images/object/jungle_escape_stone_maze_gray.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123}/>
+                </button>
                 <PositionText style={StoneMazeTextStyle}>Stone Maze</PositionText>
             </StoneMazeIcon>
             <BoneHillIcon>
-                <img src='/images/object/jungle_escape_bone_hill_gray.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117}/>
+                <button className='image-button'>
+                   <img src='/images/object/jungle_escape_bone_hill_gray.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117}/>
+                </button>
                 <PositionText style={BoneHillTextStyle}>Bone Hill</PositionText>
             </BoneHillIcon>
             <AncientTempleIcon>
-                <img src='/images/object/jungle_escape_ancient_temple_gray.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131}/>
+                <button className='image-button'>
+                  <img src='/images/object/jungle_escape_ancient_temple_gray.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131}/>
+                </button>
                 <PositionText style={AncientTempleTextStyle}>Ancient Temple</PositionText>
             </AncientTempleIcon>
             <MermaidCaveIcon>
-                <img src='/images/object/jungle_escape_mermaid_cave_gray.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111}/>
+                <button className='image-button'>
+                   <img src='/images/object/jungle_escape_mermaid_cave_gray.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111}/>
+                </button>
                 <PositionText style={MermaidCaveTextStyle}>Mermaid Cave</PositionText>
             </MermaidCaveIcon>
         </div>

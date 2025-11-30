@@ -110,7 +110,7 @@ export const InstructionsPage = ({ navigateTo, backgroundImage }) => {
                 {cfg.strings.instructionsText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`}
             </InstructionsText>
         </InstructionSection>
-        <SoundButton style={imageButton} onClick={() => navigateTo('map')}>
+        <SoundButton style={imageButton} onClick={()=>navigateTo('map')}>
             <img src='images/object/jungle_escape_mission_button.png' alt="Continue" />
             <BtnText>Start Mission</BtnText>
         </SoundButton>

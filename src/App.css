@@ -33,3 +33,10 @@ body, html {
   color: #000000;
 }
 
+.image-button{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+

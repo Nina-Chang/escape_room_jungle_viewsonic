@@ -4,6 +4,8 @@ import { StartPage } from './components/FirstPage';
 import { PreviousStoryPage } from './components/PreviousStoryPage';
 import { InstructionsPage } from './components/InstructionsPage';
 import { MapPage } from './components/MapPage';
+import { WrongPlacePage } from './components/WrongPlacePage';
+import { TrueFalseItemPage } from './components/TrueFalseItemPage';
 import { useEffect, useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -13,6 +15,8 @@ const backgroundImage = {
   previousStory: cfg.images.bgPreviousStory || '/images/background/jungle_escape_room_02_FHD.png',
   instructions:cfg.images.bgInstructions || '/images/background/jungle_escape_room_03_FHD.png',
   map:cfg.images.bgMap || '/images/background/jungle_escape_room_04_FHD.png',
+  wrongPlace: cfg.images.bgWrongPlace || '/images/background/jungle_escape_room_13_FHD.png',
+  trueFalseItem: cfg.images.bgTrueFalseItem || '/images/background/jungle_escape_room_05_FHD.png',
 }
 
 function App() {
@@ -44,6 +48,8 @@ function App() {
         {page === 'previousStory' && <PreviousStoryPage navigateTo={navigateTo} backgroundImage={backgroundImage.previousStory} />}
         {page === 'instructions' && <InstructionsPage navigateTo={navigateTo} backgroundImage={backgroundImage.instructions} />}
         {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} />}
+        {page === 'wrong place' && <WrongPlacePage navigateTo={navigateTo} backgroundImage={backgroundImage.wrongPlace} />}
+        {page === 'true false item' && <TrueFalseItemPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseItem} />}
       </div>
     </div>
   );
