@@ -128,7 +128,7 @@ export const MapPage = ({ navigateTo, backgroundImage }) => {
                 </button>
             </RiverCampIcon>
             <SwampTrapIcon>
-                <button className='image-button' onClick={()=>navigateTo('wrong place')}>
+                <button className='image-button' onClick={()=>navigateTo('single selection')}>
                   <img src='/images/object/jungle_escape_swamp_trap_gray.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108}/>
                 </button>
                 <PositionText style={SwampTrapTextStyle}>Swamp Trap</PositionText>

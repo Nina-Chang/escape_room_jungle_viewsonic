@@ -58,12 +58,12 @@ export const TrueFalseItemPage = ({ navigateTo, backgroundImage }) => {
         </ProblemText>
         <TrueBtnIcon>
             <SoundButton className='image-button'>
-                <img src='/images/object/jungle_escape_true.png' alt="jungle_escape_true" onClick={()=>navigateTo('map')}/>
+                <img src='/images/object/jungle_escape_true.png' alt="jungle_escape_true" onClick={()=>navigateTo('true false completed')}/>
             </SoundButton>
         </TrueBtnIcon>
         <FalseBtnIcon>
             <SoundButton className='image-button'>
-                <img src='/images/object/jungle_escape_false.png' alt="jungle_escape_false" onClick={()=>navigateTo('map')}/>
+                <img src='/images/object/jungle_escape_false.png' alt="jungle_escape_false" onClick={()=>navigateTo('wrong place')}/>
             </SoundButton>
         </FalseBtnIcon>
     </div>

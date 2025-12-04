@@ -6,6 +6,9 @@ import { InstructionsPage } from './components/InstructionsPage';
 import { MapPage } from './components/MapPage';
 import { WrongPlacePage } from './components/WrongPlacePage';
 import { TrueFalseItemPage } from './components/TrueFalseItemPage';
+import { TrueFalseItemCompletedPage } from './components/TrueFalseItemCompletedPage';
+import { SingleSelectionPage } from './components/SingleSelectionPage';
+import { SingleSelectionCompletedPage } from './components/SingleSelectionCompletedPage';
 import { useEffect, useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -17,6 +20,8 @@ const backgroundImage = {
   map:cfg.images.bgMap || '/images/background/jungle_escape_room_04_FHD.png',
   wrongPlace: cfg.images.bgWrongPlace || '/images/background/jungle_escape_room_13_FHD.png',
   trueFalseItem: cfg.images.bgTrueFalseItem || '/images/background/jungle_escape_room_05_FHD.png',
+  trueFalseItemCompleted: cfg.images.bgTrueFalseItemCompleted || '/images/background/jungle_escape_room_06_FHD.png',
+  singleSelection: cfg.images.bgSingleSelection || '/images/background/jungle_escape_room_07_FHD.png',
 }
 
 function App() {
@@ -50,6 +55,9 @@ function App() {
         {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} />}
         {page === 'wrong place' && <WrongPlacePage navigateTo={navigateTo} backgroundImage={backgroundImage.wrongPlace} />}
         {page === 'true false item' && <TrueFalseItemPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseItem} />}
+        {page === 'true false completed' && <TrueFalseItemCompletedPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseItemCompleted} />}
+        {page === 'single selection' && <SingleSelectionPage navigateTo={navigateTo} backgroundImage={backgroundImage.singleSelection} />}
+        {page === 'single selection completed' && <SingleSelectionCompletedPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseItemCompleted} />}
       </div>
     </div>
   );
