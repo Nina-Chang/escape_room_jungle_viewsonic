@@ -134,7 +134,7 @@ export const MapPage = ({ navigateTo, backgroundImage }) => {
                 <PositionText style={SwampTrapTextStyle}>Swamp Trap</PositionText>
             </SwampTrapIcon>
             <StoneMazeIcon>
-                <button className='image-button'>
+                <button className='image-button' onClick={()=>navigateTo('multiple selection')}>
                    <img src='/images/object/jungle_escape_stone_maze_gray.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123}/>
                 </button>
                 <PositionText style={StoneMazeTextStyle}>Stone Maze</PositionText>
