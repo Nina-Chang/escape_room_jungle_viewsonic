@@ -11,6 +11,7 @@ import { SingleSelectionPage } from './components/SingleSelectionPage';
 import { SingleSelectionCompletedPage } from './components/SingleSelectionCompletedPage';
 import { MultipleSelectionPage } from './components/MultipleSelectionPage';
 import { MultipleSelectionCompletedPage } from './components/MultipleSelectionCompletedPage';
+import {WholeGameCompletedPage} from './components/WholeGameCompletedPage'
 import { ClueProblemPage } from './components/ClueProblemPage';
 import { useEffect, useState } from 'react';
 
@@ -26,6 +27,7 @@ const backgroundImage = {
   trueFalseItemCompleted: cfg.images.bgTrueFalseItemCompleted || '/images/background/jungle_escape_room_06_FHD.png',
   singleSelection: cfg.images.bgSingleSelection || '/images/background/jungle_escape_room_07_FHD.png',
   clueProblem: cfg.images.bgClueProblem || '/images/background/jungle_escape_room_11_FHD.png',
+  wholeGameCompleted: cfg.images.bgWholeGameCompleted || '/images/background/jungle_escape_room_12_FHD.png',
 }
 
 function App() {
@@ -65,6 +67,7 @@ function App() {
         {page === 'multiple selection' && <MultipleSelectionPage navigateTo={navigateTo} backgroundImage={backgroundImage.singleSelection} />}
         {page === 'multiple selection completed' && <MultipleSelectionCompletedPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseItemCompleted} />}
         {page === 'clue problem' && <ClueProblemPage navigateTo={navigateTo} backgroundImage={backgroundImage.clueProblem} />}
+        {page === 'game completed' && <WholeGameCompletedPage navigateTo={navigateTo} backgroundImage={backgroundImage.wholeGameCompleted} />}
       </div>
     </div>
   );

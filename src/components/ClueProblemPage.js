@@ -157,7 +157,7 @@ export const ClueProblemPage = ({ navigateTo, backgroundImage }) => {
                         </AnswerOptionSection>
                         <AnswerOptionSection>
                             <AnswerText>{problem[2].option[2]}</AnswerText>
-                            <img src={problem[2].optionImageSrc[2]} style={photoStyle} alt="jungle_escape_id_card03" width={250} onClick={()=>navigateTo('wrong place')}/>    
+                            <img src={problem[2].optionImageSrc[2]} style={photoStyle} alt="jungle_escape_id_card03" width={250} onClick={()=>navigateTo('game completed')}/>    
                         </AnswerOptionSection>
                     </AnswerWithTextSection>
                 </>
