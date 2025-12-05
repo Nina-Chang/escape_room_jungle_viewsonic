@@ -10,6 +10,7 @@ import { TrueFalseItemCompletedPage } from './components/TrueFalseItemCompletedP
 import { SingleSelectionPage } from './components/SingleSelectionPage';
 import { SingleSelectionCompletedPage } from './components/SingleSelectionCompletedPage';
 import { MultipleSelectionPage } from './components/MultipleSelectionPage';
+import { MultipleSelectionCompletedPage } from './components/MultipleSelectionCompletedPage';
 import { useEffect, useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -60,6 +61,7 @@ function App() {
         {page === 'single selection' && <SingleSelectionPage navigateTo={navigateTo} backgroundImage={backgroundImage.singleSelection} />}
         {page === 'single selection completed' && <SingleSelectionCompletedPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseItemCompleted} />}
         {page === 'multiple selection' && <MultipleSelectionPage navigateTo={navigateTo} backgroundImage={backgroundImage.singleSelection} />}
+        {page === 'multiple selection completed' && <MultipleSelectionCompletedPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseItemCompleted} />}
       </div>
     </div>
   );
