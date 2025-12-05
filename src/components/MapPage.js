@@ -146,7 +146,7 @@ export const MapPage = ({ navigateTo, backgroundImage }) => {
                 <PositionText style={BoneHillTextStyle}>Bone Hill</PositionText>
             </BoneHillIcon>
             <AncientTempleIcon>
-                <button className='image-button'>
+                <button className='image-button' onClick={()=>navigateTo('clue problem')}>
                   <img src='/images/object/jungle_escape_ancient_temple_gray.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131}/>
                 </button>
                 <PositionText style={AncientTempleTextStyle}>Ancient Temple</PositionText>
