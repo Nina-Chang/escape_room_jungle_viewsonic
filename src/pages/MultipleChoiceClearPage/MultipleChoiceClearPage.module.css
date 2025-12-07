@@ -1,0 +1,51 @@
+.explanationSection{
+    position: absolute;
+    top:5%;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.explanationTextFirstLine{
+    position: absolute;
+    top:17%;
+    left:50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.explanationTextSecondLine{
+    position: absolute;
+    top:42%;
+    left:50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    font-weight: 800;
+}
+
+.clueSection{
+    position: absolute;
+    top:30%;
+    left:50%;
+    transform: translateX(-50%);
+}
+.clueSection img:first-child {
+    margin-left: 370px;
+}
+.clueSection img:last-child {
+    position: absolute;
+    top: 20%;
+    right: 50%;
+}
+
+.imageButton{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    position: absolute;
+    top:80%;
+    left:50%;
+    transform: translateX(-50%);
+}

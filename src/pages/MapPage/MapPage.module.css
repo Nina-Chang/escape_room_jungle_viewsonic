@@ -1,0 +1,85 @@
+.mapSection{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.explanationText{
+    width: 435px;
+    height: 285px;
+    position: absolute;
+    top:18%;
+    left:16%;
+    color:#000000;
+    font-size: 36px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+}
+
+.riverCampIcon{
+    position: absolute;
+    top:54%;
+    left:33%;
+    display: flex;
+}
+
+
+.swampTrapIcon{
+    position: absolute;
+    top:28%;
+    left:40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.stoneMazeIcon{
+    position: absolute;
+    top:40%;
+    left:50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.boneHillIcon{
+    position: absolute;
+    top:30%;
+    left:65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ancientTempleIcon{
+    position: absolute;
+    top:47%;
+    left:66%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mermaidCaveIcon{
+    position: absolute;
+    top:62%;
+    left:56%;
+    display: flex;
+    flex-direction: column;
+}
+
+.locationText{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.riverCampTextStyle{
+    margin-right:-40px;
+    color:#9E9B98
+}
+
+.swampTrapTextStyle{
+    margin-top:10px;
+    margin-left:30px;
+    color:#9E9B98
+}
+

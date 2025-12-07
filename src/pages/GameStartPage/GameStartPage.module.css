@@ -1,0 +1,95 @@
+.imageButton{
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+
+    position: absolute;
+    top: 74%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.explanationSection{
+    width:1100px;
+    height: 600px;
+    background-color: white;
+    border-radius: 60px;
+    position: absolute;
+    top:52%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border: 20px solid #F9B93B;
+}
+
+.avatarsSection{
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    border: 15px solid #F9B93B;
+    background-color: #407338;
+    position: absolute;
+    top:-15%;
+    left:50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.avatarsIconTop{
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    background-color: #C1DFBB;
+    position: absolute;
+    top:15%;
+    left:30%;
+}
+
+.avatarsIconBottom{
+    width: 90px;
+    height: 40px;
+    border-top-left-radius: 70px;
+    border-top-right-radius: 70px;
+    background-color: #C1DFBB;
+    position: absolute;
+    top:45%;
+    left:20%;
+}
+.avatarsIconBottom:after{
+    content: '';
+    width: 90px;
+    height: 35px;
+    border-bottom-left-radius: 500px;
+    border-bottom-right-radius: 500px;
+    background-color: #C1DFBB;
+    position: absolute;
+    top:65%;
+
+}
+
+.explanationText{
+    width: 900px;
+    height: 500px;
+    position: absolute;
+    top:5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+
+.btnText{
+    width: 352px;
+    position: absolute; 
+    top:45%;
+    left:50%;
+    font-size: 40px;
+    font-weight:700;
+    transform: translate(-50%,-50%);
+}

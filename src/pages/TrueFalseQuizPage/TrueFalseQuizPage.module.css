@@ -1,0 +1,44 @@
+.questionSection{
+    position: absolute;
+    left:52%;
+}
+
+.questionIndexText{
+    width: 570px;
+    position: absolute;
+    top:10%;
+    left:60%;
+    color:#000;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.questionText{
+    width: 570px;
+    position: absolute;
+    top:20%;    
+    left:60%;
+    color:#000;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.trueButtonIcon{
+    position: absolute;
+    top:45%;
+    left:60%;
+}
+
+.falseButtonIcon{
+    position: absolute;
+    top:45%;
+    left:75%;
+}
+
+.imageButton{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}

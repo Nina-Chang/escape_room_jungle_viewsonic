@@ -1,0 +1,63 @@
+.quizSection{
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.questionIndexText{
+    position: absolute;
+    top:25%;
+    left:50%;
+    color:#000;
+    font-size: 40px;
+    font-weight: 700;
+    transform: translateX(-50%);
+}
+
+.questionText{
+    width: 720px;
+    position: absolute;
+    top:33%;    
+    left:50%;
+    transform: translateX(-50%);
+    color:#000;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.answerSection{
+    position: absolute;
+    top:45%;
+    left:54%;
+    transform: translateX(-50%);
+}
+.answerSection button{
+    margin: 5px 0;
+}
+
+.imageButton{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  position: relative;
+}
+
+.answerText{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.submitButtonText{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    font-weight:500;
+}

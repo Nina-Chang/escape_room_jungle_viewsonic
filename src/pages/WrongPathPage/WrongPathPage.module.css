@@ -1,0 +1,24 @@
+.titleText{
+    width:1250px;
+    height: 240px;
+    position: absolute;
+    top:40%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size: 110px;
+    font-weight: 800;
+    color:#042B17;
+    text-align: center;
+}
+
+.imageButton{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    position: absolute;
+    top:60%;
+    left:50%;
+    transform:translateX(-50%);
+}

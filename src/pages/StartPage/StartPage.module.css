@@ -1,0 +1,38 @@
+.imageButton{
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title{
+    position: absolute;
+    top: 23%;
+    width: 100%;
+    text-align: center;
+    font-size: 120px;
+    font-weight:900;
+}
+
+.subTitle{
+    position: absolute;
+    top: 38%;
+    width: 100%;
+    text-align: center;
+    font-size: 65px;
+    font-weight:800;
+}
+
+.btnText{
+    position: absolute; 
+    top:45%;
+    left:50%;
+    font-size: 55px;
+    font-weight:700;
+    transform: translate(-50%,-50%);
+}

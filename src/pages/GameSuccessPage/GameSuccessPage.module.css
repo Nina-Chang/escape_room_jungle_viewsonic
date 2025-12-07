@@ -1,0 +1,25 @@
+.explanationSection{
+    position: absolute;
+    top:5%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.explanationText{
+    width: 1100px;
+    position: absolute;
+    z-index: 2;
+    top:30%;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 38px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.returnButton{
+    position: absolute;
+    top:70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
