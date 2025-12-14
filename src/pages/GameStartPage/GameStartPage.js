@@ -14,7 +14,7 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
                 <div className={GameStartPageStyle.avatarsIconTop}></div>
                 <div className={GameStartPageStyle.avatarsIconBottom}></div>
             </div>
-            <div dangerouslySetInnerHTML={{__html:cfg.strings.explanationText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`}} className={GameStartPageStyle.explanationText}>
+            <div dangerouslySetInnerHTML={{__html:cfg.strings.startGameExplanationText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`}} className={GameStartPageStyle.explanationText}>
                 {/* {cfg.strings.explanationText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`} */}
                 {/* <p>[Headquarters]:</p>
                 <p>That's the last we heard. <br/>The missing team needs your help.</p>

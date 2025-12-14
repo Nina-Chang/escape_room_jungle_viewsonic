@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import FinalClueQuizPageStyle from './FinalClueQuizPage.module.css'
 
-export const FinalClueQuizPage = ({ navigateTo, backgroundImage }) => {
+export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,clueProblemCurrentIndex,setClueProblemCurrentIndex }) => {
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
-    const [problemIndex,setProblemIndex]=useState(0)
     const problem=[
         {
             question: 'Who was the first member to go missing?',
@@ -25,6 +23,16 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage }) => {
         },
     ]
 
+    const handleNavigateToWrongPath=(currentStep)=>{
+        setWrongPathBackTo({page:'final clue quiz',clueProblemIndex:currentStep})
+        navigateTo('wrong path')
+    }
+
+    const handleGameSuccess=()=>{
+        setClueProblemCurrentIndex(0)
+        navigateTo('game success')
+    }
+
 
   return (
     <div className="page-container" style={pageStyle}>
@@ -33,57 +41,57 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage }) => {
             <img src='/images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" />
 
             {
-                problemIndex===0
+                clueProblemCurrentIndex===0
                 &&
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[0].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionSection}>
-                        <img src={problem[0].optionImageSrc[0]} alt="jungle_escape_id_card01" onClick={()=>setProblemIndex(1)} />
-                        <img src={problem[0].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>navigateTo('wrong path')}/>
-                        <img src={problem[0].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>navigateTo('wrong path')}/>    
+                        <img src={problem[0].optionImageSrc[0]} alt="jungle_escape_id_card01" onClick={()=>setClueProblemCurrentIndex(1)} />
+                        <img src={problem[0].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(0)}/>
+                        <img src={problem[0].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(0)}/>    
                     </div>
                 </>
             }
 
             {
-                problemIndex===1
+                clueProblemCurrentIndex===1
                 &&
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[1].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[0]}</div>
-                            <img src={problem[1].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>navigateTo('wrong path')} />
+                            <img src={problem[1].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(1)} />
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[1]}</div>
-                            <img src={problem[1].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>setProblemIndex(2)}/>
+                            <img src={problem[1].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>setClueProblemCurrentIndex(2)}/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[2]}</div>
-                            <img src={problem[1].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>navigateTo('wrong path')}/>    
+                            <img src={problem[1].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(1)}/>    
                         </div>
                     </div>
                 </>
             }
 
             {
-                problemIndex===2
+                clueProblemCurrentIndex===2
                 &&
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[2].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[0]}</div>
-                            <img src={problem[2].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>navigateTo('wrong path')} />
+                            <img src={problem[2].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(2)} />
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[1]}</div>
-                            <img src={problem[2].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>navigateTo('wrong path')}/>
+                            <img src={problem[2].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(2)}/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[2]}</div>
-                            <img src={problem[2].optionImageSrc[2]} className={FinalClueQuizPageStyle.answerCustomStyle} alt="jungle_escape_id_card03" width={250} onClick={()=>navigateTo('game success')}/>    
+                            <img src={problem[2].optionImageSrc[2]} className={FinalClueQuizPageStyle.answerCustomStyle} alt="jungle_escape_id_card03" width={250} onClick={()=>{handleGameSuccess()}}/>    
                         </div>
                     </div>
                 </>

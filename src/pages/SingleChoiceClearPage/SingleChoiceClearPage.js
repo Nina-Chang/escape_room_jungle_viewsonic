@@ -1,7 +1,7 @@
 import SingleChoiceClearPageStyle from './SingleChoiceClearPage.module.css'
 
 
-export const SingleChoiceClearPage = ({ navigateTo, backgroundImage }) => {
+export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
 
     return (
@@ -14,7 +14,7 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage }) => {
             <div className={SingleChoiceClearPageStyle.clueSection}> 
                 <img src='/images/object/jungle_escape_walkie_talkie.png' alt="jungle_escape_walkie_talkie"/>
             </div>
-            <button className={SingleChoiceClearPageStyle.imageButton}>
+            <button className={SingleChoiceClearPageStyle.imageButton} onClick={()=>{setCurrentStepOnMap(3)}}>
                 <img src='/images/object/jungle_escape_nect_button.png' alt="Return to Map" onClick={()=>navigateTo('map')}/>
             </button>
         </div>

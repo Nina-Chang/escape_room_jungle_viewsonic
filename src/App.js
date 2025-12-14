@@ -12,7 +12,7 @@ import { MultipleChoiceQuizPage } from './pages/MultipleChoiceQuizPage/MultipleC
 import { MultipleChoiceClearPage } from './pages/MultipleChoiceClearPage/MultipleChoiceClearPage';
 import { GameSuccessPage} from './pages/GameSuccessPage/GameSuccessPage'
 import { FinalClueQuizPage } from './pages/FinalClueQuizPage/FinalClueQuizPage';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
@@ -32,6 +32,10 @@ const backgroundImage = {
 function App() {
   const [page, setPage] = useState('start');
   const [scale, setScale] = useState(1);
+  const [currentStepOnMap,setCurrentStepOnMap]=useState(1)
+  const [wrongPathBackTo,setWrongPathBackTo]=useState({page:'map',clueProblemIndex:0})
+  const [clueProblemCurrentIndex,setClueProblemCurrentIndex]=useState(0)
+  const audioRef=useRef(null)
 
   const navigateTo = (pageName) => setPage(pageName);
 
@@ -40,6 +44,10 @@ function App() {
   };
 
   useEffect(() => {
+    // 開始遊戲並播放音樂
+    if (audioRef.current && audioRef.current.paused && page === 'start') {
+      audioRef.current.play().catch(error => console.error("背景音樂播放失敗:", error));
+    }
     // 視窗縮放
     const handleResize = () => {
       const scaleX = window.innerWidth / 1920;
@@ -57,16 +65,18 @@ function App() {
         {page === 'start' && <StartPage navigateTo={navigateTo} backgroundImage={backgroundImage.start} />}
         {page === 'prologue' && <StoryProloguePage navigateTo={navigateTo} backgroundImage={backgroundImage.prologue} />}
         {page === 'gameStart' && <GameStartPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameStart} />}
-        {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} />}
-        {page === 'wrong path' && <WrongPathPage navigateTo={navigateTo} backgroundImage={backgroundImage.wrongPath} />}
+        {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} currentStep={currentStepOnMap} setWrongPathBackTo={setWrongPathBackTo}/>}
+        {page === 'wrong path' && <WrongPathPage navigateTo={navigateTo} backgroundImage={backgroundImage.wrongPath} backTo={wrongPathBackTo} setClueProblemCurrentIndex={setClueProblemCurrentIndex} />}
         {page === 'true false quiz' && <TrueFalseQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseQuiz} />}
-        {page === 'true false quiz clear' && <TrueFalseQuizClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} />}
+        {page === 'true false quiz clear' && <TrueFalseQuizClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
         {page === 'single choice quiz' && <SingleChoiceQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.choiceQuiz} />}
-        {page === 'single choice quiz clear' && <SingleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} />}
+        {page === 'single choice quiz clear' && <SingleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
         {page === 'multiple choice quiz' && <MultipleChoiceQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.choiceQuiz} />}
-        {page === 'multiple choice clear' && <MultipleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} />}
-        {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} />}
+        {page === 'multiple choice clear' && <MultipleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
+        {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} setWrongPathBackTo={setWrongPathBackTo} clueProblemCurrentIndex={clueProblemCurrentIndex} setClueProblemCurrentIndex={setClueProblemCurrentIndex}/>}
         {page === 'game success' && <GameSuccessPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameSuccess} />}
+
+        <audio ref={audioRef} src={"sounds/african-background-music-tribal-kongo-nigeria-tanzania.mp3"} loop preload="auto" />    
       </div>
     </div>
   );

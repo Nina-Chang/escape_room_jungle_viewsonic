@@ -1,7 +1,12 @@
 import WrongPathPageStyle from './WrongPathPage.module.css'
 
-export const WrongPathPage = ({ navigateTo, backgroundImage }) => {
+export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setClueProblemCurrentIndex }) => {
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+
+    const handleBackTo=()=>{
+      navigateTo(backTo.page)
+      setClueProblemCurrentIndex(backTo.clueProblemIndex)
+    }
 
   return (
     <div className="page-container" style={pageStyle}>
@@ -9,7 +14,7 @@ export const WrongPathPage = ({ navigateTo, backgroundImage }) => {
             You've lost your way in the jungle...
         </div>
         <button className={WrongPathPageStyle.imageButton}>
-            <img src='/images/object/jungle_escape_again_button.png' alt="Return to Map" onClick={()=>navigateTo('map')}/>
+            <img src='/images/object/jungle_escape_again_button.png' alt="Return to Map" onClick={()=>{handleBackTo()}}/>
         </button>
     </div>
   )

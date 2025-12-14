@@ -1,6 +1,6 @@
 import TrueFalseQuizClearPageStyle from './TrueFalseQuizClearPage.module.css'
 
-export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage }) => {
+export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
     
     return (
@@ -15,7 +15,7 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage }) => {
                 <span className={TrueFalseQuizClearPageStyle.clueTextSecondLine}>We lost comms with Fynn.B. Last heard he was going toward the marsh...</span>
                 <img src='/images/object/jungle_escape_notebook.png' alt="jungle_escape_notebook"/>
             </div>
-            <button className={TrueFalseQuizClearPageStyle.imageButton}>
+            <button className={TrueFalseQuizClearPageStyle.imageButton} onClick={()=>{setCurrentStepOnMap(2)}}>
                 <img src='/images/object/jungle_escape_nect_button.png' alt="Return to Map" onClick={()=>navigateTo('map')}/>
             </button>
         </div>

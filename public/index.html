@@ -36,13 +36,20 @@
           startTitle:"Into the Jungle",
           startSubtitle:"The Missing Expedition",
           previousStoryConversation:"[Team Member]:Hello? Can anyone hear me? We're lost...battery dying!",
-          explanationText:`
+          startGameExplanationText:`
             <p>[Headquarters]:</p>
             <p>That's the last we heard.<br/>The missing team needs your help.</p>
             <p>To rescue them, you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.</p>
           `,
           wholeGameCompletedExplanation:"Congratulations! Thanks to your efforts, the team is safe, and the ancient temple has been discovered!"
         },
+
+        sounds:{
+          bgm:"sounds/african-background-music-tribal-kongo-nigeria-tanzania.mp3",
+          correct:"",
+          wrong:""
+        },
+
          // 圖片資源（依元件實際使用列出）
         images: {
           // 背景
@@ -70,7 +77,11 @@
               {
                 "question": "Rainforests get very little rainfall each year.",
                 "answer": false
-              }
+              },
+              {
+                "question": "Jaguars are predators that live in the jungle.",
+                "answer": true
+              },
             ]
           },
           {
@@ -93,7 +104,16 @@
                   "C) Hunting",
                 ],
                 "answer": "A) Balance"
-              }
+              },
+              {
+                "question": "Which bird is known for its colorful beak in the jungle?",
+                "options": [
+                  "A) Toucan",
+                  "B) Eagle",
+                  "C) Owl",
+                ],
+                "answer": "A) Toucan"
+              },
             ]
           },
           {
@@ -126,7 +146,21 @@
                   "B) Forest floor",
                   "C) Shrubland"
                 ]
-              }
+              },
+              {
+                "question": "Which foods can come from jungle plants?",
+                "options": [
+                  "A) Cocoa beans",
+                  "B) Bananas",
+                  "C) Pine trees",
+                  "D) Mangoes"
+                ],
+                "answers": [
+                  "A) Cocoa beans",
+                  "B) Bananas",
+                  "D) Mangoes"
+                ]
+              },
             ]
           }
         ]
