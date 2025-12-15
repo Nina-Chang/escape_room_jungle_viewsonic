@@ -30,6 +30,15 @@
     transform: translateX(-50%);
 }
 
+.clickButton{
+    position: absolute;
+    bottom:9%;
+    left: 30%;
+    width: 96px;
+    height: 42px;
+    background-color: transparent;
+}
+
 .imageButton{
     background: none;
     border: none;
