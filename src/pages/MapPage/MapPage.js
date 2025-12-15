@@ -40,7 +40,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
     }
 
     const handleWrongPath=()=>{
-        setWrongPathBackTo({page:'map',clueProblemIndex:0})
+        setWrongPathBackTo({page:'map',problemIndex:0})
         navigateTo('wrong path')
     }
 

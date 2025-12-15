@@ -33,8 +33,8 @@ function App() {
   const [page, setPage] = useState('start');
   const [scale, setScale] = useState(1);
   const [currentStepOnMap,setCurrentStepOnMap]=useState(1)
-  const [wrongPathBackTo,setWrongPathBackTo]=useState({page:'map',clueProblemIndex:0})
-  const [clueProblemCurrentIndex,setClueProblemCurrentIndex]=useState(0)
+  const [wrongPathBackTo,setWrongPathBackTo]=useState({page:'map',problemIndex:0})
+  const [currentProblemIndex,setCurrentProblemIndex]=useState(0)
   const audioRef=useRef(null)
 
   const navigateTo = (pageName) => setPage(pageName);
@@ -66,17 +66,17 @@ function App() {
         {page === 'prologue' && <StoryProloguePage navigateTo={navigateTo} backgroundImage={backgroundImage.prologue} />}
         {page === 'gameStart' && <GameStartPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameStart} />}
         {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} currentStep={currentStepOnMap} setWrongPathBackTo={setWrongPathBackTo}/>}
-        {page === 'wrong path' && <WrongPathPage navigateTo={navigateTo} backgroundImage={backgroundImage.wrongPath} backTo={wrongPathBackTo} setClueProblemCurrentIndex={setClueProblemCurrentIndex} />}
-        {page === 'true false quiz' && <TrueFalseQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseQuiz} />}
+        {page === 'wrong path' && <WrongPathPage navigateTo={navigateTo} backgroundImage={backgroundImage.wrongPath} backTo={wrongPathBackTo} setCurrentProblemIndex={setCurrentProblemIndex} />}
+        {page === 'true false quiz' && <TrueFalseQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
         {page === 'true false quiz clear' && <TrueFalseQuizClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
         {page === 'single choice quiz' && <SingleChoiceQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.choiceQuiz} />}
         {page === 'single choice quiz clear' && <SingleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
         {page === 'multiple choice quiz' && <MultipleChoiceQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.choiceQuiz} />}
         {page === 'multiple choice clear' && <MultipleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
-        {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} setWrongPathBackTo={setWrongPathBackTo} clueProblemCurrentIndex={clueProblemCurrentIndex} setClueProblemCurrentIndex={setClueProblemCurrentIndex}/>}
+        {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
         {page === 'game success' && <GameSuccessPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameSuccess} />}
 
-        <audio ref={audioRef} src={"sounds/african-background-music-tribal-kongo-nigeria-tanzania.mp3"} loop preload="auto" />    
+        <audio ref={audioRef} src={"sounds/background-music.mp3"} loop preload="auto" />    
       </div>
     </div>
   );

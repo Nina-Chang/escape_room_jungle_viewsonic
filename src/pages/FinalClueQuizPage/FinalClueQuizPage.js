@@ -1,6 +1,6 @@
 import FinalClueQuizPageStyle from './FinalClueQuizPage.module.css'
 
-export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,clueProblemCurrentIndex,setClueProblemCurrentIndex }) => {
+export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
     const problem=[
         {
@@ -23,13 +23,13 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         },
     ]
 
-    const handleNavigateToWrongPath=(currentStep)=>{
-        setWrongPathBackTo({page:'final clue quiz',clueProblemIndex:currentStep})
+    const handleNavigateToWrongPath=(currentIndex)=>{
+        setWrongPathBackTo({page:'final clue quiz',problemIndex:currentIndex})
         navigateTo('wrong path')
     }
 
     const handleGameSuccess=()=>{
-        setClueProblemCurrentIndex(0)
+        setCurrentProblemIndex(0)
         navigateTo('game success')
     }
 
@@ -41,12 +41,12 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             <img src='/images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" />
 
             {
-                clueProblemCurrentIndex===0
+                currentProblemIndex===0
                 &&
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[0].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionSection}>
-                        <img src={problem[0].optionImageSrc[0]} alt="jungle_escape_id_card01" onClick={()=>setClueProblemCurrentIndex(1)} />
+                        <img src={problem[0].optionImageSrc[0]} alt="jungle_escape_id_card01" onClick={()=>setCurrentProblemIndex(1)} />
                         <img src={problem[0].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(0)}/>
                         <img src={problem[0].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(0)}/>    
                     </div>
@@ -54,7 +54,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             }
 
             {
-                clueProblemCurrentIndex===1
+                currentProblemIndex===1
                 &&
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[1].question}</div>
@@ -65,7 +65,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[1]}</div>
-                            <img src={problem[1].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>setClueProblemCurrentIndex(2)}/>
+                            <img src={problem[1].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>setCurrentProblemIndex(2)}/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[2]}</div>
@@ -76,7 +76,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             }
 
             {
-                clueProblemCurrentIndex===2
+                currentProblemIndex===2
                 &&
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[2].question}</div>
