@@ -29,10 +29,18 @@
     left:50%;
     transform: translateX(-50%);
 }
-.clueSection img:first-child {
-    margin-left: 370px;
+.clueSection button{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
-.clueSection img:last-child {
+.clueSection button img{
+    position: absolute;
+    left:0%;
+    margin-left: -70px;
+}
+.clueSection img{
     position: absolute;
     top: 20%;
     right: 50%;

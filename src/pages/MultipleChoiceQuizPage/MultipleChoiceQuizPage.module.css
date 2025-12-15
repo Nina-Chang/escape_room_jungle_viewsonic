@@ -26,8 +26,10 @@
 }
 
 .answerSection{
+    height: 100%;
+    width: 900px;
     position: absolute;
-    top:45%;
+    top:43%;
     left:54%;
     transform: translateX(-50%);
 }
