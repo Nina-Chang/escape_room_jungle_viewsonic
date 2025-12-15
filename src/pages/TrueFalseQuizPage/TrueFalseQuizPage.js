@@ -5,7 +5,8 @@ import TrueFalseQuizPageStyle from './TrueFalseQuizPage.module.css'
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
-    const [isCorrect, setIsCorrect] = useState([{button:true,status:-1},{button:false,status:-1}]) // 0:false 1:true -1:not yet to choose
+    const initialButtonState=[{button:true,status:-1},{button:false,status:-1}]
+    const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
 
     const trueFalseQuizSum=cfg?.questions[0].questions.length
@@ -27,16 +28,17 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             // 音效
             const audioPlayer=new Audio(cfg.sounds.correct || '/sounds/correct.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
-
+            // 導向頁面
             setTimeout(()=>{
                 if(currentProblemIndex<trueFalseQuizSum-1){
                     setCurrentProblemIndex(currentProblemIndex+1)
                 }
                 else{
                     navigateTo('true false quiz clear')
+                    setCurrentProblemIndex(0)
                 }
-                setIsCorrect([{button:true,status:-1},{button:false,status:-1}]);
-            },1000)
+                setIsCorrect(initialButtonState);
+            },500)
         }
         else{
             // 更改按鈕狀態
@@ -50,11 +52,12 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             // 音效
             const audioPlayer=new Audio(cfg.sounds.wrong || '/sounds/wrong.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
+            // 導向頁面
             setTimeout(()=>{
                 setWrongPathBackTo({page:'true false quiz',problemIndex:currentProblemIndex})
                 navigateTo('wrong path')
-                setIsCorrect([{button:true,status:-1},{button:false,status:-1}]);
-            },1000)
+                setIsCorrect(initialButtonState);
+            },500)
         }
     }
 
