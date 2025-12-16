@@ -5,6 +5,7 @@ import MultipleChoiceQuizPageStyle from './MultipleChoiceQuizPage.module.css'
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
+    const [buttonHidden, setButtonHidden] = useState(false)
     const initialButtonState=[{button:'A',optionText:'',status:-2},{button:'B',optionText:'',status:-2},{button:'C',optionText:'',status:-2},{button:'D',optionText:'',status:-2}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:already choose -2:not yet to choose
     const pageStyle = { backgroundImage: `url(${backgroundImage})` }
@@ -29,7 +30,13 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         );
     }
 
+    const reset=()=>{
+        setIsCorrect(initialButtonState);
+        setButtonHidden(false)
+    }
+
     const handleSubmitAnswer=()=>{
+        setButtonHidden(true)
         const choosedItem=isCorrect.filter(item=>item.status===-1).map(item=>item.optionText)
         const correctAnswer=cfg.questions[2].questions[currentProblemIndex].answers|| []
         const isAllCorrect=choosedItem.length===correctAnswer.length && choosedItem.every((item,index)=>item===correctAnswer[index])
@@ -59,7 +66,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                     navigateTo('multiple choice quiz clear')
                     setCurrentProblemIndex(0)
                 }
-                setIsCorrect(initialButtonState);
+                reset()
             },500)
         }
         else{
@@ -70,7 +77,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             setTimeout(()=>{
                 setWrongPathBackTo({page:'multiple choice quiz',problemIndex:currentProblemIndex})
                 navigateTo('wrong path')
-                setIsCorrect(initialButtonState);
+                reset()
             },500)
         }
     }
@@ -121,7 +128,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[3] || `D`}</span>
                 <AnswerBackground status={dButtonItem.status}/>
             </button>
-            <SoundButton className={`${MultipleChoiceQuizPageStyle.imageButton}`} style={{marginLeft:'20px'}} onClick={()=>handleSubmitAnswer()}>
+            <SoundButton className={`${MultipleChoiceQuizPageStyle.imageButton} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} style={{marginLeft:'20px'}} onClick={()=>handleSubmitAnswer()}>
                 <span className={MultipleChoiceQuizPageStyle.submitButtonText}>Submit</span>
                 <img src='/images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy"/>
             </SoundButton>

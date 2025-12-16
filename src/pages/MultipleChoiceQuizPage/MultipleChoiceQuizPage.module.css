@@ -46,6 +46,10 @@
   position: relative;
 }
 
+.buttonHidden{
+    visibility: hidden;
+}
+
 .answerText{
     position: absolute;
     top:50%;
