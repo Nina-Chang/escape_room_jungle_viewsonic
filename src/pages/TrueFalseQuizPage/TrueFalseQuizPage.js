@@ -5,6 +5,7 @@ import TrueFalseQuizPageStyle from './TrueFalseQuizPage.module.css'
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
+    const [buttonDisabled, setButtonDisabled] = useState(false)
     const initialButtonState=[{button:true,status:-1},{button:false,status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
@@ -15,7 +16,13 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     const trueItem = isCorrect.find(item => item.button === true);
     const falseItem = isCorrect.find(item => item.button === false);
 
+    const reset=()=>{
+        setIsCorrect(initialButtonState);
+        setButtonDisabled(false)
+    }
+
     const handleAnswer=(button)=>{
+        setButtonDisabled(true)
         if(cfg.questions[0].questions[currentProblemIndex].answer===button){
             // 更改按鈕狀態
             setIsCorrect(prev =>
@@ -37,7 +44,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     navigateTo('true false quiz clear')
                     setCurrentProblemIndex(0)
                 }
-                setIsCorrect(initialButtonState);
+                reset()
             },500)
         }
         else{
@@ -56,7 +63,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             setTimeout(()=>{
                 setWrongPathBackTo({page:'true false quiz',problemIndex:currentProblemIndex})
                 navigateTo('wrong path')
-                setIsCorrect(initialButtonState);
+                reset()
             },500)
         }
     }
@@ -90,12 +97,12 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             {cfg.questions[0]?.questions[currentProblemIndex]?.question || ``}
         </span>
         <div className={TrueFalseQuizPageStyle.trueButtonIcon}>
-            <SoundButton className={TrueFalseQuizPageStyle.imageButton} onClick={()=>{handleAnswer(true)}}>
+            <SoundButton disabled={buttonDisabled} className={TrueFalseQuizPageStyle.imageButton} onClick={()=>{handleAnswer(true)}}>
                 <AnswerIcon isTrueButton={true} status={trueItem.status}/>
             </SoundButton>
         </div>
         <div className={TrueFalseQuizPageStyle.falseButtonIcon}>
-            <SoundButton className={TrueFalseQuizPageStyle.imageButton} onClick={()=>{handleAnswer(false)}}>
+            <SoundButton disabled={buttonDisabled} className={TrueFalseQuizPageStyle.imageButton} onClick={()=>{handleAnswer(false)}}>
                 <AnswerIcon isTrueButton={false} status={falseItem.status}/>
             </SoundButton>
         </div>

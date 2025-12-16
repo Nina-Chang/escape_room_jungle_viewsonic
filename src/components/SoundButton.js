@@ -10,7 +10,7 @@ import React, { useRef } from "react";
  * - onClick (function): 按鈕點擊後額外執行的事件
  * - className (string): 可傳入自訂 CSS 樣式
  */
-function SoundButton({ sound, children, onClick, className,style }) {
+function SoundButton({ sound, children, onClick, className,style,disabled }) {
   const audioRef = useRef(new Audio(sound));
 
   const handleClick = (e) => {
@@ -23,7 +23,7 @@ function SoundButton({ sound, children, onClick, className,style }) {
   };
 
   return (
-    <button  onClick={handleClick} className={className} style={style}>
+    <button disabled={disabled} onClick={handleClick} className={className} style={style}>
       {children}
     </button>
   );
