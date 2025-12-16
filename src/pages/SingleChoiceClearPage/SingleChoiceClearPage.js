@@ -1,17 +1,20 @@
+import React, { useState } from 'react'
 import SingleChoiceClearPageStyle from './SingleChoiceClearPage.module.css'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
-
 export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap,bgmAudio }) => {
+    const [buttonDisabled, setButtonDisabled] = useState(false)
     const pageStyle = { backgroundImage: `url(${backgroundImage})` };
 
     const handleAudioPlay=()=>{
         // 播放對講機音檔時背景音樂音量轉小 直到音檔結束
+        setButtonDisabled(true)// 不能換頁
         if(bgmAudio) bgmAudio.volume=0.2
         const audioPlayer=new Audio(cfg.sounds.walkieTalkie || "sounds/walkie_talkie.mp3")
         audioPlayer.play(e => console.error("Audio play failed", e));
         audioPlayer.addEventListener('ended',()=>{
             if(bgmAudio) bgmAudio.volume=0.5
+            setButtonDisabled(false)
         })
     }
 
@@ -26,7 +29,7 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
                 <img src='/images/object/jungle_escape_walkie_talkie.png' alt="jungle_escape_walkie_talkie" loading="lazy"/>
                 <span onClick={()=>{handleAudioPlay()}} className={SingleChoiceClearPageStyle.clickButton}></span>
             </div>
-            <button className={SingleChoiceClearPageStyle.imageButton} onClick={()=>{setCurrentStepOnMap(3)}}>
+            <button disabled={buttonDisabled} className={`${SingleChoiceClearPageStyle.imageButton} ${buttonDisabled&&SingleChoiceClearPageStyle.buttonDisabled}`} onClick={()=>{setCurrentStepOnMap(3)}}>
                 <img src='/images/object/jungle_escape_nect_button.png' alt="Return to Map" onClick={()=>navigateTo('map')} loading="lazy"/>
             </button>
         </div>

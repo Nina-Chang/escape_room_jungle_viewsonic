@@ -44,21 +44,9 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 status:isAllCorrect?1:0
             }
         })
-        console.log('choosedItem',choosedItem)
-        console.log('correctAnswer',correctAnswer)
-        console.log('updateState',updateState)
         setIsCorrect(updateState)
-        
 
         if(isAllCorrect ){// 全對
-            // 更改按鈕狀態
-            // setIsCorrect(prev =>
-            //     prev.map(item =>
-            //         item.button===button
-            //         ? { ...item, status: 1 }  
-            //         : item
-            //     )
-            // );
             // 音效
             const audioPlayer=new Audio(cfg.sounds.correct || '/sounds/correct.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
@@ -75,14 +63,6 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             },500)
         }
         else{
-            // 更改按鈕狀態
-            // setIsCorrect(prev =>
-            //     prev.map(item =>
-            //         item.button===button
-            //         ? { ...item, status: 0 }  
-            //         : item
-            //     )
-            // );
             // 音效
             const audioPlayer=new Audio(cfg.sounds.wrong || '/sounds/wrong.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
