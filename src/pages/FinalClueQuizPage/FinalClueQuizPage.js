@@ -38,7 +38,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     <div className="page-container" style={pageStyle}>
         <div className={FinalClueQuizPageStyle.quizSection}>
             <div className={FinalClueQuizPageStyle.explanationSection}>Assemble the clues you've gathered. Only then will you uncover the truth and complete the rescue.</div>
-            <img src='/images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" />
+            <img src='/images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" loading="lazy"/>
 
             {
                 currentProblemIndex===0
@@ -46,9 +46,9 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[0].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionSection}>
-                        <img src={problem[0].optionImageSrc[0]} alt="jungle_escape_id_card01" onClick={()=>setCurrentProblemIndex(1)} />
-                        <img src={problem[0].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(0)}/>
-                        <img src={problem[0].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(0)}/>    
+                        <img src={problem[0].optionImageSrc[0]} alt="jungle_escape_id_card01" onClick={()=>setCurrentProblemIndex(1)} loading="lazy"/>
+                        <img src={problem[0].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(0)} loading="lazy"/>
+                        <img src={problem[0].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(0)} loading="lazy"/>    
                     </div>
                 </>
             }
@@ -61,15 +61,15 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[0]}</div>
-                            <img src={problem[1].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(1)} />
+                            <img src={problem[1].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(1)} loading="lazy"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[1]}</div>
-                            <img src={problem[1].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>setCurrentProblemIndex(2)}/>
+                            <img src={problem[1].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>setCurrentProblemIndex(2)} loading="lazy"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[2]}</div>
-                            <img src={problem[1].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(1)}/>    
+                            <img src={problem[1].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(1)} loading="lazy"/>    
                         </div>
                     </div>
                 </>
@@ -83,15 +83,15 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[0]}</div>
-                            <img src={problem[2].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(2)} />
+                            <img src={problem[2].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(2)} loading="lazy"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[1]}</div>
-                            <img src={problem[2].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(2)}/>
+                            <img src={problem[2].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(2)} loading="lazy"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[2]}</div>
-                            <img src={problem[2].optionImageSrc[2]} className={FinalClueQuizPageStyle.answerCustomStyle} alt="jungle_escape_id_card03" width={250} onClick={()=>{handleGameSuccess()}}/>    
+                            <img src={problem[2].optionImageSrc[2]} className={FinalClueQuizPageStyle.answerCustomStyle} alt="jungle_escape_id_card03" width={250} onClick={()=>{handleGameSuccess()}} loading="lazy"/>    
                         </div>
                     </div>
                 </>

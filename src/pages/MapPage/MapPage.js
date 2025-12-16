@@ -47,7 +47,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
     return (
         <div className="page-container" style={pageStyle}>
             <div className={MapPageStyle.mapSection}>
-                <img src='/images/object/jungle_escape_map.png' alt="jungle_escape_map.png" />
+                <img src='/images/object/jungle_escape_map.png' alt="jungle_escape_map.png" loading="lazy"/>
             </div>
             <div className={MapPageStyle.explanationText}>
                 {step[0].text}
@@ -57,21 +57,21 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                 {
                     currentStep===1?
                     <button className='image-button' onClick={()=>navigateTo('true false quiz')}>
-                        <img src='/images/object/jungle_escape_river_camp.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93}/>
+                        <img src='/images/object/jungle_escape_river_camp.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93}  loading="lazy"/>
                     </button>
                     :
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_river_camp_gray.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93}/>
+                        <img src='/images/object/jungle_escape_river_camp_gray.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93} loading="lazy"/>
                     </button>
                 }
                 {
                     currentStep===1 &&
                     <div className={MapPageStyle.slideshow}>
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="image 1"/> */}
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="image 2"/> */}
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="image 3"/> */}
-                        <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="image 4"/>
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="image 5"/> */}
+                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="image 1" loading="lazy"/> */}
+                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="image 2" loading="lazy"/> */}
+                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="image 3" loading="lazy"/> */}
+                        <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="image 4" loading="lazy"/>
+                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="image 5" loading="lazy"/> */}
                     </div>
                 }
             </div>
@@ -80,11 +80,11 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                     currentStep===2
                     ?
                     <button className='image-button' onClick={()=>navigateTo('single choice quiz')}>
-                        <img src='/images/object/jungle_escape_swamp_trap.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108}/>
+                        <img src='/images/object/jungle_escape_swamp_trap.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108} loading="lazy"/>
                     </button>
                     :
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_swamp_trap_gray.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108}/> 
+                        <img src='/images/object/jungle_escape_swamp_trap_gray.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108} loading="lazy"/> 
                     </button>
                 }
                 <span className={MapPageStyle.locationText} style={SwampTrapTextStyle}>Swamp Trap</span>
@@ -94,18 +94,18 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                     currentStep===2
                     ?
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_stone_maze.png' alt="jungle_escape_stone_maze.png" width={177} height={123}/>
+                        <img src='/images/object/jungle_escape_stone_maze.png' alt="jungle_escape_stone_maze.png" width={177} height={123} loading="lazy"/>
                     </button>
                     :
                     (
                         currentStep===3
                         ?
                         <button className='image-button' onClick={()=>navigateTo('multiple choice quiz')}>
-                            <img src='/images/object/jungle_escape_stone_maze.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123}/>
+                            <img src='/images/object/jungle_escape_stone_maze.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123} loading="lazy"/>
                         </button>
                         :
                         <button className='image-button' onClick={()=>handleWrongPath()}>
-                            <img src='/images/object/jungle_escape_stone_maze_gray.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123}/>
+                            <img src='/images/object/jungle_escape_stone_maze_gray.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123} loading="lazy"/>
                         </button>
                     )
                 }
@@ -115,11 +115,11 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                 {
                     currentStep===2 || currentStep===3 || currentStep===4?
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_bone_hill.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117}/>
+                        <img src='/images/object/jungle_escape_bone_hill.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117} loading="lazy"/>
                     </button>
                     :
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_bone_hill_gray.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117}/>
+                        <img src='/images/object/jungle_escape_bone_hill_gray.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117} loading="lazy"/>
                     </button>
                 }
                 <span className={MapPageStyle.locationText} style={BoneHillTextStyle}>Bone Hill</span>
@@ -128,17 +128,17 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                 {
                     currentStep===2 || currentStep===3?
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_ancient_temple.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131}/>
+                        <img src='/images/object/jungle_escape_ancient_temple.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131} loading="lazy"/>
                     </button>
                     :
                     (
                         currentStep===4?
                         <button className='image-button' onClick={()=>navigateTo('final clue quiz')}>
-                            <img src='/images/object/jungle_escape_ancient_temple.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131}/>
+                            <img src='/images/object/jungle_escape_ancient_temple.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131} loading="lazy"/>
                         </button>
                         :
                         <button className='image-button' onClick={()=>handleWrongPath()}>
-                            <img src='/images/object/jungle_escape_ancient_temple_gray.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131}/>
+                            <img src='/images/object/jungle_escape_ancient_temple_gray.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131} loading="lazy"/>
                         </button>
                     )
                 }
@@ -148,11 +148,11 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                 {
                     currentStep===2 || currentStep===3 || currentStep===4?
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_mermaid_cave.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111}/>
+                        <img src='/images/object/jungle_escape_mermaid_cave.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111} loading="lazy"/>
                     </button>
                     :
                     <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_mermaid_cave_gray.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111}/>
+                        <img src='/images/object/jungle_escape_mermaid_cave_gray.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111} loading="lazy"/>
                     </button>
                 }
                 <span className={MapPageStyle.locationText} style={MermaidCaveTextStyle}>Mermaid Cave</span>

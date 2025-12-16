@@ -68,7 +68,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                     setCurrentProblemIndex(currentProblemIndex+1)
                 }
                 else{
-                    navigateTo('multiple choice clear')
+                    navigateTo('multiple choice quiz clear')
                     setCurrentProblemIndex(0)
                 }
                 setIsCorrect(initialButtonState);
@@ -109,14 +109,14 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         }
 
         return (
-            <img src={imgSrc} alt={`jungle_escape_multiple_question_${status}`} />
+            <img src={imgSrc} alt={`jungle_escape_multiple_question_${status}`} loading="lazy" />
         );
     };
 
   return (
     <div className="page-container" style={pageStyle}>
         <div className={MultipleChoiceQuizPageStyle.quizSection}>
-            <img src='/images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" />
+            <img src='/images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" />
         </div>
         <div className={MultipleChoiceQuizPageStyle.questionIndexText}>
             {trueFalseQuizSum+singleChoiceSum+currentProblemIndex+1}/{totalProblemSum}
@@ -143,7 +143,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             </button>
             <SoundButton className={`${MultipleChoiceQuizPageStyle.imageButton}`} style={{marginLeft:'20px'}} onClick={()=>handleSubmitAnswer()}>
                 <span className={MultipleChoiceQuizPageStyle.submitButtonText}>Submit</span>
-                <img src='/images/object/jungle_escape_submit_button.png' alt="Submit" />
+                <img src='/images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy"/>
             </SoundButton>
         </div>
     </div>

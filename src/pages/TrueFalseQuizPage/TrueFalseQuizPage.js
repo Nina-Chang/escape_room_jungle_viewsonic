@@ -74,14 +74,14 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         }
 
         return (
-            <img src={imgSrc} alt={`jungle_escape_${type}_${status}`} />
+            <img src={imgSrc} alt={`jungle_escape_${type}_${status}`} loading="lazy"/>
         );
     };
 
   return (
     <div className="page-container" style={pageStyle}>
         <div className={TrueFalseQuizPageStyle.questionSection}>
-            <img src='/images/object/jungle_escape_question_frame01.png' alt="jungle_escape_question_frame01" />
+            <img src='/images/object/jungle_escape_question_frame01.png' alt="jungle_escape_question_frame01" loading="lazy" />
         </div>
         <span className={TrueFalseQuizPageStyle.questionIndexText}>
             {currentProblemIndex+1}/{totalProblemSum}
