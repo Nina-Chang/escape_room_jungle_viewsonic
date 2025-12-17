@@ -3,7 +3,10 @@ import MultipleChoiceClearPageStyle from './MultipleChoiceClearPage.module.css'
 
 export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
     const [isPicReveal, setIsPicReveal] = useState(false)
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px' };
 
 
     return (

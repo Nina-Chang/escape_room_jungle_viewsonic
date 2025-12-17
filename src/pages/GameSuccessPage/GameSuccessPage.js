@@ -4,7 +4,11 @@ import GameSuccessPageStyle from './GameSuccessPage.module.css'
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurrentStepOnMap }) => {
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+      backgroundImage: `url(${backgroundImage})`,
+      width:'1920px',
+      height:'1080px'
+     };
 
     useEffect(()=>{
       if(bgmAudio) bgmAudio.pause()

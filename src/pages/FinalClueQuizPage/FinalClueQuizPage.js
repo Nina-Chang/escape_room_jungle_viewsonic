@@ -1,7 +1,10 @@
 import FinalClueQuizPageStyle from './FinalClueQuizPage.module.css'
 
 export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px' };
     const problem=[
         {
             question: 'Who was the first member to go missing?',

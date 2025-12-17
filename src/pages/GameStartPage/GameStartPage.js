@@ -1,10 +1,13 @@
-import SoundButton from '../../components/SoundButton';
 import GameStartPageStyle from './GameStartPage.module.css'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const GameStartPage = ({ navigateTo, backgroundImage }) => {
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px'
+     };
 
 
   return (
@@ -21,10 +24,10 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
                 <p>To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.</p> */}
             </div>
         </div>
-        <SoundButton className={GameStartPageStyle.imageButton} onClick={()=>navigateTo('map')}>
+        <button className={GameStartPageStyle.imageButton} onClick={()=>navigateTo('map')}>
             <img src='images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
             <div className={GameStartPageStyle.btnText}>Start Mission</div>
-        </SoundButton>
+        </button>
     </div>
   )
 }

@@ -1,7 +1,11 @@
 import TrueFalseQuizClearPageStyle from './TrueFalseQuizClearPage.module.css'
 
 export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px'
+    };
     
     return (
         <div className="page-container" style={pageStyle}>

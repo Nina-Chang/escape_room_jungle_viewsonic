@@ -8,7 +8,11 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     const [buttonDisabled, setButtonDisabled] = useState(false)
     const initialButtonState=[{button:true,status:-1},{button:false,status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px'
+    };
 
     const trueFalseQuizSum=cfg?.questions[0].questions.length
     const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);

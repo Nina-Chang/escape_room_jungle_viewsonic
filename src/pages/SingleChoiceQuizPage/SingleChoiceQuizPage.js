@@ -7,7 +7,11 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
     const initialButtonState=[{button:'A',status:-1},{button:'B',status:-1},{button:'C',status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px'
+     };
 
     const trueFalseQuizSum=cfg?.questions[0].questions.length
     const singleChoiceSum=cfg?.questions[1].questions.length

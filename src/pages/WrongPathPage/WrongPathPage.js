@@ -1,7 +1,11 @@
 import WrongPathPageStyle from './WrongPathPage.module.css'
 
 export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentProblemIndex }) => {
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+      backgroundImage: `url(${backgroundImage})`,
+      width:'1920px',
+      height:'1080px'
+    };
 
     const handleBackTo=()=>{
       navigateTo(backTo.page)

@@ -8,7 +8,10 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         { index:3,text:"Where do the clues lead?"},
         { index:4,text:"Where do the clues lead?"},
     ]
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px' };
 
     const RiverCampTextStyle={
         marginRight:'-40px',

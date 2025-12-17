@@ -4,7 +4,10 @@ import SingleChoiceClearPageStyle from './SingleChoiceClearPage.module.css'
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap,bgmAudio }) => {
     const [buttonDisabled, setButtonDisabled] = useState(false)
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` };
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px' };
 
     const handleAudioPlay=()=>{
         // 播放對講機音檔時背景音樂音量轉小 直到音檔結束

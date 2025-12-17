@@ -8,7 +8,10 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const [buttonHidden, setButtonHidden] = useState(false)
     const initialButtonState=[{button:'A',optionText:'',status:-2},{button:'B',optionText:'',status:-2},{button:'C',optionText:'',status:-2},{button:'D',optionText:'',status:-2}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:already choose -2:not yet to choose
-    const pageStyle = { backgroundImage: `url(${backgroundImage})` }
+    const pageStyle = { 
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px' }
 
     const trueFalseQuizSum=cfg?.questions[0].questions.length
     const singleChoiceSum=cfg?.questions[1].questions.length
