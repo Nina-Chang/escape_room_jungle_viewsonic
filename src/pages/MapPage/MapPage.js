@@ -2,7 +2,7 @@ import MapPageStyle from "./MapPage.module.css"
 
 // 關卡順序為：river camp→ swamp trap→ stone maze→ ancient temple
 export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBackTo }) => {
-    const step=[
+    const explanationText=[
         { index:1,text:"Start your adventure at the River Camp. From there, follow the clues and work your way through the jungle to find the missing members."},
         { index:2,text:"Where do the clues lead?"},
         { index:3,text:"Where do the clues lead?"},
@@ -44,119 +44,152 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         navigateTo('wrong path')
     }
 
+    // 在 component 內建立配置
+    const locations = [
+    {
+        iconClass: MapPageStyle.riverCampIcon,
+        name: 'River Camp',
+        textStyle: RiverCampTextStyle,
+        isActiveClick: currentStep === 1,
+        isNormalImg: currentStep === 1,
+        normalImg: '/images/object/jungle_escape_river_camp.png',
+        grayImg: '/images/object/jungle_escape_river_camp_gray.png',
+        width: 200, height: 93,
+        altBase: 'jungle_escape_river_camp',
+        onActiveClick: () => navigateTo('true false quiz'),
+        hasSlideshow: true  // 特殊手指動畫
+    },
+    {
+        iconClass: MapPageStyle.swampTrapIcon,
+        name: 'Swamp Trap',
+        textStyle: SwampTrapTextStyle,
+        isActiveClick: currentStep === 2,
+        isNormalImg: currentStep === 2,
+        normalImg: '/images/object/jungle_escape_swamp_trap.png',
+        grayImg: '/images/object/jungle_escape_swamp_trap_gray.png',
+        width: 247, height: 108,
+        altBase: 'jungle_escape_swamp_trap',
+        onActiveClick: () => navigateTo('single choice quiz')
+    },
+    {
+        iconClass: MapPageStyle.stoneMazeIcon,
+        name: 'Stone Maze',
+        textStyle: StoneMazeTextStyle,
+        isActiveClick: currentStep === 3,
+        isNormalImg: currentStep === 2 || currentStep === 3,
+        normalImg: '/images/object/jungle_escape_stone_maze.png',
+        grayImg: '/images/object/jungle_escape_stone_maze_gray.png',
+        width: 177, height: 123,
+        altBase: 'jungle_escape_stone_maze',
+        onActiveClick: () => navigateTo('multiple choice quiz')
+    },
+    {
+        iconClass: MapPageStyle.boneHillIcon,
+        name: 'Bone Hill',
+        textStyle: BoneHillTextStyle,
+        isActiveClick: false,
+        isNormalImg: currentStep >= 2,
+        normalImg: '/images/object/jungle_escape_bone_hill.png',
+        grayImg: '/images/object/jungle_escape_bone_hill_gray.png',
+        width: 119, height: 117,
+        altBase: 'jungle_escape_bone_hill',
+        onActiveClick: () => {}
+    },
+    {
+        iconClass: MapPageStyle.ancientTempleIcon,
+        name: 'Ancient Temple',
+        textStyle: AncientTempleTextStyle,
+        isActiveClick: currentStep === 4,
+        isNormalImg: currentStep >= 2,
+        normalImg: '/images/object/jungle_escape_ancient_temple.png',
+        grayImg: '/images/object/jungle_escape_ancient_temple_gray.png',
+        width: 116, height: 131,
+        altBase: 'jungle_escape_ancient_temple',
+        onActiveClick: () => navigateTo('final clue quiz')
+    },
+    {
+        iconClass: MapPageStyle.mermaidCaveIcon,
+        name: 'Mermaid Cave',
+        textStyle: MermaidCaveTextStyle,
+        isActiveClick: false,
+        isNormalImg: currentStep >= 2,
+        normalImg: '/images/object/jungle_escape_mermaid_cave.png',
+        grayImg: '/images/object/jungle_escape_mermaid_cave_gray.png',
+        width: 102, height: 111,
+        altBase: 'jungle_escape_mermaid_cave',
+        onActiveClick: () => {}
+    }
+    ];
+
+
+    const MapLocationButton = ({
+            isActiveClick,
+            isNormalImg,
+            normalImg,
+            grayImg,
+            width,
+            height,
+            altBase,
+            onActiveClick,
+        }) => {
+        const handleClick = () => {
+            if (isActiveClick) {
+                onActiveClick();
+            } else {
+                handleWrongPath();
+            }
+        };
+
+        const imgSrc = isNormalImg ? normalImg : grayImg;
+        const alt = `${altBase}${isNormalImg ? '' : '_gray'}.png`;
+
+        return (
+            <button className="image-button" onClick={handleClick}>
+                <img src={imgSrc} alt={alt} width={width} height={height} loading="lazy" />
+            </button>
+        );
+    };
+
+
     return (
         <div className="page-container" style={pageStyle}>
             <div className={MapPageStyle.mapSection}>
                 <img src='/images/object/jungle_escape_map.png' alt="jungle_escape_map.png" loading="lazy"/>
             </div>
             <div className={MapPageStyle.explanationText}>
-                {step[0].text}
+                {explanationText[currentStep-1].text}
             </div>
-            <div className={MapPageStyle.riverCampIcon}>
-                <span className={MapPageStyle.locationText} style={RiverCampTextStyle}>River Camp</span>
-                {
-                    currentStep===1?
-                    <button className='image-button' onClick={()=>navigateTo('true false quiz')}>
-                        <img src='/images/object/jungle_escape_river_camp.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93}  loading="lazy"/>
-                    </button>
-                    :
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_river_camp_gray.png' alt="jungle_escape_river_camp_gray.png" width={200} height={93} loading="lazy"/>
-                    </button>
-                }
-                {
-                    currentStep===1 &&
+            {locations.map((location) => (
+                <div key={location.name} className={location.iconClass}>
+                    <MapLocationButton
+                        isActiveClick={location.isActiveClick}
+                        isNormalImg={location.isNormalImg}
+                        normalImg={location.normalImg}
+                        grayImg={location.grayImg}
+                        width={location.width}
+                        height={location.height}
+                        altBase={location.altBase}
+                        onActiveClick={location.onActiveClick}
+                    />
+                    <span className={MapPageStyle.locationText} style={location.textStyle}>
+                        {location.name}
+                    </span>
+
+                    {/* River Camp 特殊動畫 */}
+                    {location.hasSlideshow && currentStep === 1 && (
                     <div className={MapPageStyle.slideshow}>
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="image 1" loading="lazy"/> */}
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="image 2" loading="lazy"/> */}
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="image 3" loading="lazy"/> */}
-                        <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="image 4" loading="lazy"/>
-                        {/* <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="image 5" loading="lazy"/> */}
+                        <div className={MapPageStyle.slideshow}>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="image 5" loading="lazy"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="image 4" loading="lazy"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="image 3" loading="lazy"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="image 2" loading="lazy"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="image 1" loading="lazy"/>
+                        </div>
                     </div>
-                }
-            </div>
-            <div className={MapPageStyle.swampTrapIcon}> 
-                {
-                    currentStep===2
-                    ?
-                    <button className='image-button' onClick={()=>navigateTo('single choice quiz')}>
-                        <img src='/images/object/jungle_escape_swamp_trap.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108} loading="lazy"/>
-                    </button>
-                    :
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_swamp_trap_gray.png' alt="jungle_escape_swamp_trap_gray.png" width={247} height={108} loading="lazy"/> 
-                    </button>
-                }
-                <span className={MapPageStyle.locationText} style={SwampTrapTextStyle}>Swamp Trap</span>
-            </div>
-            <div className={MapPageStyle.stoneMazeIcon}>
-                {
-                    currentStep===2
-                    ?
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_stone_maze.png' alt="jungle_escape_stone_maze.png" width={177} height={123} loading="lazy"/>
-                    </button>
-                    :
-                    (
-                        currentStep===3
-                        ?
-                        <button className='image-button' onClick={()=>navigateTo('multiple choice quiz')}>
-                            <img src='/images/object/jungle_escape_stone_maze.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123} loading="lazy"/>
-                        </button>
-                        :
-                        <button className='image-button' onClick={()=>handleWrongPath()}>
-                            <img src='/images/object/jungle_escape_stone_maze_gray.png' alt="jungle_escape_stone_maze_gray.png" width={177} height={123} loading="lazy"/>
-                        </button>
-                    )
-                }
-                <span className={MapPageStyle.locationText} style={StoneMazeTextStyle}>Stone Maze</span>
-            </div> 
-            <div className={MapPageStyle.boneHillIcon}>
-                {
-                    currentStep===2 || currentStep===3 || currentStep===4?
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_bone_hill.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117} loading="lazy"/>
-                    </button>
-                    :
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_bone_hill_gray.png' alt="jungle_escape_bone_hill_gray.png" width={119} height={117} loading="lazy"/>
-                    </button>
-                }
-                <span className={MapPageStyle.locationText} style={BoneHillTextStyle}>Bone Hill</span>
-            </div>
-            <div className={MapPageStyle.ancientTempleIcon}>
-                {
-                    currentStep===2 || currentStep===3?
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_ancient_temple.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131} loading="lazy"/>
-                    </button>
-                    :
-                    (
-                        currentStep===4?
-                        <button className='image-button' onClick={()=>navigateTo('final clue quiz')}>
-                            <img src='/images/object/jungle_escape_ancient_temple.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131} loading="lazy"/>
-                        </button>
-                        :
-                        <button className='image-button' onClick={()=>handleWrongPath()}>
-                            <img src='/images/object/jungle_escape_ancient_temple_gray.png' alt="jungle_escape_ancient_temple_gray.png" width={116} height={131} loading="lazy"/>
-                        </button>
-                    )
-                }
-                <span className={MapPageStyle.locationText} style={AncientTempleTextStyle}>Ancient Temple</span>
-            </div>
-            <div className={MapPageStyle.mermaidCaveIcon}>
-                {
-                    currentStep===2 || currentStep===3 || currentStep===4?
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_mermaid_cave.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111} loading="lazy"/>
-                    </button>
-                    :
-                    <button className='image-button' onClick={()=>handleWrongPath()}>
-                        <img src='/images/object/jungle_escape_mermaid_cave_gray.png' alt="jungle_escape_mermaid_cave_gray.png" width={102} height={111} loading="lazy"/>
-                    </button>
-                }
-                <span className={MapPageStyle.locationText} style={MermaidCaveTextStyle}>Mermaid Cave</span>
-            </div>
+                    
+                    )}
+                </div>
+            ))}
         </div>
     )
 }
