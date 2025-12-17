@@ -22,7 +22,7 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
         <div className="page-container" style={pageStyle}>
             <div className={SingleChoiceClearPageStyle.explanationSection}>
                 <span className={SingleChoiceClearPageStyle.explanationTextFirstLine}>You found...</span>
-                <span className={SingleChoiceClearPageStyle.explanationTextSecondLine}>A Photo!</span>
+                <span className={SingleChoiceClearPageStyle.explanationTextSecondLine}>A Walkie Talkie!</span>
                 <img src='/images/object/jungle_escape_clue_frame.png' alt="jungle_escape_true_false_completed" loading="lazy" decoding="async"/>
             </div>
             <div className={SingleChoiceClearPageStyle.clueSection}> 

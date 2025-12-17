@@ -57,7 +57,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         width: 200, height: 93,
         altBase: 'jungle_escape_river_camp',
         onActiveClick: () => navigateTo('true false quiz'),
-        hasSlideshow: true  // 特殊手指動畫
+        hasSlideshow: true  // 動畫
     },
     {
         iconClass: MapPageStyle.swampTrapIcon,
@@ -175,15 +175,15 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                         {location.name}
                     </span>
 
-                    {/* River Camp 特殊動畫 */}
+                    {/* River Camp 動畫 */}
                     {location.hasSlideshow && currentStep === 1 && (
                     <div className={MapPageStyle.slideshow}>
                         <div className={MapPageStyle.slideshow}>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="image 5" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="image 4" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="image 3" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="image 2" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="image 1" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="finger frame 5" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="finger frame 4" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="finger frame 3" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="finger frame 2" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="finger frame 1" loading="lazy" decoding="async"/>
                         </div>
                     </div>
                     
