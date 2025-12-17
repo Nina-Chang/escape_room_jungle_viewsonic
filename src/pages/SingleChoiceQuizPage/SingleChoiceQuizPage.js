@@ -75,14 +75,14 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
         }
 
         return (
-            <img src={imgSrc} alt={`jungle_escape_sigle_question_${status}`}  loading="lazy"/>
+            <img src={imgSrc} alt={`jungle_escape_sigle_question_${status}`}  loading="lazy" decoding="async"/>
         );
     };
 
   return (
     <div className="page-container" style={pageStyle}>
         <div className={SingleChoiceQuizPageStyle.questionSection}>
-            <img src='/images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" />
+            <img src='/images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" decoding="async" />
         </div>
         <span className={SingleChoiceQuizPageStyle.questionIndexText}>
             {trueFalseQuizSum+currentProblemIndex+1}/{totalProblemSum}

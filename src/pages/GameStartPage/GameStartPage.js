@@ -22,7 +22,7 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
             </div>
         </div>
         <SoundButton className={GameStartPageStyle.imageButton} onClick={()=>navigateTo('map')}>
-            <img src='images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy"/>
+            <img src='images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
             <div className={GameStartPageStyle.btnText}>Start Mission</div>
         </SoundButton>
     </div>

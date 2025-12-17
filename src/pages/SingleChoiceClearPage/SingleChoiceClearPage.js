@@ -23,14 +23,14 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
             <div className={SingleChoiceClearPageStyle.explanationSection}>
                 <span className={SingleChoiceClearPageStyle.explanationTextFirstLine}>You found...</span>
                 <span className={SingleChoiceClearPageStyle.explanationTextSecondLine}>A Photo!</span>
-                <img src='/images/object/jungle_escape_clue_frame.png' alt="jungle_escape_true_false_completed" loading="lazy"/>
+                <img src='/images/object/jungle_escape_clue_frame.png' alt="jungle_escape_true_false_completed" loading="lazy" decoding="async"/>
             </div>
             <div className={SingleChoiceClearPageStyle.clueSection}> 
-                <img src='/images/object/jungle_escape_walkie_talkie.png' alt="jungle_escape_walkie_talkie" loading="lazy"/>
+                <img src='/images/object/jungle_escape_walkie_talkie.png' alt="jungle_escape_walkie_talkie" loading="lazy" decoding="async"/>
                 <span onClick={()=>{handleAudioPlay()}} className={SingleChoiceClearPageStyle.clickButton}></span>
             </div>
             <button disabled={buttonDisabled} className={`${SingleChoiceClearPageStyle.imageButton} ${buttonDisabled&&SingleChoiceClearPageStyle.buttonDisabled}`} onClick={()=>{setCurrentStepOnMap(3)}}>
-                <img src='/images/object/jungle_escape_nect_button.png' alt="Return to Map" onClick={()=>navigateTo('map')} loading="lazy"/>
+                <img src='/images/object/jungle_escape_nect_button.png' alt="Return to Map" onClick={()=>navigateTo('map')} loading="lazy" decoding="async"/>
             </button>
         </div>
     )

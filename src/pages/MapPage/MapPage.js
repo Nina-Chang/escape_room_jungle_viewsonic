@@ -145,7 +145,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
 
         return (
             <button className="image-button" onClick={handleClick}>
-                <img src={imgSrc} alt={alt} width={width} height={height} loading="lazy" />
+                <img src={imgSrc} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
             </button>
         );
     };
@@ -154,7 +154,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
     return (
         <div className="page-container" style={pageStyle}>
             <div className={MapPageStyle.mapSection}>
-                <img src='/images/object/jungle_escape_map.png' alt="jungle_escape_map.png" loading="lazy"/>
+                <img src='/images/object/jungle_escape_map.png' alt="jungle_escape_map.png" loading="lazy" decoding="async"/>
             </div>
             <div className={MapPageStyle.explanationText}>
                 {explanationText[currentStep-1].text}
@@ -179,11 +179,11 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                     {location.hasSlideshow && currentStep === 1 && (
                     <div className={MapPageStyle.slideshow}>
                         <div className={MapPageStyle.slideshow}>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="image 5" loading="lazy"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="image 4" loading="lazy"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="image 3" loading="lazy"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="image 2" loading="lazy"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="image 1" loading="lazy"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="image 5" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="image 4" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="image 3" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="image 2" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="image 1" loading="lazy" decoding="async"/>
                         </div>
                     </div>
                     

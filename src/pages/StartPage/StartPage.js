@@ -18,7 +18,7 @@ export const StartPage = ({navigateTo,backgroundImage}) => {
       <h1 className={StartPageStyle.title}>{cfg.strings.startTitle || 'Into the Jungle'}</h1>
       <h3 className={StartPageStyle.subTitle}>{cfg.strings.startSubtitle || 'The Missing Expedition'}</h3>
       <SoundButton className={StartPageStyle.imageButton} onClick={handleStartClick}>
-        <img src='/images/object/jungle_escape_start_button.png' alt="Start Button" loading="lazy" />
+        <img src='/images/object/jungle_escape_start_button.png' alt="Start Button" loading="lazy" decoding="async" />
         <span className={StartPageStyle.btnText}>Start</span>
       </SoundButton>
     </div>
