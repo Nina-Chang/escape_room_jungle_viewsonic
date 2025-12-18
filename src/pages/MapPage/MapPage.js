@@ -12,7 +12,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
         height:'1080px',
-        loading: 'eager'
+        loading:'eager'
     };
 
     const RiverCampTextStyle={

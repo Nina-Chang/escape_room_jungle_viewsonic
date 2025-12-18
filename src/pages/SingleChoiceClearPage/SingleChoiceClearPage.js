@@ -8,7 +8,7 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
         height:'1080px',
-        loading: 'eager'
+        loading:'eager'
     };
 
     const handleAudioPlay=()=>{

@@ -7,7 +7,7 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
         height:'1080px',
-        loading: 'eager'
+        loading:'eager'
     };
 
 
@@ -19,10 +19,6 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
                 <div className={GameStartPageStyle.avatarsIconBottom}></div>
             </div>
             <div dangerouslySetInnerHTML={{__html:cfg.strings.startGameExplanationText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`}} className={GameStartPageStyle.explanationText}>
-                {/* {cfg.strings.explanationText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`} */}
-                {/* <p>[Headquarters]:</p>
-                <p>That's the last we heard. <br/>The missing team needs your help.</p>
-                <p>To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.</p> */}
             </div>
         </div>
         <button className={GameStartPageStyle.imageButton} onClick={()=>navigateTo('map')}>
