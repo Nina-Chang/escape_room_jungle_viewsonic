@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Jungle Escape Room
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Page Flow
+Start → Prologue → Game Start → Map → Quizzes → Success
+↓ (錯路)
+Wrong Path
 
-## Available Scripts
+### Core Pages
+| Page Name | Type | Purpose |
+|-----------|------|---------|
+| `start` | Intro | 遊戲開場 |
+| `prologue` | Story | 劇情介紹 |
+| `gameStart` | Setup | 遊戲開始 |
+| `map` | Navigation | **地圖選擇關卡**<br>River Camp → Swamp Trap → Stone Maze → Ancient Temple |
+| `wrong path` | Penalty | 選錯路罰頁 |
+| `true false quiz` | Quiz | 是非題 (River Camp) |
+| `single choice quiz` | Quiz | 單選題 (Swamp Trap) |
+| `multiple choice quiz` | Quiz | 多選題 (Stone Maze) |
+| `final clue quiz` | Quiz | 最終推理題 (Ancient Temple) |
+| `* quiz clear` | Success | 關卡通關動畫 |
+| `game success` | Ending | 遊戲完結 |
 
-In the project directory, you can run:
+### Map Flow (4 Steps)
+Step 1: River Camp (true false quiz)
+↓
+Step 2: Swamp Trap (single choice quiz)
+↓
+Step 3: Stone Maze (multiple choice quiz)
+↓
+Step 4: Ancient Temple (final clue quiz)
+↓
+Game Success!
 
-### `npm start`
+## 🛠️ Tech Stack
+- **React** + CSS Modules
+- **Public folder assets** (images/sounds)
+- **Responsive scaling** (1920x1080 → auto-fit)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Quick Start
+npm install
+npm start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Game designed for 1920x1080 full-screen play.**
