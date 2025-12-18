@@ -5,10 +5,11 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 
 export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurrentStepOnMap }) => {
     const pageStyle = { 
-      backgroundImage: `url(${backgroundImage})`,
-      width:'1920px',
-      height:'1080px'
-     };
+        backgroundImage: `url(${backgroundImage})`,
+        width:'1920px',
+        height:'1080px',
+        loading: 'eager'
+    };
 
     useEffect(()=>{
       if(bgmAudio) bgmAudio.pause()

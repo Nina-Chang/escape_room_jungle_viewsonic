@@ -50,6 +50,9 @@ function App() {
       audioRef.current.currentTime = 0; // 從頭開始播放
       audioRef.current.play().catch(error => console.error("背景音樂播放失敗:", error));
     }
+  }, [page]);
+
+  useEffect(() => {
     // 視窗縮放
     const handleResize = () => {
       const scaleX = window.innerWidth / 1920;
@@ -59,7 +62,7 @@ function App() {
     window.addEventListener('resize', handleResize);
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
-  }, [page]);
+  }, []);
 
   return (
     <div className="game-viewport">

@@ -6,7 +6,9 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
-        height:'1080px' };
+        height:'1080px',
+        loading: 'eager'
+    };
 
 
     return (

@@ -11,7 +11,9 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
-        height:'1080px' }
+        height:'1080px',
+        loading: 'eager'
+    };
 
     const trueFalseQuizSum=cfg?.questions[0].questions.length
     const singleChoiceSum=cfg?.questions[1].questions.length

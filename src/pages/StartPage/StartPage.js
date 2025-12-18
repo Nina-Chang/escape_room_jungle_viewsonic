@@ -4,9 +4,10 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 
 export const StartPage = ({navigateTo,backgroundImage}) => {
   const pageStyle = { 
-    backgroundImage: `url(${backgroundImage})`,
-    width:'1920px',
-    height:'1080px'
+      backgroundImage: `url(${backgroundImage})`,
+      width:'1920px',
+      height:'1080px',
+      loading: 'eager'
   };
 
   const handleStartClick=()=>{

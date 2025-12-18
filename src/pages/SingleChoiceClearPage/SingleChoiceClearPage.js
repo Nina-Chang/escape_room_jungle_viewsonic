@@ -7,7 +7,9 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
-        height:'1080px' };
+        height:'1080px',
+        loading: 'eager'
+    };
 
     const handleAudioPlay=()=>{
         // 播放對講機音檔時背景音樂音量轉小 直到音檔結束

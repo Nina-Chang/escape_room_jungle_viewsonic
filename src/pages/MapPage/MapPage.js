@@ -11,7 +11,9 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
-        height:'1080px' };
+        height:'1080px',
+        loading: 'eager'
+    };
 
     const RiverCampTextStyle={
         marginRight:'-40px',

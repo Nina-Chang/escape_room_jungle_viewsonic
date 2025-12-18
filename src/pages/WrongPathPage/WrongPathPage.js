@@ -4,7 +4,8 @@ export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentPro
     const pageStyle = { 
       backgroundImage: `url(${backgroundImage})`,
       width:'1920px',
-      height:'1080px'
+      height:'1080px',
+      loading: 'eager'
     };
 
     const handleBackTo=()=>{

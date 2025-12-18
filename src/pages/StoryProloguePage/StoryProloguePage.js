@@ -2,11 +2,12 @@ import StoryProloguePageStyle from './StoryProloguePage.module.css'
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
-    const pageStyle = { 
-      backgroundImage: `url(${backgroundImage})`,
-      width:'1920px',
-      height:'1080px'
-     };
+  const pageStyle = { 
+    backgroundImage: `url(${backgroundImage})`,
+    width:'1920px',
+    height:'1080px',
+    loading: 'eager'
+  };
 
 
   return (
