@@ -184,11 +184,11 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                     {location.hasSlideshow && currentStep === 1 && (
                     <div className={MapPageStyle.slideshow}>
                         <div className={MapPageStyle.slideshow}>
-                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger05.png" alt="finger frame 5" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger04.png" alt="finger frame 4" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger03.png" alt="finger frame 3" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger02.png" alt="finger frame 2" loading="lazy" decoding="async"/>
                             <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger01.png" alt="finger frame 1" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger02.png" alt="finger frame 2" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger03.png" alt="finger frame 3" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger04.png" alt="finger frame 4" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger05.png" alt="finger frame 5" loading="lazy" decoding="async"/>
                         </div>
                     </div>
                     
