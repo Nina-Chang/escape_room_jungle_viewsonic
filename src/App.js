@@ -17,16 +17,16 @@ import { useEffect, useState,useRef } from 'react';
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 const backgroundImage = {
-  start:cfg.images.bgStart || '/images/background/jungle_escape_room_01_FHD.png',
-  prologue: cfg.images.bgPrologue || '/images/background/jungle_escape_room_02_FHD.png',
-  gameStart:cfg.images.bgGameStart || '/images/background/jungle_escape_room_03_FHD.png',
-  map:cfg.images.bgMap || '/images/background/jungle_escape_room_04_FHD.png',
-  wrongPath: cfg.images.bgWrongPath || '/images/background/jungle_escape_room_13_FHD.png',
-  trueFalseQuiz: cfg.images.bgTrueFalseQuiz || '/images/background/jungle_escape_room_05_FHD.png',
-  quizClear: cfg.images.bgQuizClear || '/images/background/jungle_escape_room_06_FHD.png',
-  choiceQuiz: cfg.images.bgChoiceQuiz || '/images/background/jungle_escape_room_07_FHD.png',
-  finalClueQuiz: cfg.images.bgFinalClueQuiz || '/images/background/jungle_escape_room_11_FHD.png',
-  gameSuccess: cfg.images.bgGameSuccess || '/images/background/jungle_escape_room_12_FHD.png',
+  start:cfg.images.bgStart || './images/background/jungle_escape_room_01_FHD.png',
+  prologue: cfg.images.bgPrologue || './images/background/jungle_escape_room_02_FHD.png',
+  gameStart:cfg.images.bgGameStart || './images/background/jungle_escape_room_03_FHD.png',
+  map:cfg.images.bgMap || './images/background/jungle_escape_room_04_FHD.png',
+  wrongPath: cfg.images.bgWrongPath || './images/background/jungle_escape_room_13_FHD.png',
+  trueFalseQuiz: cfg.images.bgTrueFalseQuiz || './images/background/jungle_escape_room_05_FHD.png',
+  quizClear: cfg.images.bgQuizClear || './images/background/jungle_escape_room_06_FHD.png',
+  choiceQuiz: cfg.images.bgChoiceQuiz || './images/background/jungle_escape_room_07_FHD.png',
+  finalClueQuiz: cfg.images.bgFinalClueQuiz || './images/background/jungle_escape_room_11_FHD.png',
+  gameSuccess: cfg.images.bgGameSuccess || './images/background/jungle_escape_room_12_FHD.png',
 }
 
 function App() {
@@ -82,7 +82,7 @@ function App() {
         {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
         {page === 'game success' && <GameSuccessPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameSuccess} bgmAudio={audioRef.current} setCurrentStepOnMap={setCurrentStepOnMap}/>}
 
-        <audio ref={audioRef} src={"sounds/background-music.mp3"} loop preload="auto" />    
+        <audio ref={audioRef} src={"./sounds/background-music.mp3"} loop preload="auto" />    
       </div>
     </div>
   );

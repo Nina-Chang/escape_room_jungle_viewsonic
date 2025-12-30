@@ -15,14 +15,13 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
     <div className="page-container" style={pageStyle}>
         <div className={GameStartPageStyle.explanationSection}>
             <div className={GameStartPageStyle.avatarsSection}>
-                <div className={GameStartPageStyle.avatarsIconTop}></div>
-                <div className={GameStartPageStyle.avatarsIconBottom}></div>
+                <img className={GameStartPageStyle.avatarsIcon} src='./images/object/jungle_escape_avatars_icon.png' alt="jungle_escape_team_avatars" loading="lazy" decoding="async"/>
             </div>
             <div dangerouslySetInnerHTML={{__html:cfg.strings.startGameExplanationText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`}} className={GameStartPageStyle.explanationText}>
             </div>
         </div>
         <button className={GameStartPageStyle.imageButton} onClick={()=>navigateTo('map')}>
-            <img src='images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
+            <img src='./images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
             <div className={GameStartPageStyle.btnText}>Start Mission</div>
         </button>
     </div>

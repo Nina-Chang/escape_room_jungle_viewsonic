@@ -60,7 +60,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
 
         if(isAllCorrect ){// 全對
             // 音效
-            const audioPlayer=new Audio(cfg.sounds.correct || '/sounds/correct.mp3')
+            const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{
@@ -76,7 +76,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         }
         else{
             // 音效
-            const audioPlayer=new Audio(cfg.sounds.wrong || '/sounds/wrong.mp3')
+            const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{
@@ -91,13 +91,13 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         let imgSrc = '';
 
         if (status === -1) {// 已選擇
-            imgSrc = `/images/object/jungle_escape_multiple_question_answer_hover.png`;
+            imgSrc = `./images/object/jungle_escape_multiple_question_answer_hover.png`;
         } else if (status === -2) {// 還沒選
-            imgSrc = `/images/object/jungle_escape_multiple_question_answer.png`;
+            imgSrc = `./images/object/jungle_escape_multiple_question_answer.png`;
         } else if (status === 1) {// 答對
-            imgSrc = `/images/object/jungle_escape_multiple_question_right_answer.png`;
+            imgSrc = `./images/object/jungle_escape_multiple_question_right_answer.png`;
         } else if (status === 0) {// 答錯
-            imgSrc = `/images/object/jungle_escape_multiple_question_wrong_answer.png`;
+            imgSrc = `./images/object/jungle_escape_multiple_question_wrong_answer.png`;
         }
 
         return (
@@ -108,7 +108,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
   return (
     <div className="page-container" style={pageStyle}>
         <div className={MultipleChoiceQuizPageStyle.quizSection}>
-            <img src='/images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" decoding="async" />
+            <img src='./images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" decoding="async" />
         </div>
         <div className={MultipleChoiceQuizPageStyle.questionIndexText}>
             {trueFalseQuizSum+singleChoiceSum+currentProblemIndex+1}/{totalProblemSum}
@@ -135,7 +135,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             </button>
             <SoundButton className={`${MultipleChoiceQuizPageStyle.imageButton} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} style={{marginLeft:'20px'}} onClick={()=>handleSubmitAnswer()}>
                 <span className={MultipleChoiceQuizPageStyle.submitButtonText}>Submit</span>
-                <img src='/images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy" decoding="async"/>
+                <img src='./images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy" decoding="async"/>
             </SoundButton>
         </div>
     </div>

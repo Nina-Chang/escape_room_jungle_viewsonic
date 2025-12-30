@@ -12,19 +12,19 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         {
             question: 'Who was the first member to go missing?',
             option:[],
-            optionImageSrc:['images/object/jungle_escape_id_card01.png','images/object/jungle_escape_id_card02.png','images/object/jungle_escape_id_card03.png'],
+            optionImageSrc:['./images/object/jungle_escape_id_card01.png','./images/object/jungle_escape_id_card02.png','./images/object/jungle_escape_id_card03.png'],
             answer:'Fynn.B'
         },
         {
             question: 'Where did you find the walkie talkie?',
             option:['Mermaid Cave','Swamp Trap','Stone Maze'],
-            optionImageSrc:['images/object/jungle_escape_mermaid_cave.png','images/object/jungle_escape_swamp_trap.png','images/object/jungle_escape_stone_maze.png'],
+            optionImageSrc:['./images/object/jungle_escape_mermaid_cave.png','./images/object/jungle_escape_swamp_trap.png','./images/object/jungle_escape_stone_maze.png'],
             answer:'Swamp Trap'
         },
         {
             question: 'What specific clues finally led you to this discovery?',
             option:['A bag','A sign','A photo'],
-            optionImageSrc:['images/object/jungle_escape_bag.png','images/object/jungle_escape_sjgn.png','images/object/jungle_escape_photo01.png'],
+            optionImageSrc:['./images/object/jungle_escape_bag.png','./images/object/jungle_escape_sjgn.png','./images/object/jungle_escape_photo01.png'],
             answer:'A photo'
         },
     ]
@@ -44,7 +44,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     <div className="page-container" style={pageStyle}>
         <div className={FinalClueQuizPageStyle.quizSection}>
             <div className={FinalClueQuizPageStyle.explanationSection}>Assemble the clues you've gathered. Only then will you uncover the truth and complete the rescue.</div>
-            <img src='/images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" loading="lazy" decoding="async"/>
+            <img src='./images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" loading="lazy" decoding="async"/>
 
             {
                 currentProblemIndex===0

@@ -57,8 +57,8 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         textStyle: RiverCampTextStyle,
         isActiveClick: currentStep === 1,
         isNormalImg: currentStep === 1,
-        normalImg: '/images/object/jungle_escape_river_camp.png',
-        grayImg: '/images/object/jungle_escape_river_camp_gray.png',
+        normalImg: './images/object/jungle_escape_river_camp.png',
+        grayImg: './images/object/jungle_escape_river_camp_gray.png',
         width: 200, height: 93,
         altBase: 'jungle_escape_river_camp',
         onActiveClick: () => navigateTo('true false quiz'),
@@ -70,8 +70,8 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         textStyle: SwampTrapTextStyle,
         isActiveClick: currentStep === 2,
         isNormalImg: currentStep === 2,
-        normalImg: '/images/object/jungle_escape_swamp_trap.png',
-        grayImg: '/images/object/jungle_escape_swamp_trap_gray.png',
+        normalImg: './images/object/jungle_escape_swamp_trap.png',
+        grayImg: './images/object/jungle_escape_swamp_trap_gray.png',
         width: 247, height: 108,
         altBase: 'jungle_escape_swamp_trap',
         onActiveClick: () => navigateTo('single choice quiz')
@@ -82,8 +82,8 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         textStyle: StoneMazeTextStyle,
         isActiveClick: currentStep === 3,
         isNormalImg: currentStep === 2 || currentStep === 3,
-        normalImg: '/images/object/jungle_escape_stone_maze.png',
-        grayImg: '/images/object/jungle_escape_stone_maze_gray.png',
+        normalImg: './images/object/jungle_escape_stone_maze.png',
+        grayImg: './images/object/jungle_escape_stone_maze_gray.png',
         width: 177, height: 123,
         altBase: 'jungle_escape_stone_maze',
         onActiveClick: () => navigateTo('multiple choice quiz')
@@ -94,8 +94,8 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         textStyle: BoneHillTextStyle,
         isActiveClick: false,
         isNormalImg: currentStep >= 2,
-        normalImg: '/images/object/jungle_escape_bone_hill.png',
-        grayImg: '/images/object/jungle_escape_bone_hill_gray.png',
+        normalImg: './images/object/jungle_escape_bone_hill.png',
+        grayImg: './images/object/jungle_escape_bone_hill_gray.png',
         width: 119, height: 117,
         altBase: 'jungle_escape_bone_hill',
         onActiveClick: () => {}
@@ -106,8 +106,8 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         textStyle: AncientTempleTextStyle,
         isActiveClick: currentStep === 4,
         isNormalImg: currentStep >= 2,
-        normalImg: '/images/object/jungle_escape_ancient_temple.png',
-        grayImg: '/images/object/jungle_escape_ancient_temple_gray.png',
+        normalImg: './images/object/jungle_escape_ancient_temple.png',
+        grayImg: './images/object/jungle_escape_ancient_temple_gray.png',
         width: 116, height: 131,
         altBase: 'jungle_escape_ancient_temple',
         onActiveClick: () => navigateTo('final clue quiz')
@@ -118,8 +118,8 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         textStyle: MermaidCaveTextStyle,
         isActiveClick: false,
         isNormalImg: currentStep >= 2,
-        normalImg: '/images/object/jungle_escape_mermaid_cave.png',
-        grayImg: '/images/object/jungle_escape_mermaid_cave_gray.png',
+        normalImg: './images/object/jungle_escape_mermaid_cave.png',
+        grayImg: './images/object/jungle_escape_mermaid_cave_gray.png',
         width: 102, height: 111,
         altBase: 'jungle_escape_mermaid_cave',
         onActiveClick: () => {}
@@ -159,7 +159,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
     return (
         <div className="page-container" style={pageStyle}>
             <div className={MapPageStyle.mapSection}>
-                <img src='/images/object/jungle_escape_map.png' alt="jungle_escape_map.png" loading="lazy" decoding="async"/>
+                <img src='./images/object/jungle_escape_map.png' alt="jungle_escape_map.png" loading="lazy" decoding="async"/>
             </div>
             <div className={MapPageStyle.explanationText}>
                 {explanationText[currentStep-1].text}
@@ -184,11 +184,11 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                     {location.hasSlideshow && currentStep === 1 && (
                     <div className={MapPageStyle.slideshow}>
                         <div className={MapPageStyle.slideshow}>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger05.png" alt="finger frame 5" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger04.png" alt="finger frame 4" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger03.png" alt="finger frame 3" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger02.png" alt="finger frame 2" loading="lazy" decoding="async"/>
-                            <img className={MapPageStyle.slide} src="/images/object/jungle_escape_finger01.png" alt="finger frame 1" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger05.png" alt="finger frame 5" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger04.png" alt="finger frame 4" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger03.png" alt="finger frame 3" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger02.png" alt="finger frame 2" loading="lazy" decoding="async"/>
+                            <img className={MapPageStyle.slide} src="./images/object/jungle_escape_finger01.png" alt="finger frame 1" loading="lazy" decoding="async"/>
                         </div>
                     </div>
                     

@@ -19,7 +19,7 @@ export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentPro
             You've lost your way in the jungle...
         </div>
         <button className={WrongPathPageStyle.imageButton}>
-            <img src='/images/object/jungle_escape_again_button.png' alt="Return to Map" onClick={()=>{handleBackTo()}} loading="lazy" decoding="async"/>
+            <img src='./images/object/jungle_escape_again_button.png' alt="Return to Map" onClick={()=>{handleBackTo()}} loading="lazy" decoding="async"/>
         </button>
     </div>
   )

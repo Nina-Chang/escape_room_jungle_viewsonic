@@ -38,7 +38,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 )
             );
             // 音效
-            const audioPlayer=new Audio(cfg.sounds.correct || '/sounds/correct.mp3')
+            const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{
@@ -62,7 +62,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 )
             );
             // 音效
-            const audioPlayer=new Audio(cfg.sounds.wrong || '/sounds/wrong.mp3')
+            const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{
@@ -78,11 +78,11 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         const type = isTrueButton ? 'true' : 'false';
 
         if (status === -1) {// 還沒選
-            imgSrc = `/images/object/jungle_escape_${type}.png`;
+            imgSrc = `./images/object/jungle_escape_${type}.png`;
         } else if (status === 1) {// 答對
-            imgSrc = `/images/object/jungle_escape_right_${type}.png`;
+            imgSrc = `./images/object/jungle_escape_right_${type}.png`;
         } else if (status === 0) {// 答錯
-            imgSrc = `/images/object/jungle_escape_wrong_${type}.png`;
+            imgSrc = `./images/object/jungle_escape_wrong_${type}.png`;
         }
 
         return (
@@ -93,7 +93,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
   return (
     <div className="page-container" style={pageStyle}>
         <div className={TrueFalseQuizPageStyle.questionSection}>
-            <img src='/images/object/jungle_escape_question_frame01.png' alt="jungle_escape_question_frame01" loading="lazy" decoding="async" />
+            <img src='./images/object/jungle_escape_question_frame01.png' alt="jungle_escape_question_frame01" loading="lazy" decoding="async" />
         </div>
         <span className={TrueFalseQuizPageStyle.questionIndexText}>
             {currentProblemIndex+1}/{totalProblemSum}
