@@ -82,7 +82,7 @@ function App() {
         {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
         {page === 'game success' && <GameSuccessPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameSuccess} bgmAudio={audioRef.current} setCurrentStepOnMap={setCurrentStepOnMap}/>}
 
-        <audio ref={audioRef} src={"./sounds/background-music.mp3"} loop preload="auto" />    
+        <audio ref={audioRef} src={cfg.sounds.bgm || "./sounds/background-music.mp3"} loop preload="auto" />    
       </div>
     </div>
   );
