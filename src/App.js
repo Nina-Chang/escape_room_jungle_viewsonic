@@ -43,14 +43,15 @@ function App() {
     transform: `scale(${scale})`,
   };
 
-  useEffect(() => {
+  const handleStartClick=()=>{
     // 開始遊戲並播放音樂
-    if (audioRef.current && audioRef.current.paused && page === 'start') {
+    if (audioRef.current && audioRef.current.paused) {
       audioRef.current.volume=0.5
       audioRef.current.currentTime = 0; // 從頭開始播放
       audioRef.current.play().catch(error => console.error("背景音樂播放失敗:", error));
     }
-  }, [page]);
+    navigateTo('prologue');
+  }
 
   useEffect(() => {
     // 視窗縮放
@@ -67,7 +68,7 @@ function App() {
   return (
     <div className="game-viewport">
       <div style={gameStyle}>
-        {page === 'start' && <StartPage navigateTo={navigateTo} backgroundImage={backgroundImage.start} />}
+        {page === 'start' && <StartPage navigateTo={navigateTo} backgroundImage={backgroundImage.start} onStartGame={handleStartClick}/>}
         {page === 'prologue' && <StoryProloguePage navigateTo={navigateTo} backgroundImage={backgroundImage.prologue} />}
         {page === 'gameStart' && <GameStartPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameStart} />}
         {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} currentStep={currentStepOnMap} setWrongPathBackTo={setWrongPathBackTo}/>}
