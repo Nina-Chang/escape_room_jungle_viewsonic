@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import SoundButton from '../../components/SoundButton';
 import MultipleChoiceQuizPageStyle from './MultipleChoiceQuizPage.module.css'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
