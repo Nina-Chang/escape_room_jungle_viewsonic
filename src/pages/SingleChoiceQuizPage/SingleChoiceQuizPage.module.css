@@ -42,6 +42,15 @@
   cursor: pointer;
 
   position: relative;
+
+}
+
+.imageButton:hover:not(:disabled) {
+    transform: scale(1.1) !important;
+}
+
+.imageButton:disabled {
+    color:#000;
 }
 
 .answerText{

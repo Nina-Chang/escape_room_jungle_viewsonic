@@ -9,6 +9,8 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const initialButtonScale={A:1,B:1,C:1}
     const [buttonScale, setButtonScale] = useState(initialButtonScale);
+    const [buttonDisabled, setButtonDisabled] = useState(false)
+    
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
@@ -21,6 +23,8 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
 
     const handleClick=async(btn,optionTxt)=>{
+        if (buttonDisabled) return; // 防止重複點擊
+        setButtonDisabled(true);
         setButtonScale({...initialButtonScale, [btn]:0.9});
         await new Promise(resolve => setTimeout(resolve, 100));
         handleAnswer(btn,optionTxt)
@@ -29,6 +33,11 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const aButtonItem = isCorrect.find(item => item.button === 'A');
     const bButtonItem = isCorrect.find(item => item.button === 'B');
     const cButtonItem = isCorrect.find(item => item.button === 'C');
+
+    const reset=()=>{
+        setIsCorrect(initialButtonState);
+        setButtonDisabled(false)
+    }
 
     const handleAnswer=(button,optionText)=>{
         if(cfg.questions[1].questions[currentProblemIndex].answer===optionText){
@@ -53,7 +62,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                     navigateTo('single choice quiz clear')
                     setCurrentProblemIndex(0)
                 }
-                setIsCorrect(initialButtonState);
+                reset()
             },1000)
         }
         else{
@@ -73,7 +82,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
             setTimeout(()=>{
                 setWrongPathBackTo({page:'single choice quiz',problemIndex:currentProblemIndex})
                 navigateTo('wrong path')
-                setIsCorrect(initialButtonState);
+                reset()
             },1000)
         }
     }
@@ -107,24 +116,21 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
         </span>
         <div className={SingleChoiceQuizPageStyle.answerSection}>
             <button className={SingleChoiceQuizPageStyle.imageButton}
-            onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, A:1}))}
+            disabled={buttonDisabled} 
             style={{transform: `scale(${buttonScale.A || 1})`}}
             onClick={()=>{handleClick('A',cfg.questions[1]?.questions[currentProblemIndex]?.options[0])}}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[0] || `A`}</div>
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
             <button className={SingleChoiceQuizPageStyle.imageButton}
-            onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
+            disabled={buttonDisabled} 
             style={{transform: `scale(${buttonScale.B || 1})`}}
             onClick={()=>handleClick('B',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[1]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[1] || `B`}</div>
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
             <button className={SingleChoiceQuizPageStyle.imageButton}
-            onMouseEnter={() => setButtonScale(prev => ({...prev, C:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, C:1}))}
+            disabled={buttonDisabled} 
             style={{transform: `scale(${buttonScale.C || 1})`}}
             onClick={()=>handleClick('C',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[2]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[2] || `C`}</div>

@@ -4,8 +4,7 @@ import TrueFalseQuizPageStyle from './TrueFalseQuizPage.module.css'
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
-    const [trueButtonScale, setTrueButtonScale] = useState(1);
-    const [falseButtonScale, setFalseButtonScale] = useState(1);
+    const [buttonScale, setButtonScale] = useState({true:1,false:1});
     const [buttonDisabled, setButtonDisabled] = useState(false)
     const initialButtonState=[{button:true,status:-1},{button:false,status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
@@ -28,23 +27,17 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     }
 
     const handleClick=async(btn)=>{
-        if(btn===true){
-            setTrueButtonScale(0.9);
-        }
-        else{
-            setFalseButtonScale(0.9);
-        }
-        await new Promise(resolve => setTimeout(resolve, 300));
-        if(btn===true){
-            handleAnswer(true)
-        }
-        else{
-            handleAnswer(false)
-        }
+        if (buttonDisabled) return; // 防止重複點擊
+        setButtonDisabled(true);
+        setButtonScale(prev => ({ ...prev, [btn]: 0.9 }));
+        await new Promise(resolve => setTimeout(resolve, 100));
+        setButtonScale(prev => ({ ...prev, [btn]: 1 }));
+        await new Promise(resolve => setTimeout(resolve, 50));
+        handleAnswer(btn)
     }
 
     const handleAnswer=(button)=>{
-        setButtonDisabled(true)
+        // setButtonDisabled(true)
         if(cfg.questions[0].questions[currentProblemIndex].answer===button){
             // 更改按鈕狀態
             setIsCorrect(prev =>
@@ -54,8 +47,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     : item
                 )
             );
-            setTrueButtonScale(1);
-            setFalseButtonScale(1);
+            
             // 音效
             const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
@@ -80,8 +72,6 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     : item
                 )
             );
-            setTrueButtonScale(1);
-            setFalseButtonScale(1);
             // 音效
             const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
@@ -126,9 +116,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             <button 
             disabled={buttonDisabled} 
             className={TrueFalseQuizPageStyle.imageButton} 
-            onMouseEnter={() => setTrueButtonScale(1.1)}
-            onMouseLeave={() => setTrueButtonScale(1)}
-            style={{transform: `scale(${trueButtonScale})`}}
+            style={{transform: `scale(${buttonScale.true || 1})`}}
             onClick={()=>{handleClick(true)}}>
                 <AnswerIcon isTrueButton={true} status={trueItem.status}/>
             </button>
@@ -137,9 +125,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             <button 
             disabled={buttonDisabled} 
             className={TrueFalseQuizPageStyle.imageButton} 
-            onMouseEnter={() => setFalseButtonScale(1.1)}
-            onMouseLeave={() => setFalseButtonScale(1)}
-            style={{transform: `scale(${falseButtonScale})`}}
+            style={{transform: `scale(${buttonScale.false || 1})`}}
             onClick={()=>{handleClick(false)}}>
                 <AnswerIcon isTrueButton={false} status={falseItem.status}/>
             </button>

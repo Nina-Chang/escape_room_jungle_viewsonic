@@ -10,6 +10,8 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:already choose -2:not yet to choose
     const initialButtonScale={A:1,B:1,C:1,D:1,submit:1}
     const [buttonScale, setButtonScale] = useState(initialButtonScale);
+    const [buttonDisabled, setButtonDisabled] = useState({A:false,B:false,C:false,D:false,submit:false})
+    
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
@@ -23,15 +25,19 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
 
     const handleClick=async(btn)=>{
-        setButtonScale({...initialButtonScale, [btn]:0.9});
+        setButtonDisabled(prev => ({ ...prev, [btn]: true }) );
+        setButtonScale(prev => ({ ...prev, [btn]: 0.9 }));
         await new Promise(resolve => setTimeout(resolve, 100));
+        setButtonScale(prev => ({ ...prev, [btn]: 1 }));
+        await new Promise(resolve => setTimeout(resolve, 80));
         handleChooseAnswer(btn)
     }
 
     const handleSubmitClick=async()=>{
-        setButtonScale({...initialButtonScale, submit:0.9});
+        setButtonDisabled(prev => ({ ...prev, submit: true }) );
+        setButtonScale(prev => ({ ...prev, submit:0.9}));
         await new Promise(resolve => setTimeout(resolve, 100));
-        setButtonScale({...initialButtonScale, submit:1});
+        setButtonScale(prev => ({ ...prev, submit:1}));
         await new Promise(resolve => setTimeout(resolve, 300));
         handleSubmitAnswer()
     }
@@ -49,12 +55,12 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 : { ...item, optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] } 
             )
         );
-        setButtonScale(initialButtonScale);
     }
 
     const reset=()=>{
         setIsCorrect(initialButtonState);
         setButtonHidden(false)
+        setButtonDisabled({A:false,B:false,C:false,D:false,submit:false})
     }
 
     const handleSubmitAnswer=()=>{
@@ -135,8 +141,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         </div>
         <div className={MultipleChoiceQuizPageStyle.answerSection}>
             <button 
-            onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, A:1}))}
+            disabled={buttonDisabled.A} 
             style={{transform: `scale(${buttonScale.A || 1})`}}
             className={MultipleChoiceQuizPageStyle.imageButton}  
             onClick={()=>handleClick('A')}>
@@ -144,8 +149,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
             <button 
-            onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
+            disabled={buttonDisabled.B} 
             style={{transform: `scale(${buttonScale.B || 1})`}}
             className={MultipleChoiceQuizPageStyle.imageButton}  
             onClick={()=>handleClick('B')}>
@@ -153,8 +157,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
             <button 
-            onMouseEnter={() => setButtonScale(prev => ({...prev, C:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, C:1}))}
+            disabled={buttonDisabled.C} 
             style={{transform: `scale(${buttonScale.C || 1})`}}
             className={MultipleChoiceQuizPageStyle.imageButton} 
             onClick={()=>handleClick('C')}>
@@ -162,8 +165,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <AnswerBackground status={cButtonItem.status}/>
             </button>
             <button 
-            onMouseEnter={() => setButtonScale(prev => ({...prev, D:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, D:1}))}
+            disabled={buttonDisabled.D} 
             style={{transform: `scale(${buttonScale.D || 1})`}}
             className={MultipleChoiceQuizPageStyle.imageButton} 
             onClick={()=>handleClick('D')}>
@@ -171,8 +173,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <AnswerBackground status={dButtonItem.status}/>
             </button>
             <button 
-            onMouseEnter={() => setButtonScale(prev => ({...prev, submit:1.05}))}
-            onMouseLeave={() => setButtonScale(prev => ({...prev, submit:1}))}
+            disabled={buttonDisabled.submit} 
             style={{transform: `scale(${buttonScale.submit || 1})`, marginLeft:'20px'}}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} 
             onClick={()=>handleSubmitClick()}>
