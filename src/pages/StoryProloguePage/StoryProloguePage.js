@@ -16,10 +16,8 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
     setButtonScale(0.9);
     await new Promise(resolve => setTimeout(resolve, 100));
     setButtonScale(1);
-
-    setTimeout(()=>{
-      navigateTo('gameStart');
-    },300)
+    await new Promise(resolve => setTimeout(resolve, 300));
+    navigateTo('gameStart');
   }
 
 
