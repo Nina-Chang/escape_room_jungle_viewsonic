@@ -14,6 +14,7 @@
     "styled-components": "^6.1.19",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://nina-chang.github.io/escape_room_jungle_viewsonic/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
