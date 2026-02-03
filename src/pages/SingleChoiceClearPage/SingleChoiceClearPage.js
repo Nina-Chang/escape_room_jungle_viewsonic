@@ -3,6 +3,7 @@ import SingleChoiceClearPageStyle from './SingleChoiceClearPage.module.css'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap,bgmAudio }) => {
+    const [buttonScale, setButtonScale] = useState(1);
     const [buttonDisabled, setButtonDisabled] = useState(false)
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -10,6 +11,15 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
         height:'1080px',
         loading:'eager'
     };
+
+    const handleClick=async()=>{
+      setButtonScale(0.9);
+      await new Promise(resolve => setTimeout(resolve, 100));
+      setButtonScale(1);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setCurrentStepOnMap(3)
+      navigateTo('map')
+    }
 
     const handleAudioPlay=()=>{
         // 播放對講機音檔時背景音樂音量轉小 直到音檔結束
@@ -34,8 +44,14 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
                 <img src='./images/object/jungle_escape_walkie_talkie.png' alt="jungle_escape_walkie_talkie" loading="lazy" decoding="async"/>
                 <span onClick={()=>{handleAudioPlay()}} className={SingleChoiceClearPageStyle.clickButton}></span>
             </div>
-            <button disabled={buttonDisabled} className={`${SingleChoiceClearPageStyle.imageButton} ${buttonDisabled&&SingleChoiceClearPageStyle.buttonDisabled}`} onClick={()=>{setCurrentStepOnMap(3)}}>
-                <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" onClick={()=>navigateTo('map')} loading="lazy" decoding="async"/>
+            <button 
+            disabled={buttonDisabled} 
+            className={`${SingleChoiceClearPageStyle.imageButton} ${buttonDisabled&&SingleChoiceClearPageStyle.buttonDisabled}`} 
+            onMouseEnter={() => setButtonScale(1.1)}
+            onMouseLeave={() => setButtonScale(1)}
+            style={{transform: `translateX(-50%) scale(${buttonScale})`}}
+            onClick={handleClick}>
+                <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
         </div>
     )

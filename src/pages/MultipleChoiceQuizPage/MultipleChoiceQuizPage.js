@@ -8,6 +8,8 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const [buttonHidden, setButtonHidden] = useState(false)
     const initialButtonState=[{button:'A',optionText:'',status:-2},{button:'B',optionText:'',status:-2},{button:'C',optionText:'',status:-2},{button:'D',optionText:'',status:-2}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:already choose -2:not yet to choose
+    const initialButtonScale={A:1,B:1,C:1,D:1,submit:1}
+    const [buttonScale, setButtonScale] = useState(initialButtonScale);
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
@@ -19,6 +21,20 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const singleChoiceSum=cfg?.questions[1].questions.length
     const multipleChoiceSum=cfg?.questions[2].questions.length
     const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
+
+    const handleClick=async(btn)=>{
+        setButtonScale({...initialButtonScale, [btn]:0.9});
+        await new Promise(resolve => setTimeout(resolve, 100));
+        handleChooseAnswer(btn)
+    }
+
+    const handleSubmitClick=async()=>{
+        setButtonScale({...initialButtonScale, submit:0.9});
+        await new Promise(resolve => setTimeout(resolve, 100));
+        setButtonScale({...initialButtonScale, submit:1});
+        await new Promise(resolve => setTimeout(resolve, 300));
+        handleSubmitAnswer()
+    }
 
     const aButtonItem = isCorrect.find(item => item.button === 'A');
     const bButtonItem = isCorrect.find(item => item.button === 'B');
@@ -33,6 +49,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 : { ...item, optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] } 
             )
         );
+        setButtonScale(initialButtonScale);
     }
 
     const reset=()=>{
@@ -72,7 +89,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                     setCurrentProblemIndex(0)
                 }
                 reset()
-            },500)
+            },1000)
         }
         else{
             // 音效
@@ -83,7 +100,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 setWrongPathBackTo({page:'multiple choice quiz',problemIndex:currentProblemIndex})
                 navigateTo('wrong path')
                 reset()
-            },500)
+            },1000)
         }
     }
 
@@ -117,26 +134,51 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             {cfg.questions[2]?.questions[currentProblemIndex]?.question || `Is the object you found a compass?`}
         </div>
         <div className={MultipleChoiceQuizPageStyle.answerSection}>
-            <button className={MultipleChoiceQuizPageStyle.imageButton}  onClick={()=>handleChooseAnswer('A')}>
+            <button 
+            onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, A:1}))}
+            style={{transform: `scale(${buttonScale.A || 1})`}}
+            className={MultipleChoiceQuizPageStyle.imageButton}  
+            onClick={()=>handleClick('A')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[0] || `A`}</span>
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
-            <button className={MultipleChoiceQuizPageStyle.imageButton}  onClick={()=>handleChooseAnswer('B')}>
+            <button 
+            onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
+            style={{transform: `scale(${buttonScale.B || 1})`}}
+            className={MultipleChoiceQuizPageStyle.imageButton}  
+            onClick={()=>handleClick('B')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[1] || `B`}</span>
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
-            <button className={MultipleChoiceQuizPageStyle.imageButton} onClick={()=>handleChooseAnswer('C')}>
+            <button 
+            onMouseEnter={() => setButtonScale(prev => ({...prev, C:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, C:1}))}
+            style={{transform: `scale(${buttonScale.C || 1})`}}
+            className={MultipleChoiceQuizPageStyle.imageButton} 
+            onClick={()=>handleClick('C')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[2] || `C`}</span>
                 <AnswerBackground status={cButtonItem.status}/>
             </button>
-            <button className={MultipleChoiceQuizPageStyle.imageButton} onClick={()=>handleChooseAnswer('D')}>
+            <button 
+            onMouseEnter={() => setButtonScale(prev => ({...prev, D:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, D:1}))}
+            style={{transform: `scale(${buttonScale.D || 1})`}}
+            className={MultipleChoiceQuizPageStyle.imageButton} 
+            onClick={()=>handleClick('D')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[3] || `D`}</span>
                 <AnswerBackground status={dButtonItem.status}/>
             </button>
-            <SoundButton className={`${MultipleChoiceQuizPageStyle.imageButton} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} style={{marginLeft:'20px'}} onClick={()=>handleSubmitAnswer()}>
+            <button 
+            onMouseEnter={() => setButtonScale(prev => ({...prev, submit:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, submit:1}))}
+            style={{transform: `scale(${buttonScale.submit || 1})`, marginLeft:'20px'}}
+            className={`${MultipleChoiceQuizPageStyle.imageButton} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} 
+            onClick={()=>handleSubmitClick()}>
                 <span className={MultipleChoiceQuizPageStyle.submitButtonText}>Submit</span>
                 <img src='./images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy" decoding="async"/>
-            </SoundButton>
+            </button>
         </div>
     </div>
   )

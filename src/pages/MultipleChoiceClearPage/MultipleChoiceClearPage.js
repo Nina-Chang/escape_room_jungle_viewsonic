@@ -2,6 +2,7 @@ import { useState } from 'react'
 import MultipleChoiceClearPageStyle from './MultipleChoiceClearPage.module.css'
 
 export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
+    const [buttonScale, setButtonScale] = useState(1);
     const [isPicReveal, setIsPicReveal] = useState(false)
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -9,6 +10,15 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
         height:'1080px',
         loading:'eager'
     };
+
+    const handleClick=async()=>{
+      setButtonScale(0.9);
+      await new Promise(resolve => setTimeout(resolve, 100));
+      setButtonScale(1);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      navigateTo('map')
+      setCurrentStepOnMap(4)
+    }
 
 
     return (
@@ -28,8 +38,13 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
                 </button>
                 <img src='./images/object/jungle_escape_camera.png' alt="jungle_escape_camera" loading="lazy" decoding="async"/>
             </div>
-            <button className={MultipleChoiceClearPageStyle.imageButton} onClick={()=>{setCurrentStepOnMap(4)}}>
-                <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" onClick={()=>navigateTo('map')} loading="lazy" decoding="async"/>
+            <button 
+            onMouseEnter={() => setButtonScale(1.1)}
+            onMouseLeave={() => setButtonScale(1)}
+            style={{transform: `translateX(-50%) scale(${buttonScale})`}}
+            className={MultipleChoiceClearPageStyle.imageButton} 
+            onClick={()=>handleClick()}>
+                <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
         </div>
     )

@@ -20,7 +20,7 @@
     top:20%;    
     left:60%;
     color:#000;
-    font-size: 40px;
+    font-size: clamp(18px, 2vw, 48px);;
     font-weight: 700;
 }
 

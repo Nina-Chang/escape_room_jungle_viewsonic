@@ -7,6 +7,8 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
     const initialButtonState=[{button:'A',status:-1},{button:'B',status:-1},{button:'C',status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
+    const initialButtonScale={A:1,B:1,C:1}
+    const [buttonScale, setButtonScale] = useState(initialButtonScale);
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
@@ -17,6 +19,12 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const trueFalseQuizSum=cfg?.questions[0].questions.length
     const singleChoiceSum=cfg?.questions[1].questions.length
     const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
+
+    const handleClick=async(btn,optionTxt)=>{
+        setButtonScale({...initialButtonScale, [btn]:0.9});
+        await new Promise(resolve => setTimeout(resolve, 100));
+        handleAnswer(btn,optionTxt)
+    }
 
     const aButtonItem = isCorrect.find(item => item.button === 'A');
     const bButtonItem = isCorrect.find(item => item.button === 'B');
@@ -32,6 +40,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                     : item
                 )
             );
+            setButtonScale(initialButtonScale);
             // 音效
             const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
@@ -45,7 +54,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                     setCurrentProblemIndex(0)
                 }
                 setIsCorrect(initialButtonState);
-            },500)
+            },1000)
         }
         else{
             // 更改按鈕狀態
@@ -56,6 +65,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                     : item
                 )
             );
+            setButtonScale(initialButtonScale);
             // 音效
             const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
@@ -64,7 +74,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                 setWrongPathBackTo({page:'single choice quiz',problemIndex:currentProblemIndex})
                 navigateTo('wrong path')
                 setIsCorrect(initialButtonState);
-            },500)
+            },1000)
         }
     }
 
@@ -96,18 +106,30 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
             {cfg.questions[1]?.questions[currentProblemIndex]?.question || ``}
         </span>
         <div className={SingleChoiceQuizPageStyle.answerSection}>
-            <SoundButton className={SingleChoiceQuizPageStyle.imageButton}  onClick={()=>handleAnswer('A',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[0]}`)}>
+            <button className={SingleChoiceQuizPageStyle.imageButton}
+            onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, A:1}))}
+            style={{transform: `scale(${buttonScale.A || 1})`}}
+            onClick={()=>{handleClick('A',cfg.questions[1]?.questions[currentProblemIndex]?.options[0])}}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[0] || `A`}</div>
                 <AnswerBackground status={aButtonItem.status}/>
-            </SoundButton>
-            <SoundButton className={SingleChoiceQuizPageStyle.imageButton}  onClick={()=>handleAnswer('B',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[1]}`)}>
+            </button>
+            <button className={SingleChoiceQuizPageStyle.imageButton}
+            onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
+            style={{transform: `scale(${buttonScale.B || 1})`}}
+            onClick={()=>handleClick('B',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[1]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[1] || `B`}</div>
                 <AnswerBackground status={bButtonItem.status}/>
-            </SoundButton>
-            <SoundButton className={SingleChoiceQuizPageStyle.imageButton} onClick={()=>handleAnswer('C',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[2]}`)}>
+            </button>
+            <button className={SingleChoiceQuizPageStyle.imageButton}
+            onMouseEnter={() => setButtonScale(prev => ({...prev, C:1.05}))}
+            onMouseLeave={() => setButtonScale(prev => ({...prev, C:1}))}
+            style={{transform: `scale(${buttonScale.C || 1})`}}
+            onClick={()=>handleClick('C',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[2]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[2] || `C`}</div>
                 <AnswerBackground status={cButtonItem.status}/>
-            </SoundButton>
+            </button>
         </div>
     </div>
   )

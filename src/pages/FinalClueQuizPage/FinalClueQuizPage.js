@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import FinalClueQuizPageStyle from './FinalClueQuizPage.module.css'
 
 export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
+    const initialButtonScale={A:1,B:1,C:1}
+    const [buttonScale, setButtonScale] = useState(initialButtonScale);
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
@@ -29,6 +32,14 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         },
     ]
 
+    const handleClick=async(btn,func)=>{
+        setButtonScale({...initialButtonScale,[btn]:0.9});
+        await new Promise(resolve => setTimeout(resolve, 100));
+        setButtonScale({...initialButtonScale,[btn]:1});
+        await new Promise(resolve => setTimeout(resolve, 500));
+        func();
+    }
+
     const handleNavigateToWrongPath=(currentIndex)=>{
         setWrongPathBackTo({page:'final clue quiz',problemIndex:currentIndex})
         navigateTo('wrong path')
@@ -52,9 +63,26 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 <>
                     <div className={FinalClueQuizPageStyle.questionText}>{problem[0].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionSection}>
-                        <img src={problem[0].optionImageSrc[0]} alt="jungle_escape_id_card01" onClick={()=>setCurrentProblemIndex(1)} loading="lazy" decoding="async"/>
-                        <img src={problem[0].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(0)} loading="lazy" decoding="async"/>
-                        <img src={problem[0].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(0)} loading="lazy" decoding="async"/>    
+                        <img 
+                            onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
+                            onMouseLeave={() => setButtonScale(prev => ({...prev, A:1}))}
+                            style={{transform: `scale(${buttonScale.A || 1})`}} 
+                            src={problem[0].optionImageSrc[0]} 
+                            alt="jungle_escape_id_card01" 
+                            onClick={()=>handleClick('A',()=>setCurrentProblemIndex(1))} loading="lazy" decoding="async"/>
+                        <img 
+                            onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
+                            onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
+                            style={{transform: `scale(${buttonScale.B || 1})`}}
+                            src={problem[0].optionImageSrc[1]} 
+                            alt="jungle_escape_id_card02" 
+                            onClick={()=>handleClick('B',()=>handleNavigateToWrongPath(0))} loading="lazy" decoding="async"/>
+                        <img onMouseEnter={() => setButtonScale(prev => ({...prev, C:1.05}))}
+                            onMouseLeave={() => setButtonScale(prev => ({...prev, C:1}))}
+                            style={{transform: `scale(${buttonScale.C || 1})`}} 
+                            src={problem[0].optionImageSrc[2]} 
+                            alt="jungle_escape_id_card03" 
+                            onClick={()=>handleClick('C',()=>handleNavigateToWrongPath(0))} loading="lazy" decoding="async"/>    
                     </div>
                 </>
             }
@@ -67,15 +95,32 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[0]}</div>
-                            <img src={problem[1].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(1)} loading="lazy" decoding="async"/>
+                            <img 
+                                onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
+                                onMouseLeave={() => setButtonScale(prev => ({...prev, A:1}))}
+                                style={{transform: `scale(${buttonScale.A || 1})`}} 
+                                src={problem[1].optionImageSrc[0]} 
+                                alt="jungle_escape_id_card01"  
+                                onClick={()=>handleClick('A',()=>handleNavigateToWrongPath(1))} loading="lazy" decoding="async"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[1]}</div>
-                            <img src={problem[1].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>setCurrentProblemIndex(2)} loading="lazy" decoding="async"/>
+                            <img 
+                                onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
+                                onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
+                                style={{transform: `scale(${buttonScale.B || 1})`}} 
+                                src={problem[1].optionImageSrc[1]} 
+                                alt="jungle_escape_id_card02" 
+                                onClick={()=>handleClick('B',()=>setCurrentProblemIndex(2))} loading="lazy" decoding="async"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[2]}</div>
-                            <img src={problem[1].optionImageSrc[2]} alt="jungle_escape_id_card03" onClick={()=>handleNavigateToWrongPath(1)} loading="lazy" decoding="async"/>    
+                            <img 
+                                onMouseEnter={() => setButtonScale(prev => ({...prev, C:1.05}))}
+                                onMouseLeave={() => setButtonScale(prev => ({...prev, C:1}))}
+                                style={{transform: `scale(${buttonScale.C || 1})`}} 
+                                src={problem[1].optionImageSrc[2]} 
+                                alt="jungle_escape_id_card03" onClick={()=>handleClick('C',()=>handleNavigateToWrongPath(1))} loading="lazy" decoding="async"/>    
                         </div>
                     </div>
                 </>
@@ -89,15 +134,33 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[0]}</div>
-                            <img src={problem[2].optionImageSrc[0]} alt="jungle_escape_id_card01"  onClick={()=>handleNavigateToWrongPath(2)} loading="lazy" decoding="async"/>
+                            <img 
+                                onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
+                                onMouseLeave={() => setButtonScale(prev => ({...prev, A:1}))}
+                                style={{transform: `scale(${buttonScale.A || 1})`}}
+                                src={problem[2].optionImageSrc[0]} 
+                                alt="jungle_escape_id_card01"  
+                                onClick={()=>handleClick('A',()=>handleNavigateToWrongPath(2))} loading="lazy" decoding="async"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[1]}</div>
-                            <img src={problem[2].optionImageSrc[1]} alt="jungle_escape_id_card02" onClick={()=>handleNavigateToWrongPath(2)} loading="lazy" decoding="async"/>
+                            <img 
+                                onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
+                                onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
+                                style={{transform: `scale(${buttonScale.B || 1})`}} 
+                                src={problem[2].optionImageSrc[1]} 
+                                alt="jungle_escape_id_card02" 
+                                onClick={()=>handleClick('B',()=>handleNavigateToWrongPath(2))} loading="lazy" decoding="async"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[2]}</div>
-                            <img src={problem[2].optionImageSrc[2]} className={FinalClueQuizPageStyle.answerCustomStyle} alt="jungle_escape_id_card03" width={250} onClick={()=>{handleGameSuccess()}} loading="lazy" decoding="async"/>    
+                            <img 
+                                onMouseEnter={() => setButtonScale(prev => ({...prev, C:1.05}))}
+                                onMouseLeave={() => setButtonScale(prev => ({...prev, C:1}))}
+                                style={{transform: `scale(${buttonScale.C || 1})`}} 
+                                src={problem[2].optionImageSrc[2]} 
+                                className={FinalClueQuizPageStyle.answerCustomStyle} alt="jungle_escape_id_card03" width={250} 
+                                onClick={()=>handleClick('C',()=>handleGameSuccess())} loading="lazy" decoding="async"/>    
                         </div>
                     </div>
                 </>

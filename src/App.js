@@ -46,7 +46,8 @@ function App() {
   const handleStartClick=()=>{
     // 開始遊戲並播放音樂
     if (audioRef.current && audioRef.current.paused) {
-      audioRef.current.volume=0.5
+      audioRef.current.volume = 0.316;
+      audioRef.current.loop = false;
       audioRef.current.currentTime = 0; // 從頭開始播放
       audioRef.current.play().catch(error => console.error("背景音樂播放失敗:", error));
     }
@@ -82,7 +83,7 @@ function App() {
         {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
         {page === 'game success' && <GameSuccessPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameSuccess} bgmAudio={audioRef.current} setCurrentStepOnMap={setCurrentStepOnMap}/>}
 
-        <audio ref={audioRef} src={cfg.sounds.bgm || "./sounds/african-background-music-tribal-kongo-nigeria-tanzania.mp3"} loop preload="auto" />    
+        <audio ref={audioRef} src={cfg.sounds.bgm || "./sounds/african-background-music-tribal-kongo-nigeria-tanzania.mp3"} preload="auto" />    
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
+import { useState } from "react"
 import MapPageStyle from "./MapPage.module.css"
 
 // 關卡順序為：river camp→ swamp trap→ stone maze→ ancient temple
 export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBackTo }) => {
+    
     const explanationText=[
         { index:1,text:"Start your adventure at the River Camp. From there, follow the clues and work your way through the jungle to find the missing members."},
         { index:2,text:"Where do the clues lead?"},
@@ -43,6 +45,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         color:currentStep===2 || currentStep===3 || currentStep===4?'#000':'#9E9B98',
         marginLeft:'-25px'
     }
+    
 
     const handleWrongPath=()=>{
         setWrongPathBackTo({page:'map',problemIndex:0})
@@ -61,7 +64,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
         grayImg: './images/object/jungle_escape_river_camp_gray.png',
         width: 200, height: 93,
         altBase: 'jungle_escape_river_camp',
-        onActiveClick: () => navigateTo('true false quiz'),
+        onActiveClick: () => {},
         hasSlideshow: true  // 動畫
     },
     {
@@ -137,7 +140,9 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
             altBase,
             onActiveClick,
         }) => {
-        const handleClick = () => {
+        const [buttonScale, setButtonScale] = useState(1);
+
+        const handleClick =() => {
             if (isActiveClick) {
                 onActiveClick();
             } else {
@@ -145,13 +150,34 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
             }
         };
 
+        const handleRiverCampActiveClick=async()=>{
+            setButtonScale(0.9);
+            await new Promise(resolve => setTimeout(resolve, 100));
+            setButtonScale(1);
+            await new Promise(resolve => setTimeout(resolve, 300));
+            navigateTo('true false quiz');
+        }
+
         const imgSrc = isNormalImg ? normalImg : grayImg;
         const alt = `${altBase}${isNormalImg ? '' : '_gray'}.png`;
 
         return (
+            currentStep === 1 && altBase === 'jungle_escape_river_camp'
+            ?
+            <button className="image-button"
+            onMouseEnter={() => {
+                setButtonScale(1.1);
+            }}
+            onMouseLeave={() => setButtonScale(1)} 
+            style={{transform: `scale(${buttonScale})`}} 
+            onClick={handleRiverCampActiveClick}>
+                <img src={imgSrc} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+            </button>
+            :
             <button className="image-button" onClick={handleClick}>
                 <img src={imgSrc} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
             </button>
+            
         );
     };
 
