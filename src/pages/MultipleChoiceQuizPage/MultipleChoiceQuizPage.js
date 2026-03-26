@@ -152,8 +152,8 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         <div className={MultipleChoiceQuizPageStyle.answerSection}>
             <button 
             disabled={buttonDisabled.A}
-            style={{transform: `scale(${buttonScale.A || 1})`}}
             className={`${MultipleChoiceQuizPageStyle.imageButton}`}
+            style={{transform: `scale(${buttonScale.A || 1})`}}
             onClick={()=>handleClick('A')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[0] || `A`}</span>
                 <AnswerBackground status={aButtonItem.status}/>

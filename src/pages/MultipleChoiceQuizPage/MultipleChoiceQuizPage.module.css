@@ -49,8 +49,8 @@
     position: relative;
 }
 
-.imageButton:hover:not(.clicking){
-    transform: scale(1.1) ;
+.imageButton:not(.disabled):hover{
+    transform: scale(1.1) !important; ;
 }
 
 .imageButton:disabled{
