@@ -81,7 +81,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 newStatus = isAnswer ? 1 : 0; 
             } else {
                 // 【沒有選到的答案】
-                newStatus = isAnswer ? 0 : -1;
+                newStatus = isAnswer ? 1 : -1;
             }
 
             return {
