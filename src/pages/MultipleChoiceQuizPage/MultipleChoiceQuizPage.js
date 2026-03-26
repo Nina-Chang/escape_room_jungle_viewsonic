@@ -23,17 +23,29 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const multipleChoiceSum=cfg?.questions[2].questions.length
     const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
 
+    const handleChooseAnswer=(button)=>{
+        setIsCorrect(prev =>
+            prev.map((item,index) =>
+                item.button===button
+                ? { ...item, status: item.status===-1?-2:item.status===-2?-1:item.status,optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] }  
+                : { ...item, optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] } 
+            )
+        );
+    }
+
     const handleClick=async(btn)=>{
-        setButtonDisabled(prev => ({ ...prev, [btn]: true }) );
+        // setButtonDisabled(prev => ({ ...prev, [btn]: true }) );
+        await new Promise(resolve => setTimeout(resolve, 100));
         setButtonScale(prev => ({ ...prev, [btn]: 0.9 }));
         await new Promise(resolve => setTimeout(resolve, 100));
         setButtonScale(prev => ({ ...prev, [btn]: 1 }));
         await new Promise(resolve => setTimeout(resolve, 80));
-        handleChooseAnswer(btn)
+
+        handleChooseAnswer(btn);
     }
 
     const handleSubmitClick=async()=>{
-        setButtonDisabled(prev => ({ ...prev, submit: true }) );
+        setButtonDisabled(prev => ({ A:true,B:true,C:true,D:true, submit: true }) );
         setButtonScale(prev => ({ ...prev, submit:0.9}));
         await new Promise(resolve => setTimeout(resolve, 100));
         setButtonScale(prev => ({ ...prev, submit:1}));
@@ -45,16 +57,6 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const bButtonItem = isCorrect.find(item => item.button === 'B');
     const cButtonItem = isCorrect.find(item => item.button === 'C');
     const dButtonItem = isCorrect.find(item => item.button === 'D');
-
-    const handleChooseAnswer=(button)=>{
-        setIsCorrect(prev =>
-            prev.map((item,index) =>
-                item.button===button
-                ? { ...item, status: -1,optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] }  
-                : { ...item, optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] } 
-            )
-        );
-    }
 
     const reset=()=>{
         setIsCorrect(initialButtonState);
@@ -69,14 +71,23 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         const isAllCorrect=choosedItem.length===correctAnswer.length && choosedItem.every((item,index)=>item===correctAnswer[index])
         // 更改按鈕狀態
         const updateState=isCorrect.map(item=>{
-            if(item.status!==-1){
-                return item
+            const isChosen = item.status === -1; // 是否被選中
+            const isAnswer = correctAnswer.includes(item.optionText); // 是否為答案
+
+            let newStatus;
+
+            if (isChosen) {
+                // 【有選到的答案】
+                newStatus = isAnswer ? 1 : 0; 
+            } else {
+                // 【沒有選到的答案】
+                newStatus = isAnswer ? 0 : -1;
             }
 
-            return{
+            return {
                 ...item,
-                status:isAllCorrect?1:0
-            }
+                status: newStatus
+            };
         })
         setIsCorrect(updateState)
 
@@ -140,15 +151,15 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         </div>
         <div className={MultipleChoiceQuizPageStyle.answerSection}>
             <button 
-            disabled={buttonDisabled.A} 
+            disabled={buttonDisabled.A}
             style={{transform: `scale(${buttonScale.A || 1})`}}
-            className={MultipleChoiceQuizPageStyle.imageButton}  
+            className={`${MultipleChoiceQuizPageStyle.imageButton}`}
             onClick={()=>handleClick('A')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[0] || `A`}</span>
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
             <button 
-            disabled={buttonDisabled.B} 
+            disabled={buttonDisabled.B}
             style={{transform: `scale(${buttonScale.B || 1})`}}
             className={MultipleChoiceQuizPageStyle.imageButton}  
             onClick={()=>handleClick('B')}>
@@ -156,7 +167,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
             <button 
-            disabled={buttonDisabled.C} 
+            disabled={buttonDisabled.C}
             style={{transform: `scale(${buttonScale.C || 1})`}}
             className={MultipleChoiceQuizPageStyle.imageButton} 
             onClick={()=>handleClick('C')}>
@@ -164,7 +175,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <AnswerBackground status={cButtonItem.status}/>
             </button>
             <button 
-            disabled={buttonDisabled.D} 
+            disabled={buttonDisabled.D}
             style={{transform: `scale(${buttonScale.D || 1})`}}
             className={MultipleChoiceQuizPageStyle.imageButton} 
             onClick={()=>handleClick('D')}>
