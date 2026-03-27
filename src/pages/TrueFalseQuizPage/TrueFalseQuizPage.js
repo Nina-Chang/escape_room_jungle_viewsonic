@@ -1,13 +1,14 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo,useRef } from 'react';
 import TrueFalseQuizPageStyle from './TrueFalseQuizPage.module.css'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
     const [buttonScale, setButtonScale] = useState({true:1,false:1});
-    const [buttonDisabled, setButtonDisabled] = useState(false)
     const initialButtonState=[{button:true,status:-1},{button:false,status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
+    const isProcessing = useRef(false);
+    
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
@@ -23,12 +24,13 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
 
     const reset=()=>{
         setIsCorrect(initialButtonState);
-        setButtonDisabled(false)
+        isProcessing.current = false;
     }
 
     const handleClick=async(btn)=>{
-        if (buttonDisabled) return; // 防止重複點擊
-        setButtonDisabled(true);
+        // 防止重複點擊
+        if (isProcessing.current) return;
+        isProcessing.current = true;
         setButtonScale(prev => ({ ...prev, [btn]: 0.9 }));
         await new Promise(resolve => setTimeout(resolve, 100));
         setButtonScale(prev => ({ ...prev, [btn]: 1 }));
@@ -37,7 +39,6 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     }
 
     const handleAnswer=(button)=>{
-        // setButtonDisabled(true)
         if(cfg.questions[0].questions[currentProblemIndex].answer===button){
             // 更改按鈕狀態
             setIsCorrect(prev =>
@@ -114,7 +115,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         </span>
         <div className={TrueFalseQuizPageStyle.trueButtonIcon}>
             <button 
-            disabled={buttonDisabled} 
+            disabled={isProcessing.current} 
             className={TrueFalseQuizPageStyle.imageButton} 
             style={{transform: `scale(${buttonScale.true || 1})`}}
             onClick={()=>{handleClick(true)}}>
@@ -123,7 +124,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         </div>
         <div className={TrueFalseQuizPageStyle.falseButtonIcon}>
             <button 
-            disabled={buttonDisabled} 
+            disabled={isProcessing.current} 
             className={TrueFalseQuizPageStyle.imageButton} 
             style={{transform: `scale(${buttonScale.false || 1})`}}
             onClick={()=>{handleClick(false)}}>

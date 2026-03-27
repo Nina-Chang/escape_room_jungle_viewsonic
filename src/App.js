@@ -12,7 +12,7 @@ import { MultipleChoiceQuizPage } from './pages/MultipleChoiceQuizPage/MultipleC
 import { MultipleChoiceClearPage } from './pages/MultipleChoiceClearPage/MultipleChoiceClearPage';
 import { GameSuccessPage} from './pages/GameSuccessPage/GameSuccessPage'
 import { FinalClueQuizPage } from './pages/FinalClueQuizPage/FinalClueQuizPage';
-import { useEffect, useState,useRef } from 'react';
+import { useLayoutEffect, useState,useRef } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
@@ -43,6 +43,38 @@ function App() {
     transform: `scale(${scale})`,
   };
 
+  document.querySelectorAll('.questionText').forEach(el => {
+    const len = el.innerText.length;
+
+    if (len > 56) {
+      el.style.fontSize = '15px';
+    } else if (len >35) {
+      el.style.fontSize = '20px';
+    } else if (len >22) {
+      el.style.fontSize = '24px';
+    } else if (len >12) {
+      el.style.fontSize = '28px';
+    } else {
+      el.style.fontSize = '32px';
+    }
+  });
+
+  document.querySelectorAll('.answerText').forEach(el => {
+    const len = el.innerText.length;
+
+    if (len > 40) {
+      el.style.fontSize = '16px';
+    } else if (len >25) {
+      el.style.fontSize = '20px';
+    } else if (len >18) {
+      el.style.fontSize = '24px';
+    } else if (len >10) {
+      el.style.fontSize = '28px';
+    } else {
+      el.style.fontSize = '32px';
+    }
+  });
+
   const handleStartClick=()=>{
     // 開始遊戲並播放音樂
     if (audioRef.current && audioRef.current.paused) {
@@ -54,20 +86,21 @@ function App() {
     navigateTo('prologue');
   }
 
-  useEffect(() => {
-    // 視窗縮放
+  useLayoutEffect(() => {
     const handleResize = () => {
-      if(window.innerWidth===0) return;
+      if (window.innerWidth === 0) return;
       const scaleX = window.innerWidth / 1920;
       const scaleY = window.innerHeight / 1080;
       setScale(Math.min(scaleX, scaleY));
     };
+
+    handleResize();
+
     window.addEventListener('resize', handleResize);
-    const timer=setTimeout(handleResize,100)
+    
     return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(timer);
-    }
+        window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (

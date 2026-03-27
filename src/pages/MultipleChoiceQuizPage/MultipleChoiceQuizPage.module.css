@@ -45,6 +45,8 @@
     user-select: none;
     cursor: pointer;
     display: inline-block;
+    /* 💡 強制開啟硬體加速，防止第一次動畫閃爍 */
+    backface-visibility: hidden;
 
     position: relative;
 }
@@ -57,16 +59,19 @@
     color: #000;
 }
 
-/* .imageButton.clicking {
-    display: inline-block;
-    animation: clickPop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards !important;
-}
 
 @keyframes clickPop {
-  0% { transform: scale(1.1); }
-  50% { transform: scale(0.9); }
-  100% { transform: scale(1); }
-} */
+  0% { transform: scale(1.1); }   /* 起始稍微放大，增加回饋感 */
+  50% { transform: scale(0.9); }  /* 按下去縮小 */
+  100% { transform: scale(1); }    /* 恢復正常 */
+}
+
+.clicking {
+  /* 將動畫套用到元件 */
+  animation: clickPop 0.25s ease-out; /* 0.25秒完成，可依喜好調整 */
+  pointer-events: none; /* 重要！動畫時不接受再次點擊，防止連續點擊 Bug */
+}
+
 
 .buttonHidden{
     visibility: hidden;
@@ -80,6 +85,8 @@
     font-size: 36px;
     font-weight: 700;
     padding: 0;
+    width: 100%;
+    will-change: transform;/*  防止縮放時文字變模糊或跳動 */
 }
 
 .submitButtonText{

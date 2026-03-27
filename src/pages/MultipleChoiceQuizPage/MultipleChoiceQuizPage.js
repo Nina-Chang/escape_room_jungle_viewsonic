@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo,useRef } from 'react';
 import MultipleChoiceQuizPageStyle from './MultipleChoiceQuizPage.module.css'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -7,9 +7,8 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const [buttonHidden, setButtonHidden] = useState(false)
     const initialButtonState=[{button:'A',optionText:'',status:-2},{button:'B',optionText:'',status:-2},{button:'C',optionText:'',status:-2},{button:'D',optionText:'',status:-2}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:already choose -2:not yet to choose
-    const initialButtonScale={A:1,B:1,C:1,D:1,submit:1}
-    const [buttonScale, setButtonScale] = useState(initialButtonScale);
-    const [buttonDisabled, setButtonDisabled] = useState({A:false,B:false,C:false,D:false,submit:false})
+    const isProcessing = useRef(false);
+    const [clickingBtn, setClickingBtn] = useState(null);
     
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -31,25 +30,21 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 : { ...item, optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] } 
             )
         );
+        setClickingBtn(null)
     }
 
     const handleClick=async(btn)=>{
-        // setButtonDisabled(prev => ({ ...prev, [btn]: true }) );
-        await new Promise(resolve => setTimeout(resolve, 100));
-        setButtonScale(prev => ({ ...prev, [btn]: 0.9 }));
-        await new Promise(resolve => setTimeout(resolve, 100));
-        setButtonScale(prev => ({ ...prev, [btn]: 1 }));
-        await new Promise(resolve => setTimeout(resolve, 80));
-
-        handleChooseAnswer(btn);
+        setClickingBtn(btn);
+        setTimeout(()=>{
+            handleChooseAnswer(btn);
+        },200)
     }
 
     const handleSubmitClick=async()=>{
-        setButtonDisabled(prev => ({ A:true,B:true,C:true,D:true, submit: true }) );
-        setButtonScale(prev => ({ ...prev, submit:0.9}));
-        await new Promise(resolve => setTimeout(resolve, 100));
-        setButtonScale(prev => ({ ...prev, submit:1}));
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // 防止重複點擊
+        if (isProcessing.current) return;
+        isProcessing.current = true;
+        setClickingBtn('submit');
         handleSubmitAnswer()
     }
 
@@ -61,7 +56,8 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const reset=()=>{
         setIsCorrect(initialButtonState);
         setButtonHidden(false)
-        setButtonDisabled({A:false,B:false,C:false,D:false,submit:false})
+        setClickingBtn(null)
+        isProcessing.current=false;
     }
 
     const handleSubmitAnswer=()=>{
@@ -120,7 +116,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         }
     }
 
-    const AnswerBackground = ({ status }) => {
+    const AnswerBackground = React.memo(({ status }) => {
         let imgSrc = '';
 
         if (status === -1) {// 已選擇
@@ -136,7 +132,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         return (
             <img src={imgSrc} alt={`jungle_escape_multiple_question_${status}`} loading="lazy" decoding="async" />
         );
-    };
+    });
 
   return (
     <div className="page-container" style={pageStyle}>
@@ -151,41 +147,37 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         </div>
         <div className={MultipleChoiceQuizPageStyle.answerSection}>
             <button 
-            disabled={buttonDisabled.A}
-            className={`${MultipleChoiceQuizPageStyle.imageButton}`}
-            style={{transform: `scale(${buttonScale.A || 1})`}}
+            disabled={isProcessing.current}
+            className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'A' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('A')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[0] || `A`}</span>
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
             <button 
-            disabled={buttonDisabled.B}
-            style={{transform: `scale(${buttonScale.B || 1})`}}
-            className={MultipleChoiceQuizPageStyle.imageButton}  
+            disabled={isProcessing.current}
+            className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'B' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('B')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[1] || `B`}</span>
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
             <button 
-            disabled={buttonDisabled.C}
-            style={{transform: `scale(${buttonScale.C || 1})`}}
-            className={MultipleChoiceQuizPageStyle.imageButton} 
+            disabled={isProcessing.current}
+            className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'C' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('C')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[2] || `C`}</span>
                 <AnswerBackground status={cButtonItem.status}/>
             </button>
             <button 
-            disabled={buttonDisabled.D}
-            style={{transform: `scale(${buttonScale.D || 1})`}}
-            className={MultipleChoiceQuizPageStyle.imageButton} 
+            disabled={isProcessing.current}
+            className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'D' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('D')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[3] || `D`}</span>
                 <AnswerBackground status={dButtonItem.status}/>
             </button>
             <button 
-            disabled={buttonDisabled.submit} 
-            style={{transform: `scale(${buttonScale.submit || 1})`, marginLeft:'20px'}}
-            className={`${MultipleChoiceQuizPageStyle.imageButton} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} 
+            disabled={isProcessing.current} 
+            style={{ marginLeft:'20px'}}
+            className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'submit' ? MultipleChoiceQuizPageStyle.clicking : ''} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} 
             onClick={()=>handleSubmitClick()}>
                 <span className={MultipleChoiceQuizPageStyle.submitButtonText}>Submit</span>
                 <img src='./images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy" decoding="async"/>

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState,useRef } from "react";
 import SingleChoiceQuizPageStyle from "./SingleChoiceQuizPage.module.css"
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -6,9 +6,8 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathBackTo,currentProblemIndex,setCurrentProblemIndex }) => {
     const initialButtonState=[{button:'A',status:-1},{button:'B',status:-1},{button:'C',status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
-    const initialButtonScale={A:1,B:1,C:1}
-    const [buttonScale, setButtonScale] = useState(initialButtonScale);
-    const [buttonDisabled, setButtonDisabled] = useState(false)
+    const isProcessing = useRef(false);
+    const [clickingBtn, setClickingBtn] = useState(null);
     
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -22,10 +21,11 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
 
     const handleClick=async(btn,optionTxt)=>{
-        if (buttonDisabled) return; // 防止重複點擊
-        setButtonDisabled(true);
-        setButtonScale({...initialButtonScale, [btn]:0.9});
-        await new Promise(resolve => setTimeout(resolve, 100));
+        // 防止重複點擊
+        if (isProcessing.current) return;
+        isProcessing.current = true;
+        setClickingBtn(btn);
+
         handleAnswer(btn,optionTxt)
     }
 
@@ -35,7 +35,8 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
 
     const reset=()=>{
         setIsCorrect(initialButtonState);
-        setButtonDisabled(false)
+        isProcessing.current=false
+        setClickingBtn(null)
     }
 
     const handleAnswer=(button,optionText)=>{
@@ -48,7 +49,6 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                     : item
                 )
             );
-            setButtonScale(initialButtonScale);
             // 音效
             const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
@@ -73,7 +73,6 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                     : item
                 )
             );
-            setButtonScale(initialButtonScale);
             // 音效
             const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
@@ -86,7 +85,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
         }
     }
 
-    const AnswerBackground = ({ status }) => {
+    const AnswerBackground = React.memo(({ status }) => {
         let imgSrc = '';
 
         if (status === -1) {// 還沒選
@@ -100,7 +99,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
         return (
             <img src={imgSrc} alt={`jungle_escape_sigle_question_${status}`}  loading="lazy" decoding="async"/>
         );
-    };
+    });
 
   return (
     <div className="page-container" style={pageStyle}>
@@ -114,23 +113,23 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
             {cfg.questions[1]?.questions[currentProblemIndex]?.question || ``}
         </span>
         <div className={SingleChoiceQuizPageStyle.answerSection}>
-            <button className={SingleChoiceQuizPageStyle.imageButton}
-            disabled={buttonDisabled} 
-            style={{transform: `scale(${buttonScale.A || 1})`}}
+            <button 
+            disabled={isProcessing.current} 
+            className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'A' ? SingleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>{handleClick('A',cfg.questions[1]?.questions[currentProblemIndex]?.options[0])}}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[0] || `A`}</div>
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
-            <button className={SingleChoiceQuizPageStyle.imageButton}
-            disabled={buttonDisabled} 
-            style={{transform: `scale(${buttonScale.B || 1})`}}
+            <button 
+            disabled={isProcessing.current} 
+            className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'B' ? SingleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('B',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[1]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[1] || `B`}</div>
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
-            <button className={SingleChoiceQuizPageStyle.imageButton}
-            disabled={buttonDisabled} 
-            style={{transform: `scale(${buttonScale.C || 1})`}}
+            <button 
+            disabled={isProcessing.current} 
+            className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'C' ? SingleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('C',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[2]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[2] || `C`}</div>
                 <AnswerBackground status={cButtonItem.status}/>

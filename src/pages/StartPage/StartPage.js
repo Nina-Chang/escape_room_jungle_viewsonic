@@ -18,7 +18,6 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
     setButtonScale(1);
     await new Promise(resolve => setTimeout(resolve, 300));
     onStartGame();
-
   }
 
 
