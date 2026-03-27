@@ -176,7 +176,6 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             </button>
             <button 
             disabled={isProcessing.current} 
-            style={{ marginLeft:'20px'}}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'submit' ? MultipleChoiceQuizPageStyle.clicking : ''} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} 
             onClick={()=>handleSubmitClick()}>
                 <span className={MultipleChoiceQuizPageStyle.submitButtonText}>Submit</span>

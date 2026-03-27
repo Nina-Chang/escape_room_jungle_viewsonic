@@ -44,11 +44,23 @@
     padding: 0;
     user-select: none;
     cursor: pointer;
-    display: inline-block;
+    /* 💡 加入固定寬高，防止 Layout 重新計算 */
+    width: 700px;   
+    height: 85px;
     /* 💡 強制開啟硬體加速，防止第一次動畫閃爍 */
     backface-visibility: hidden;
 
     position: relative;
+}
+
+.imageButton:last-child{
+    position: relative;
+    bottom:0px;
+    left: 20px;
+    z-index: 0;
+    padding: 0;
+    margin: 0;
+    width: 160px;
 }
 
 .imageButton:not(.disabled):hover{
