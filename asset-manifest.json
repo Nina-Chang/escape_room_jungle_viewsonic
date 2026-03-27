@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/escape_room_jungle_viewsonic/static/css/main.d3755f64.css",
-    "main.js": "/escape_room_jungle_viewsonic/static/js/main.2f7975d2.js",
+    "main.css": "/escape_room_jungle_viewsonic/static/css/main.e764d120.css",
+    "main.js": "/escape_room_jungle_viewsonic/static/js/main.86aa6d1b.js",
     "static/js/453.bfc0d360.chunk.js": "/escape_room_jungle_viewsonic/static/js/453.bfc0d360.chunk.js",
     "index.html": "/escape_room_jungle_viewsonic/index.html",
-    "main.d3755f64.css.map": "/escape_room_jungle_viewsonic/static/css/main.d3755f64.css.map",
-    "main.2f7975d2.js.map": "/escape_room_jungle_viewsonic/static/js/main.2f7975d2.js.map",
+    "main.e764d120.css.map": "/escape_room_jungle_viewsonic/static/css/main.e764d120.css.map",
+    "main.86aa6d1b.js.map": "/escape_room_jungle_viewsonic/static/js/main.86aa6d1b.js.map",
     "453.bfc0d360.chunk.js.map": "/escape_room_jungle_viewsonic/static/js/453.bfc0d360.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3755f64.css",
-    "static/js/main.2f7975d2.js"
+    "static/css/main.e764d120.css",
+    "static/js/main.86aa6d1b.js"
   ]
 }
