@@ -1,5 +1,5 @@
 import WrongPathPageStyle from './WrongPathPage.module.css'
-import useClickAnimation from '../../components/useClickAnimation';
+import useClickAnimation from '../../hooks/useClickAnimation';
 
 export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentProblemIndex }) => {
   const reset=()=>{

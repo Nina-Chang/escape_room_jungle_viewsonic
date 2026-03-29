@@ -1,5 +1,5 @@
 import StartPageStyle from "./StartPage.module.css"
-import useClickAnimation from '../../components/useClickAnimation'
+import useClickAnimation from '../../hooks/useClickAnimation'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 

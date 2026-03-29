@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import MultipleChoiceClearPageStyle from './MultipleChoiceClearPage.module.css'
-import useClickAnimation from '../../components/useClickAnimation'
+import useClickAnimation from '../../hooks/useClickAnimation'
 
 export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
     const reset=()=>{

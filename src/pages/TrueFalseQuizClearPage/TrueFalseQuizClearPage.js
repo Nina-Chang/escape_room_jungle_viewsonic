@@ -1,5 +1,5 @@
 import TrueFalseQuizClearPageStyle from './TrueFalseQuizClearPage.module.css'
-import useClickAnimation from '../../components/useClickAnimation';
+import useClickAnimation from '../../hooks/useClickAnimation';
 
 export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
     const reset=()=>{

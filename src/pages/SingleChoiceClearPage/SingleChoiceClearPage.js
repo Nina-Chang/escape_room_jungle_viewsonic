@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SingleChoiceClearPageStyle from './SingleChoiceClearPage.module.css'
-import useClickAnimation from '../../components/useClickAnimation';
+import useClickAnimation from '../../hooks/useClickAnimation';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap,bgmAudio }) => {

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import MapPageStyle from "./MapPage.module.css"
-import useClickAnimation from "../../components/useClickAnimation";
+import useClickAnimation from "../../hooks/useClickAnimation";
 
 // 關卡順序為：river camp→ swamp trap→ stone maze→ ancient temple
 export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBackTo }) => {
