@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import StoryProloguePageStyle from './StoryProloguePage.module.css'
+import useClickAnimation from '../../components/useClickAnimation';
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
-  const [buttonScale, setButtonScale] = useState(1);
+  const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(()=>navigateTo('gameStart'))
   
   const pageStyle = { 
     backgroundImage: `url(${backgroundImage})`,
@@ -11,15 +11,6 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
     height:'1080px',
     loading:'eager'
   };
-
-  const handleClick=async()=>{
-    setButtonScale(0.9);
-    await new Promise(resolve => setTimeout(resolve, 100));
-    setButtonScale(1);
-    await new Promise(resolve => setTimeout(resolve, 300));
-    navigateTo('gameStart');
-  }
-
 
   return (
     <div className="page-container" style={pageStyle}>
@@ -29,7 +20,7 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
          onMouseEnter={() => setButtonScale(1.1)}
          onMouseLeave={() => setButtonScale(1)}
          style={{transform: `translate(-50%, -50%) scale(${buttonScale})`}}
-         onClick={handleClick}>
+         onClick={handleClickAnimation}>
             <img src='./images/object/jungle_escape_nect_button.png' alt="Continue" loading="lazy" decoding="async"/>
         </button>
         <div className={StoryProloguePageStyle.conversationText}>

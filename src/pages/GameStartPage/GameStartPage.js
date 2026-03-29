@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import GameStartPageStyle from './GameStartPage.module.css'
+import useClickAnimation from '../../components/useClickAnimation';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const GameStartPage = ({ navigateTo, backgroundImage }) => {
-    const [buttonScale, setButtonScale] = useState(1);
+    const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(()=>navigateTo('map'))
     
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -12,15 +12,6 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
         height:'1080px',
         loading:'eager'
     };
-
-    const handleClick=async()=>{
-        setButtonScale(0.9);
-        await new Promise(resolve => setTimeout(resolve, 100));
-        setButtonScale(1);
-        await new Promise(resolve => setTimeout(resolve, 300));
-        navigateTo('map');
-    }
-
 
   return (
     <div className="page-container" style={pageStyle}>
@@ -35,7 +26,7 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
          onMouseEnter={() => setButtonScale(1.1)}
          onMouseLeave={() => setButtonScale(1)}
          style={{transform: `translate(-50%, -50%) scale(${buttonScale})`}}
-         onClick={handleClick}>
+         onClick={handleClickAnimation}>
             <img src='./images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
             <div className={GameStartPageStyle.btnText}>Start Mission</div>
         </button>

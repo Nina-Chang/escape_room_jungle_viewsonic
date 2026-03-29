@@ -1,23 +1,19 @@
-import { useState } from 'react'
 import TrueFalseQuizClearPageStyle from './TrueFalseQuizClearPage.module.css'
+import useClickAnimation from '../../components/useClickAnimation';
 
 export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap }) => {
-    const [buttonScale, setButtonScale] = useState(1);
+    const reset=()=>{
+        setCurrentStepOnMap(2)
+        navigateTo('map')
+    }
+    const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
+
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
         height:'1080px',
         loading:'eager'
     };
-
-    const handleClick=async()=>{
-      setButtonScale(0.9);
-      await new Promise(resolve => setTimeout(resolve, 100));
-      setButtonScale(1);
-      await new Promise(resolve => setTimeout(resolve, 300));
-      setCurrentStepOnMap(2)
-      navigateTo('map')
-    }
     
     return (
         <div className="page-container" style={pageStyle}>
@@ -35,7 +31,7 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
                 onMouseEnter={() => setButtonScale(1.1)}
                 onMouseLeave={() => setButtonScale(1)}
                 style={{transform: `translateX(-50%) scale(${buttonScale})`}}
-                onClick={handleClick}>
+                onClick={handleClickAnimation}>
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
         </div>

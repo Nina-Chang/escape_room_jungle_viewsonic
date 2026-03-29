@@ -1,5 +1,6 @@
 import { useState } from "react"
 import MapPageStyle from "./MapPage.module.css"
+import useClickAnimation from "../../components/useClickAnimation";
 
 // 關卡順序為：river camp→ swamp trap→ stone maze→ ancient temple
 export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBackTo }) => {
@@ -140,7 +141,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
             altBase,
             onActiveClick,
         }) => {
-        const [buttonScale, setButtonScale] = useState(1);
+        const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(()=>navigateTo('true false quiz'))
 
         const handleClick =() => {
             if (isActiveClick) {
@@ -149,14 +150,6 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                 handleWrongPath();
             }
         };
-
-        const handleRiverCampActiveClick=async()=>{
-            setButtonScale(0.9);
-            await new Promise(resolve => setTimeout(resolve, 100));
-            setButtonScale(1);
-            await new Promise(resolve => setTimeout(resolve, 300));
-            navigateTo('true false quiz');
-        }
 
         const imgSrc = isNormalImg ? normalImg : grayImg;
         const alt = `${altBase}${isNormalImg ? '' : '_gray'}.png`;
@@ -170,7 +163,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
             }}
             onMouseLeave={() => setButtonScale(1)} 
             style={{transform: `scale(${buttonScale})`}} 
-            onClick={handleRiverCampActiveClick}>
+            onClick={handleClickAnimation}>
                 <img src={imgSrc} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
             </button>
             :

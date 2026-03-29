@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import GameSuccessPageStyle from './GameSuccessPage.module.css'
+import useClickAnimation from '../../components/useClickAnimation';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurrentStepOnMap }) => {
-    const [buttonScale, setButtonScale] = useState(1);
+    const handleReturnHome=()=>{
+      navigateTo('start')
+      setCurrentStepOnMap(1)
+    }
+    const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(handleReturnHome)
 
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -19,20 +24,6 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
       audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
     },[])
 
-
-    const handleReturnHome=()=>{
-      navigateTo('start')
-      setCurrentStepOnMap(1)
-    }
-
-    const handleClick=async()=>{
-      setButtonScale(0.9);
-      await new Promise(resolve => setTimeout(resolve, 100));
-      setButtonScale(1);
-      await new Promise(resolve => setTimeout(resolve, 300));
-      handleReturnHome()
-    }
-
   return (
     <div className="page-container" style={pageStyle}>
         <div className={GameSuccessPageStyle.explanationSection}>
@@ -44,7 +35,7 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
                 onMouseLeave={() => setButtonScale(1)}
                 style={{transform: `scale(${buttonScale})`}}
                 src='./images/object/jungle_escape_home_button.png' alt="jungle_escape_clue_frame" 
-                onClick={()=>handleClick()} loading="lazy" decoding="async"/>
+                onClick={()=>handleClickAnimation()} loading="lazy" decoding="async"/>
             </div>
         </div>
     </div>

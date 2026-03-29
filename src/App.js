@@ -87,6 +87,7 @@ function App() {
   }
 
   useLayoutEffect(() => {
+    // 視窗縮放
     const handleResize = () => {
       if (window.innerWidth === 0) return;
       const scaleX = window.innerWidth / 1920;

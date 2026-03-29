@@ -1,23 +1,19 @@
-import { useState } from 'react'
 import WrongPathPageStyle from './WrongPathPage.module.css'
+import useClickAnimation from '../../components/useClickAnimation';
 
 export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentProblemIndex }) => {
-    const [buttonScale, setButtonScale] = useState(1);
-    const pageStyle = { 
-      backgroundImage: `url(${backgroundImage})`,
-      width:'1920px',
-      height:'1080px',
-      loading:'eager'
-    };
+  const reset=()=>{
+    navigateTo(backTo.page)
+    setCurrentProblemIndex(backTo.problemIndex)
+  }
+  const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
 
-    const handleClick=async()=>{
-      setButtonScale(0.9);
-      await new Promise(resolve => setTimeout(resolve, 100));
-      setButtonScale(1);
-      await new Promise(resolve => setTimeout(resolve, 300));
-      navigateTo(backTo.page)
-      setCurrentProblemIndex(backTo.problemIndex)
-    }
+  const pageStyle = { 
+    backgroundImage: `url(${backgroundImage})`,
+    width:'1920px',
+    height:'1080px',
+    loading:'eager'
+  };
 
   return (
     <div className="page-container" style={pageStyle}>
@@ -28,7 +24,7 @@ export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentPro
          onMouseEnter={() => setButtonScale(1.1)}
          onMouseLeave={() => setButtonScale(1)}
          style={{transform: `translateX(-50%) scale(${buttonScale})`}}
-         onClick={handleClick}>
+         onClick={handleClickAnimation}>
             <img src='./images/object/jungle_escape_again_button.png' alt="Return to Map"  loading="lazy" decoding="async"/>
         </button>
     </div>
