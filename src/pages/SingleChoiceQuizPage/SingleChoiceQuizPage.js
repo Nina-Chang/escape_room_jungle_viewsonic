@@ -1,4 +1,5 @@
-import React, { useMemo, useState,useRef } from "react";
+import React, { useMemo, useState,useRef, useEffect } from "react";
+import useSendGameMessage from '../../hooks/useSendGameMessage';
 import SingleChoiceQuizPageStyle from "./SingleChoiceQuizPage.module.css"
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -7,7 +8,13 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const initialButtonState=[{button:'A',status:-1},{button:'B',status:-1},{button:'C',status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const isProcessing = useRef(false);
+    const { sendMessage }=useSendGameMessage()
     const [clickingBtn, setClickingBtn] = useState(null);
+
+    useEffect(() => {
+        // 當這一頁載入時，立刻通知外層
+        sendMessage({ sceneId: 8});
+    }, [sendMessage]);
     
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -16,9 +23,37 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
         loading:'eager'
     };
 
-    const trueFalseQuizSum=cfg?.questions[0].questions.length
-    const singleChoiceSum=cfg?.questions[1].questions.length
-    const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
+    // 找出 sceneId 為 8 的所有 Assets
+    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 8) || [];
+
+    // 建立一個產生 Style 的 function
+    const getAssetStyle = (asset) => ({
+        position: 'absolute',
+        left: asset.position.x,
+        top: asset.position.y,
+        width:asset.textWidth,
+        height:asset.textHeight,
+        fontFamily: asset.fontFamily,
+        textAlign:asset.textAlign,
+        fontSize:asset.fontSize,
+        color: asset.color,
+        fontWeight: asset.fontWeight,
+        fontStyle: asset.fontStyle,
+        textDecoration: asset.textDecoration,
+        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
+        zIndex:"99"
+    });
+
+    const scQuestions = useMemo(() => {
+        return cfg?.questions?.[0]?.questions?.filter(q => q.type === 'single_choice') || [];
+    }, []);
+
+    const trueFalseQuizSum = useMemo(() => {
+        return cfg?.questions?.[0]?.questions?.filter(q => q.type === 'true_false').length || 0;
+    }, []);
+
+    const singleChoiceSum=scQuestions.length;
+    const totalProblemSum = cfg?.questions?.[0]?.questions?.length
 
     const handleClick=async(btn,optionTxt)=>{
         // 防止重複點擊
@@ -40,7 +75,8 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     }
 
     const handleAnswer=(button,optionText)=>{
-        if(cfg.questions[1].questions[currentProblemIndex].answer===optionText){
+        const currentQuestion = scQuestions[currentProblemIndex];
+        if(currentQuestion?.answer === optionText){
             // 更改按鈕狀態
             setIsCorrect(prev =>
                 prev.map(item =>
@@ -110,31 +146,36 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
             {trueFalseQuizSum+currentProblemIndex+1}/{totalProblemSum}
         </span>
         <span className={SingleChoiceQuizPageStyle.questionText}>
-            {cfg.questions[1]?.questions[currentProblemIndex]?.question || ``}
+            {scQuestions[currentProblemIndex].question || ``}
         </span>
         <div className={SingleChoiceQuizPageStyle.answerSection}>
             <button 
             disabled={isProcessing.current} 
             className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'A' ? SingleChoiceQuizPageStyle.clicking : ''}`}
-            onClick={()=>{handleClick('A',cfg.questions[1]?.questions[currentProblemIndex]?.options[0])}}>
-                <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[0] || `A`}</div>
+            onClick={()=>{handleClick('A',scQuestions[currentProblemIndex]?.options[0])}}>
+                <div className={SingleChoiceQuizPageStyle.answerText}>{scQuestions[currentProblemIndex]?.options[0] || `A`}</div>
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
             <button 
             disabled={isProcessing.current} 
             className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'B' ? SingleChoiceQuizPageStyle.clicking : ''}`}
-            onClick={()=>handleClick('B',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[1]}`)}>
-                <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[1] || `B`}</div>
+            onClick={()=>handleClick('B',`${scQuestions[currentProblemIndex]?.options[1]}`)}>
+                <div className={SingleChoiceQuizPageStyle.answerText}>{scQuestions[currentProblemIndex]?.options[1] || `B`}</div>
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
             <button 
             disabled={isProcessing.current} 
             className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'C' ? SingleChoiceQuizPageStyle.clicking : ''}`}
-            onClick={()=>handleClick('C',`${cfg.questions[1]?.questions[currentProblemIndex]?.options[2]}`)}>
-                <div className={SingleChoiceQuizPageStyle.answerText}>{cfg.questions[1]?.questions[currentProblemIndex]?.options[2] || `C`}</div>
+            onClick={()=>handleClick('C',`${scQuestions[currentProblemIndex]?.options[2]}`)}>
+                <div className={SingleChoiceQuizPageStyle.answerText}>{scQuestions[currentProblemIndex]?.options[2] || `C`}</div>
                 <AnswerBackground status={cButtonItem.status}/>
             </button>
         </div>
+        {pageAssets.map((asset, index) => (
+            <div key={index} style={getAssetStyle(asset)}>
+            {asset.text}
+            </div>
+        ))}
     </div>
   )
 }

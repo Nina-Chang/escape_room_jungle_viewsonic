@@ -1,4 +1,5 @@
-import React, { useState, useMemo,useRef } from 'react';
+import React, { useState, useMemo,useRef, useEffect } from 'react';
+import useSendGameMessage from '../../hooks/useSendGameMessage';
 import MultipleChoiceQuizPageStyle from './MultipleChoiceQuizPage.module.css'
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -9,6 +10,12 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:already choose -2:not yet to choose
     const isProcessing = useRef(false);
     const [clickingBtn, setClickingBtn] = useState(null);
+    const { sendMessage }=useSendGameMessage()
+
+    useEffect(() => {
+        // 當這一頁載入時，立刻通知外層
+        sendMessage({ sceneId: 10});
+    }, [sendMessage]);
     
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -17,17 +24,44 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         loading:'eager'
     };
 
-    const trueFalseQuizSum=cfg?.questions[0].questions.length
-    const singleChoiceSum=cfg?.questions[1].questions.length
-    const multipleChoiceSum=cfg?.questions[2].questions.length
-    const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
+    // 找出 sceneId 為 10 的所有 Assets
+    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 10) || [];
+
+    // 建立一個產生 Style 的 function
+    const getAssetStyle = (asset) => ({
+        position: 'absolute',
+        left: asset.position.x,
+        top: asset.position.y,
+        width:asset.textWidth,
+        height:asset.textHeight,
+        fontFamily: asset.fontFamily,
+        textAlign:asset.textAlign,
+        fontSize:asset.fontSize,
+        color: asset.color,
+        fontWeight: asset.fontWeight,
+        fontStyle: asset.fontStyle,
+        textDecoration: asset.textDecoration,
+        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
+        zIndex:"99"
+    });
+
+    const mcQuestions = useMemo(() => {
+        return cfg?.questions?.[0]?.questions?.filter(q => q.type === 'multiple_choice') || [];
+    }, []);
+    // 計算是非題 + 單選題的總數，用於序號顯示
+    const prevQuestionsCount = useMemo(() => {
+        return cfg?.questions?.[0]?.questions?.filter(q => q.type === 'true_false' || q.type === 'single_choice').length || 0;
+    }, []);
+    const multipleChoiceSum=mcQuestions.length;
+    const totalProblemSum = cfg?.questions?.[0]?.questions?.length || 0;
+    const currentQ = mcQuestions[currentProblemIndex];
 
     const handleChooseAnswer=(button)=>{
         setIsCorrect(prev =>
             prev.map((item,index) =>
                 item.button===button
-                ? { ...item, status: item.status===-1?-2:item.status===-2?-1:item.status,optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] }  
-                : { ...item, optionText:cfg.questions[2]?.questions[currentProblemIndex]?.options[index] } 
+                ? { ...item, status: item.status===-1?-2:item.status===-2?-1:item.status,optionText:currentQ?.options[index] }  
+                : { ...item, optionText:currentQ?.options[index] } 
             )
         );
         setClickingBtn(null)
@@ -63,7 +97,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const handleSubmitAnswer=()=>{
         setButtonHidden(true)
         const choosedItem=isCorrect.filter(item=>item.status===-1).map(item=>item.optionText)
-        const correctAnswer=cfg.questions[2].questions[currentProblemIndex].answers|| []
+        const correctAnswer=currentQ?.answer || [];
         const isAllCorrect=choosedItem.length===correctAnswer.length && choosedItem.every((item,index)=>item===correctAnswer[index])
         // 更改按鈕狀態
         const updateState=isCorrect.map(item=>{
@@ -140,38 +174,38 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             <img src='./images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" decoding="async" />
         </div>
         <div className={MultipleChoiceQuizPageStyle.questionIndexText}>
-            {trueFalseQuizSum+singleChoiceSum+currentProblemIndex+1}/{totalProblemSum}
+            {prevQuestionsCount+currentProblemIndex+1}/{totalProblemSum}
         </div>
         <div className={MultipleChoiceQuizPageStyle.questionText}>
-            {cfg.questions[2]?.questions[currentProblemIndex]?.question || `Is the object you found a compass?`}
+            {currentQ?.question || `Is the object you found a compass?`}
         </div>
         <div className={MultipleChoiceQuizPageStyle.answerSection}>
             <button 
             disabled={isProcessing.current}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'A' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('A')}>
-                <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[0] || `A`}</span>
+                <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[0] || `A`}</span>
                 <AnswerBackground status={aButtonItem.status}/>
             </button>
             <button 
             disabled={isProcessing.current}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'B' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('B')}>
-                <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[1] || `B`}</span>
+                <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[1] || `B`}</span>
                 <AnswerBackground status={bButtonItem.status}/>
             </button>
             <button 
             disabled={isProcessing.current}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'C' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('C')}>
-                <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[2] || `C`}</span>
+                <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[2] || `C`}</span>
                 <AnswerBackground status={cButtonItem.status}/>
             </button>
             <button 
             disabled={isProcessing.current}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'D' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('D')}>
-                <span className={MultipleChoiceQuizPageStyle.answerText}>{cfg.questions[2]?.questions[currentProblemIndex]?.options[3] || `D`}</span>
+                <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[3] || `D`}</span>
                 <AnswerBackground status={dButtonItem.status}/>
             </button>
             <button 
@@ -182,6 +216,11 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <img src='./images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy" decoding="async"/>
             </button>
         </div>
+        {pageAssets.map((asset, index) => (
+            <div key={index} style={getAssetStyle(asset)}>
+            {asset.text}
+            </div>
+        ))}
     </div>
   )
 }

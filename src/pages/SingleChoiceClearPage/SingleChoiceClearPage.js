@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SingleChoiceClearPageStyle from './SingleChoiceClearPage.module.css'
+import useSendGameMessage from '../../hooks/useSendGameMessage';
 import useClickAnimation from '../../hooks/useClickAnimation';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -9,13 +10,41 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
         navigateTo('map')
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
+    const { sendMessage }=useSendGameMessage()
     const [buttonDisabled, setButtonDisabled] = useState(false)
+
+    useEffect(() => {
+        // 當這一頁載入時，立刻通知外層
+        sendMessage({ sceneId: 9});
+    }, [sendMessage]);
+
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
         width:'1920px',
         height:'1080px',
         loading:'eager'
     };
+
+    // 找出 sceneId 為 9 的所有 Assets
+    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 9) || [];
+
+    // 建立一個產生 Style 的 function
+    const getAssetStyle = (asset) => ({
+        position: 'absolute',
+        left: asset.position.x,
+        top: asset.position.y,
+        width:asset.textWidth,
+        height:asset.textHeight,
+        fontFamily: asset.fontFamily,
+        textAlign:asset.textAlign,
+        fontSize:asset.fontSize,
+        color: asset.color,
+        fontWeight: asset.fontWeight,
+        fontStyle: asset.fontStyle,
+        textDecoration: asset.textDecoration,
+        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
+        zIndex:"99"
+    });
 
     const handleAudioPlay=()=>{
         // 播放對講機音檔時背景音樂音量轉小 直到音檔結束
@@ -49,6 +78,11 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
             onClick={handleClickAnimation}>
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
+            {pageAssets.map((asset, index) => (
+                <div key={index} style={getAssetStyle(asset)}>
+                {asset.text}
+                </div>
+            ))}
         </div>
     )
 }

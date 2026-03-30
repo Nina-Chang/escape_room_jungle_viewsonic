@@ -1,5 +1,7 @@
-import React, { useState, useMemo,useRef } from 'react';
+import React, { useState, useMemo,useRef, useEffect } from 'react';
 import TrueFalseQuizPageStyle from './TrueFalseQuizPage.module.css'
+import useSendGameMessage from '../../hooks/useSendGameMessage';
+
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
@@ -8,6 +10,12 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     const initialButtonState=[{button:true,status:-1},{button:false,status:-1}]
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const isProcessing = useRef(false);
+    const { sendMessage }=useSendGameMessage()
+
+    useEffect(() => {
+        // 當這一頁載入時，立刻通知外層
+        sendMessage({ sceneId: 6});
+    }, [sendMessage]);
     
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -16,8 +24,34 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         loading:'eager'
     };
 
-    const trueFalseQuizSum=cfg?.questions[0].questions.length
-    const totalProblemSum = useMemo(() => cfg?.questions?.reduce((sum, group) => sum + group.questions.length, 0) || 0, [cfg?.questions]);
+    // 找出 sceneId 為 6 的所有 Assets
+    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 6) || [];
+
+    // 建立一個產生 Style 的 function
+    const getAssetStyle = (asset) => ({
+        position: 'absolute',
+        left: asset.position.x,
+        top: asset.position.y,
+        width:asset.textWidth,
+        height:asset.textHeight,
+        fontFamily: asset.fontFamily,
+        textAlign:asset.textAlign,
+        fontSize:asset.fontSize,
+        color: asset.color,
+        fontWeight: asset.fontWeight,
+        fontStyle: asset.fontStyle,
+        textDecoration: asset.textDecoration,
+        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
+        zIndex:"99"
+    });
+
+    const tfQuestions = useMemo(() => {
+        return cfg?.questions?.[0]?.questions?.filter(q => q.type === 'true_false') || [];
+    }, []);
+
+    // trueFalseQuizSum 現在只計算是非題的數量
+    const trueFalseQuizSum = tfQuestions.length;
+    const totalProblemSum = cfg?.questions?.[0]?.questions.length;
 
     const trueItem = isCorrect.find(item => item.button === true);
     const falseItem = isCorrect.find(item => item.button === false);
@@ -39,7 +73,8 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     }
 
     const handleAnswer=(button)=>{
-        if(cfg.questions[0].questions[currentProblemIndex].answer===button){
+        const currentQuestion = tfQuestions[currentProblemIndex];
+        if(currentQuestion?.answer === button){
             // 更改按鈕狀態
             setIsCorrect(prev =>
                 prev.map(item =>
@@ -111,7 +146,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             {currentProblemIndex+1}/{totalProblemSum}
         </span>
         <span className={TrueFalseQuizPageStyle.questionText}>
-            {cfg.questions[0]?.questions[currentProblemIndex]?.question || ``}
+            {tfQuestions[currentProblemIndex]?.question || ``}
         </span>
         <div className={TrueFalseQuizPageStyle.trueButtonIcon}>
             <button 
@@ -131,6 +166,11 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 <AnswerIcon isTrueButton={false} status={falseItem.status}/>
             </button>
         </div>
+        {pageAssets.map((asset, index) => (
+            <div key={index} style={getAssetStyle(asset)}>
+            {asset.text}
+            </div>
+        ))}
     </div>
   )
 }

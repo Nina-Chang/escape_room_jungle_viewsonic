@@ -33,15 +33,170 @@
       window.gameConfig={
         // 文字字串（可換語系）
         strings:{
-          startTitle:"Into the Jungle",
-          startSubtitle:"The Missing Expedition",
-          previousStoryConversation:"[Team Member]:Hello? Can anyone hear me? We're lost...battery dying!",
-          startGameExplanationText:`
-            <p>[Headquarters]:</p>
-            <p>That's the last we heard.<br/>The missing team needs your help.</p>
-            <p>To rescue them, you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.</p>
-          `,
-          wholeGameCompletedExplanation:"Congratulations! Thanks to your efforts, the team is safe, and the ancient temple has been discovered!"
+          startTitle:{
+            "text": "Into the Jungle",
+            "style": {
+              "width": "100%",
+              "height": "",
+              "position": "absolute",
+              "left": "",
+              "top": "26%",
+              "bottom":"",
+              "right":"",
+              "textAlign": "center",
+              "fontSize": "120px",
+              "fontFamily": "sans-serif",
+              "color": "",
+              "fontWeight": "900",
+              "fontStyle": "",
+              "textDecoration": "",
+              "backgroundColor":""
+            }
+          },
+          startSubtitle:{
+            "text": "The Missing Expedition",
+            "style": {
+              "width": "100%",
+              "height": "",
+              "position": "absolute",
+              "left": "",
+              "top": "40%",
+              "bottom":"",
+              "right":"",
+              "textAlign": "center",
+              "fontSize": "65px",
+              "fontFamily": "sans-serif",
+              "color": "",
+              "fontWeight": "800",
+              "fontStyle": "",
+              "textDecoration": "",
+              "backgroundColor":""
+            }
+          },
+          previousStoryConversation:{
+            "text": "[Team Member]:Hello? Can anyone hear me? We're lost...battery dying!",
+            "style": {
+              "width": "1189px",
+              "height": "137px",
+              "position": "absolute",
+              "left": "20%",
+              "top": "",
+              "bottom":"15%",
+              "right":"",
+              "textAlign": "center",
+              "fontSize": "50px",
+              "fontFamily": "sans-serif",
+              "color": "",
+              "fontWeight": "700",
+              "fontStyle": "",
+              "textDecoration": "",
+              "backgroundColor":"white"
+            }
+          },
+          startGameExplanationText:[
+            {
+              "text": "[Headquarters]:",
+              "style": {
+                "width": "",
+                "height": "",
+                "position": "absolute",
+                "left": "40%",
+                "top": "15%",
+                "bottom":"",
+                "right":"",
+                "textAlign": "center",
+                "fontSize": "34px",
+                "fontFamily": "sans-serif",
+                "color": "",
+                "fontWeight": "700",
+                "fontStyle": "",
+                "textDecoration": "",
+                "backgroundColor":"white"
+              }
+            },
+            {
+              "text": "That's the last we heard.",
+              "style": {
+                "width": "900px",
+                "height": "",
+                "position": "absolute",
+                "left": "10%",
+                "top": "25%",
+                "bottom":"",
+                "right":"",
+                "textAlign": "center",
+                "fontSize": "34px",
+                "fontFamily": "sans-serif",
+                "color": "",
+                "fontWeight": "700",
+                "fontStyle": "",
+                "textDecoration": "",
+                "backgroundColor":"white"
+              }
+            },
+            {
+              "text": "The missing team needs your help.",
+              "style": {
+                "width": "900px",
+                "height": "",
+                "position": "absolute",
+                "left": "10%",
+                "top": "35%",
+                "bottom":"",
+                "right":"",
+                "textAlign": "center",
+                "fontSize": "34px",
+                "fontFamily": "sans-serif",
+                "color": "",
+                "fontWeight": "700",
+                "fontStyle": "",
+                "textDecoration": "",
+                "backgroundColor":"white"
+              }
+            },
+            {
+              "text": "To rescue them, you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.",
+              "style": {
+                "width": "1000px",
+                "height": "",
+                "position": "absolute",
+                "left": "5%",
+                "top": "55%",
+                "bottom":"",
+                "right":"",
+                "textAlign": "center",
+                "fontSize": "34px",
+                "fontFamily": "sans-serif",
+                "color": "",
+                "fontWeight": "700",
+                "fontStyle": "",
+                "textDecoration": "",
+                "backgroundColor":"white"
+              }
+            },
+          
+          ],
+          wholeGameCompletedExplanation:{
+            "text": "Congratulations! Thanks to your efforts, the team is safe, and the ancient temple has been discovered!",
+            "style": {
+              "width": "1000px",
+              "height": "",
+              "position": "absolute",
+              "left": "0%",
+              "top": "30%",
+              "bottom":"",
+              "right":"",
+              "textAlign": "center",
+              "fontSize": "38px",
+              "fontFamily": "sans-serif",
+              "color": "",
+              "fontWeight": "700",
+              "fontStyle": "",
+              "textDecoration": "",
+              "backgroundColor":"",
+              "zIndex": 2,
+            }
+          },
         },
 
         sounds:{
@@ -68,102 +223,99 @@
         },
 
         // 題庫
-        questions: [
+        "questions": [
           {
-            "category": "true_false",
+            "category": "category or null",
             "questions": [
               {
                 "question": "The jungle is home to many different species of animals.",
-                "answer": true
+                "answer": true,
+                "options": [],
+                "points": 0,
+                "type": "true_false"
               },
               {
                 "question": "Rainforests get very little rainfall each year.",
-                "answer": false
+                "answer": false,
+                "options": [],
+                "points": 0,
+                "type": "true_false"
               },
-              // {
-              //   "question": "Jaguars are predators that live in the jungle.",
-              //   "answer": true
-              // },
-            ]
-          },
-          {
-            "category": "single_selection",
-            "questions": [
               {
                 "question": "Which layer of the jungle gets the most sunlight?",
+                "answer": "Emergent",
                 "options": [
                   "Canopy",
                   "Forest floor",
-                  "Emergent",
+                  "Emergent"
                 ],
-                "answer": "Emergent"
+                "points": 0,
+                "type": "single_choice"
               },
               {
                 "question": "What do monkeys mainly use their tails for?",
+                "answer": "Balance",
                 "options": [
                   "Balance",
                   "Smelling",
-                  "Hunting",
+                  "Hunting"
                 ],
-                "answer": "Balance"
+                "points": 0,
+                "type": "single_choice"
               },
-              // {
-              //   "question": "Which bird is known for its colorful beak in the jungle?",
-              //   "options": [
-              //     "Toucan",
-              //     "Eagle",
-              //     "Owl",
-              //   ],
-              //   "answer": "Toucan"
-              // },
-            ]
-          },
-          {
-            "category": "multiple_selection",
-            "questions": [
               {
                 "question": "Which animals can be found in the jungle?",
+                "answer": [
+                  "Tiger",
+                  "Poison dart frog",
+                  "Sloth"
+                ],
                 "options": [
                   "Tiger",
                   "Poison dart frog",
                   "Polar bear",
                   "Sloth"
                 ],
-                "answers": [
-                  "Tiger",
-                  "Poison dart frog",
-                  "Sloth",
-                ]
+                "points": 0,
+                "type": "multiple_choice"
               },
               {
                 "question": "Which are layers of the jungle?",
+                "answer": [
+                  "Canopy",
+                  "Forest floor",
+                  "Shrubland"
+                ],
                 "options": [
                   "Canopy",
                   "Forest floor",
                   "Shrubland",
                   "Emergent"
                 ],
-                "answers": [
-                  "Canopy",
-                  "Forest floor",
-                  "Shrubland"
-                ]
-              },
-              // {
-              //   "question": "Which foods can come from jungle plants?",
-              //   "options": [
-              //     "Cocoa beans",
-              //     "Bananas",
-              //     "Pine trees",
-              //     "Mangoes"
-              //   ],
-              //   "answers": [
-              //     "Cocoa beans",
-              //     "Bananas",
-              //     "Mangoes"
-              //   ]
-              // },
+                "points": 0,
+                "type": "multiple_choice"
+              }
             ]
+          }
+        ],
+
+        assets: [
+          {
+            "sceneId":1,
+            "text":"ABC",
+            "textWidth":"500px",
+            "textHeight":"200px",
+            "position":{
+              x:"40px",
+              y:"100px"
+            },
+            "textAlign":"center",
+            "fontSize":'104px',
+            "fontFamily": 'sans-serif',
+            "color": "rgb(61,101,153)",
+            "fontWeight": '600',
+            "fontStyle": 'italic',
+            "textDecoration": 'underline',
           }
         ]
       }

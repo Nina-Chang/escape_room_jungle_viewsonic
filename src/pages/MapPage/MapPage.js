@@ -1,9 +1,39 @@
-import { useState } from "react"
 import MapPageStyle from "./MapPage.module.css"
 import useClickAnimation from "../../hooks/useClickAnimation";
+import useSendGameMessage from '../../hooks/useSendGameMessage';
+import { useEffect } from "react";
+
+const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
 // 關卡順序為：river camp→ swamp trap→ stone maze→ ancient temple
 export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBackTo }) => {
+    const { sendMessage }=useSendGameMessage()
+
+    useEffect(() => {
+        // 當這一頁載入時，立刻通知外層
+        sendMessage({ sceneId: 4});
+    }, [sendMessage]);
+
+    // 找出 sceneId 為 4 的所有 Assets
+    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 4) || [];
+
+    // 建立一個產生 Style 的 function
+    const getAssetStyle = (asset) => ({
+        position: 'absolute',
+        left: asset.position.x,
+        top: asset.position.y,
+        width:asset.textWidth,
+        height:asset.textHeight,
+        fontFamily: asset.fontFamily,
+        textAlign:asset.textAlign,
+        fontSize:asset.fontSize,
+        color: asset.color,
+        fontWeight: asset.fontWeight,
+        fontStyle: asset.fontStyle,
+        textDecoration: asset.textDecoration,
+        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
+        zIndex:"99"
+    });
     
     const explanationText=[
         { index:1,text:"Start your adventure at the River Camp. From there, follow the clues and work your way through the jungle to find the missing members."},
@@ -212,6 +242,11 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
                     </div>
                     
                     )}
+                </div>
+            ))}
+            {pageAssets.map((asset, index) => (
+                <div key={index} style={getAssetStyle(asset)}>
+                {asset.text}
                 </div>
             ))}
         </div>
