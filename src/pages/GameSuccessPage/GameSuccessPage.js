@@ -49,6 +49,7 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
     useEffect(()=>{
       if(bgmAudio) bgmAudio.pause()
       const audioPlayer=new Audio(cfg.sounds.gameSuccess || './sounds/gameSuccess.mp3')
+      audioPlayer.volume=0.316;
       audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
     },[])
 

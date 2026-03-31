@@ -86,6 +86,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             
             // 音效
             const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
+            audioPlayer.volume=0.316;
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{
@@ -110,6 +111,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             );
             // 音效
             const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
+            audioPlayer.volume=0.316;
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{

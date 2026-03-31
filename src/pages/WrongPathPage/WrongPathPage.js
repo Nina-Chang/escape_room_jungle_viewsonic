@@ -1,7 +1,7 @@
 import WrongPathPageStyle from './WrongPathPage.module.css'
 import useClickAnimation from '../../hooks/useClickAnimation';
 import useSendGameMessage from '../../hooks/useSendGameMessage';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
@@ -12,11 +12,26 @@ export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentPro
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
+    const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
       // 當這一頁載入時，立刻通知外層
       sendMessage({ sceneId: 5});
     }, [sendMessage]);
+
+    useEffect(()=>{
+      const handleEnded = () => setButtonDisabled(false);
+      const audioPlayer=new Audio(cfg.sounds.wrongPath || './sounds/wrong_path.wav')
+      audioPlayer.volume=0.316
+      audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
+      audioPlayer.addEventListener('ended',handleEnded)
+  
+      return () => {
+        audioPlayer.removeEventListener('ended',handleEnded);
+        audioPlayer.pause();
+        audioPlayer.src = ""; // 釋放記憶體
+      };
+    },[])
 
     const pageStyle = { 
       backgroundImage: `url(${backgroundImage})`,
@@ -51,11 +66,12 @@ export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentPro
         <div className={WrongPathPageStyle.titleText}>
             You've lost your way in the jungle...
         </div>
-        <button className={WrongPathPageStyle.imageButton} 
-         onMouseEnter={() => setButtonScale(1.1)}
-         onMouseLeave={() => setButtonScale(1)}
-         style={{transform: `translateX(-50%) scale(${buttonScale})`}}
-         onClick={handleClickAnimation}>
+        <button className={`${WrongPathPageStyle.imageButton} ${buttonDisabled&&WrongPathPageStyle.buttonDisabled}`}
+          disabled={buttonDisabled}
+          onMouseEnter={() => setButtonScale(1.1)}
+          onMouseLeave={() => setButtonScale(1)}
+          style={{transform: `translateX(-50%) scale(${buttonScale})`}}
+          onClick={handleClickAnimation}>
             <img src='./images/object/jungle_escape_again_button.png' alt="Return to Map"  loading="lazy" decoding="async"/>
         </button>
         {pageAssets.map((asset, index) => (

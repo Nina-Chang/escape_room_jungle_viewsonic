@@ -1,7 +1,7 @@
 import TrueFalseQuizClearPageStyle from './TrueFalseQuizClearPage.module.css'
 import useClickAnimation from '../../hooks/useClickAnimation';
 import useSendGameMessage from '../../hooks/useSendGameMessage';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
@@ -12,11 +12,27 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
+    const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
         sendMessage({ sceneId: 7});
     }, [sendMessage]);
+
+    useEffect(()=>{
+        const handleEnded = () => setButtonDisabled(false);
+        const audioPlayer=new Audio(cfg.sounds.findItems || './sounds/find items.mp3')
+        audioPlayer.volume=0.316
+        audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
+        audioPlayer.addEventListener('ended',handleEnded)
+    
+        return () => {
+          audioPlayer.removeEventListener('ended',handleEnded);
+          audioPlayer.pause();
+          audioPlayer.src = ""; // 釋放記憶體
+        };
+    },[])
+
 
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -58,7 +74,8 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
                 <span className={TrueFalseQuizClearPageStyle.clueTextSecondLine}>We lost comms with Fynn.B. Last heard he was going toward the marsh...</span>
                 <img src='./images/object/jungle_escape_notebook.png' alt="jungle_escape_notebook" loading="lazy" decoding="async"/>
             </div>
-            <button className={TrueFalseQuizClearPageStyle.imageButton}
+            <button className={`${TrueFalseQuizClearPageStyle.imageButton} ${buttonDisabled&&TrueFalseQuizClearPageStyle.buttonDisabled}`} 
+                disabled={buttonDisabled}
                 onMouseEnter={() => setButtonScale(1.1)}
                 onMouseLeave={() => setButtonScale(1)}
                 style={{transform: `translateX(-50%) scale(${buttonScale})`}}

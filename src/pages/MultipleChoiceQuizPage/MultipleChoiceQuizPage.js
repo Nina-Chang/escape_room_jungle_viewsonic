@@ -100,30 +100,29 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         const correctAnswer=currentQ?.answer || [];
         const isAllCorrect=choosedItem.length===correctAnswer.length && choosedItem.every((item,index)=>item===correctAnswer[index])
         // 更改按鈕狀態
-        const updateState=isCorrect.map(item=>{
+        const updateState = isCorrect.map(item => {
             const isChosen = item.status === -1; // 是否被選中
-            const isAnswer = correctAnswer.includes(item.optionText); // 是否為答案
-
-            let newStatus;
 
             if (isChosen) {
-                // 【有選到的答案】
-                newStatus = isAnswer ? 1 : 0; 
+                // 只有在全對 (isAllCorrect) 的情況下，選中的才會變綠色 (1)
+                return {
+                    ...item,
+                    status: isAllCorrect ? 1 : 0 
+                };
             } else {
-                // 【沒有選到的答案】
-                newStatus = isAnswer ? 1 : -1;
+                // 未選中的項目，不論它是不是正確答案，一律維持原狀 (-1，即黃色)
+                return {
+                    ...item,
+                    status: -1
+                };
             }
-
-            return {
-                ...item,
-                status: newStatus
-            };
-        })
+        });
         setIsCorrect(updateState)
 
         if(isAllCorrect ){// 全對
             // 音效
             const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
+            audioPlayer.volume=0.316;
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{
@@ -140,6 +139,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         else{
             // 音效
             const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
+            audioPlayer.volume=0.316;
             audioPlayer.play().catch(e => console.error("Audio play failed", e));
             // 導向頁面
             setTimeout(()=>{

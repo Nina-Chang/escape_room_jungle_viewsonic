@@ -171,7 +171,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
             altBase,
             onActiveClick,
         }) => {
-        const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(()=>navigateTo('true false quiz'))
+        const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(()=>navigateTo('true false quiz'),false)
 
         const handleClick =() => {
             if (isActiveClick) {

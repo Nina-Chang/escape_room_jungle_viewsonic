@@ -12,7 +12,7 @@ import { MultipleChoiceQuizPage } from './pages/MultipleChoiceQuizPage/MultipleC
 import { MultipleChoiceClearPage } from './pages/MultipleChoiceClearPage/MultipleChoiceClearPage';
 import { GameSuccessPage} from './pages/GameSuccessPage/GameSuccessPage'
 import { FinalClueQuizPage } from './pages/FinalClueQuizPage/FinalClueQuizPage';
-import { useLayoutEffect, useState,useRef } from 'react';
+import { useLayoutEffect,useEffect, useState,useRef } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
@@ -78,13 +78,38 @@ function App() {
   const handleStartClick=()=>{
     // 開始遊戲並播放音樂
     if (audioRef.current && audioRef.current.paused) {
-      audioRef.current.volume = 0.316;
-      audioRef.current.loop = false;
+      audioRef.current.volume = 0.1;
+      audioRef.current.loop = true;
       audioRef.current.currentTime = 0; // 從頭開始播放
       audioRef.current.play().catch(error => console.error("背景音樂播放失敗:", error));
     }
     navigateTo('prologue');
   }
+
+  useEffect(() => {
+    const startAudioContext = () => {
+      if (audioRef.current && audioRef.current.paused) {
+        audioRef.current.volume = 0.1;
+        audioRef.current.loop = true;
+        audioRef.current.play()
+          .then(() => {
+            window.removeEventListener('click', startAudioContext);
+            window.removeEventListener('touchstart', startAudioContext);
+          })
+          .catch((error) => {
+            console.log("Audio play failed:", error);
+          });
+      }
+    };
+
+    window.addEventListener('click', startAudioContext);
+    window.addEventListener('touchstart', startAudioContext);
+
+    return () => {
+      window.removeEventListener('click', startAudioContext);
+      window.removeEventListener('touchstart', startAudioContext);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     // 視窗縮放

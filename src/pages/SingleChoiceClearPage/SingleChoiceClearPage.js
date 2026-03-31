@@ -11,12 +11,18 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
-    const [buttonDisabled, setButtonDisabled] = useState(false)
+    const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
         sendMessage({ sceneId: 9});
     }, [sendMessage]);
+
+    useEffect(()=>{
+        const audioPlayer=new Audio(cfg.sounds.findItems || './sounds/find items.mp3')
+        audioPlayer.volume=0.316;
+        audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
+    },[])
 
     const pageStyle = { 
         backgroundImage: `url(${backgroundImage})`,
@@ -47,13 +53,9 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
     });
 
     const handleAudioPlay=()=>{
-        // 播放對講機音檔時背景音樂音量轉小 直到音檔結束
-        setButtonDisabled(true)// 不能換頁
-        if(bgmAudio) bgmAudio.volume=0.2
         const audioPlayer=new Audio(cfg.sounds.walkieTalkie || "./sounds/walkie_talkie.mp3")
         audioPlayer.play(e => console.error("Audio play failed", e));
         audioPlayer.addEventListener('ended',()=>{
-            if(bgmAudio) bgmAudio.volume=0.5
             setButtonDisabled(false)
         })
     }
