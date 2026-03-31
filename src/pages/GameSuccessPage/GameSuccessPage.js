@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import GameSuccessPageStyle from './GameSuccessPage.module.css'
 import useSendGameMessage from '../../hooks/useSendGameMessage';
 import useClickAnimation from '../../hooks/useClickAnimation';
+import usePageAssets from '../../hooks/usePageAssets';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 
@@ -12,6 +13,7 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(handleReturnHome)
     const { sendMessage }=useSendGameMessage()
+    const pageAssets = usePageAssets(cfg.assets, 13);
     
     const pageStyle = { 
       backgroundImage: `url(${backgroundImage})`,
@@ -19,27 +21,6 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
       height:'1080px',
       loading:'eager'
     };
-
-    // 找出 sceneId 為 13 的所有 Assets
-    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 13) || [];
-
-    // 建立一個產生 Style 的 function
-    const getAssetStyle = (asset) => ({
-      position: 'absolute',
-      left: asset.position.x,
-      top: asset.position.y,
-      width:asset.textWidth,
-      height:asset.textHeight,
-      fontFamily: asset.fontFamily,
-      textAlign:asset.textAlign,
-      fontSize:asset.fontSize,
-      color: asset.color,
-      fontWeight: asset.fontWeight,
-      fontStyle: asset.fontStyle,
-      textDecoration: asset.textDecoration,
-      pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
-      zIndex:"99"
-    });
     
     useEffect(() => {
       // 當這一頁載入時，立刻通知外層
@@ -71,9 +52,9 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
           </div>
       </div>
       {pageAssets.map((asset, index) => (
-        <div key={index} style={getAssetStyle(asset)}>
+          <div key={asset.id || index} style={asset.style}>
           {asset.text}
-        </div>
+          </div>
       ))}
     </div>
   )

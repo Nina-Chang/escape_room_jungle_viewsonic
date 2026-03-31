@@ -1,6 +1,7 @@
 import GameStartPageStyle from './GameStartPage.module.css'
 import useClickAnimation from '../../hooks/useClickAnimation';
 import useSendGameMessage from '../../hooks/useSendGameMessage';
+import usePageAssets from '../../hooks/usePageAssets';
 import { useEffect } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -8,6 +9,7 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 export const GameStartPage = ({ navigateTo, backgroundImage }) => {
     const { sendMessage }=useSendGameMessage()
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(()=>navigateTo('map'))
+    const pageAssets = usePageAssets(cfg.assets, 3);
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
@@ -20,28 +22,7 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
         height:'1080px',
         loading:'eager'
     };
-
-    // 找出 sceneId 為 3 的所有 Assets
-    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 3) || [];
-
-    // 建立一個產生 Style 的 function
-    const getAssetStyle = (asset) => ({
-        position: 'absolute',
-        left: asset.position.x,
-        top: asset.position.y,
-        width:asset.textWidth,
-        height:asset.textHeight,
-        fontFamily: asset.fontFamily,
-        textAlign:asset.textAlign,
-        fontSize:asset.fontSize,
-        color: asset.color,
-        fontWeight: asset.fontWeight,
-        fontStyle: asset.fontStyle,
-        textDecoration: asset.textDecoration,
-        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
-        zIndex:"99"
-    });
-
+    
   return (
     <div className="page-container" style={pageStyle}>
         <div className={GameStartPageStyle.explanationSection}>
@@ -65,8 +46,8 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
             <div className={GameStartPageStyle.btnText}>Start Mission</div>
         </button>
         {pageAssets.map((asset, index) => (
-            <div key={index} style={getAssetStyle(asset)}>
-                {asset.text}
+            <div key={asset.id || index} style={asset.style}>
+            {asset.text}
             </div>
         ))}
     </div>

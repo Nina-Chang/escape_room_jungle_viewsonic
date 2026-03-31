@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SingleChoiceClearPageStyle from './SingleChoiceClearPage.module.css'
 import useSendGameMessage from '../../hooks/useSendGameMessage';
 import useClickAnimation from '../../hooks/useClickAnimation';
+import usePageAssets from '../../hooks/usePageAssets';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
 export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentStepOnMap,bgmAudio }) => {
@@ -11,6 +12,7 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
+    const pageAssets = usePageAssets(cfg.assets, 9);
     const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
@@ -30,27 +32,6 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
         height:'1080px',
         loading:'eager'
     };
-
-    // 找出 sceneId 為 9 的所有 Assets
-    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 9) || [];
-
-    // 建立一個產生 Style 的 function
-    const getAssetStyle = (asset) => ({
-        position: 'absolute',
-        left: asset.position.x,
-        top: asset.position.y,
-        width:asset.textWidth,
-        height:asset.textHeight,
-        fontFamily: asset.fontFamily,
-        textAlign:asset.textAlign,
-        fontSize:asset.fontSize,
-        color: asset.color,
-        fontWeight: asset.fontWeight,
-        fontStyle: asset.fontStyle,
-        textDecoration: asset.textDecoration,
-        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
-        zIndex:"99"
-    });
 
     const handleAudioPlay=()=>{
         const audioPlayer=new Audio(cfg.sounds.walkieTalkie || "./sounds/walkie_talkie.mp3")
@@ -81,7 +62,7 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
             {pageAssets.map((asset, index) => (
-                <div key={index} style={getAssetStyle(asset)}>
+                <div key={asset.id || index} style={asset.style}>
                 {asset.text}
                 </div>
             ))}

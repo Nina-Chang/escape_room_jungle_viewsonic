@@ -1,6 +1,7 @@
 import React, { useState, useMemo,useRef, useEffect } from 'react';
 import TrueFalseQuizPageStyle from './TrueFalseQuizPage.module.css'
 import useSendGameMessage from '../../hooks/useSendGameMessage';
+import usePageAssets from '../../hooks/usePageAssets';
 
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -11,6 +12,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const isProcessing = useRef(false);
     const { sendMessage }=useSendGameMessage()
+    const pageAssets = usePageAssets(cfg.assets, 6);
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
@@ -23,27 +25,6 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         height:'1080px',
         loading:'eager'
     };
-
-    // 找出 sceneId 為 6 的所有 Assets
-    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 6) || [];
-
-    // 建立一個產生 Style 的 function
-    const getAssetStyle = (asset) => ({
-        position: 'absolute',
-        left: asset.position.x,
-        top: asset.position.y,
-        width:asset.textWidth,
-        height:asset.textHeight,
-        fontFamily: asset.fontFamily,
-        textAlign:asset.textAlign,
-        fontSize:asset.fontSize,
-        color: asset.color,
-        fontWeight: asset.fontWeight,
-        fontStyle: asset.fontStyle,
-        textDecoration: asset.textDecoration,
-        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
-        zIndex:"99"
-    });
 
     const tfQuestions = useMemo(() => {
         return cfg?.questions?.[0]?.questions?.filter(q => q.type === 'true_false') || [];
@@ -169,7 +150,7 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             </button>
         </div>
         {pageAssets.map((asset, index) => (
-            <div key={index} style={getAssetStyle(asset)}>
+            <div key={asset.id || index} style={asset.style}>
             {asset.text}
             </div>
         ))}

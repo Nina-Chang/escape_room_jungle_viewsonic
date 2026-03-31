@@ -1,6 +1,7 @@
 import StartPageStyle from "./StartPage.module.css"
 import useSendGameMessage from "../../hooks/useSendGameMessage"
 import useClickAnimation from '../../hooks/useClickAnimation'
+import usePageAssets from '../../hooks/usePageAssets'
 import { useEffect } from "react";
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -8,6 +9,7 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
   const { buttonScale,setButtonScale, handleClickAnimation } = useClickAnimation(onStartGame);
   const { sendMessage }=useSendGameMessage()
+  const pageAssets = usePageAssets(cfg.assets, 1);
 
   const pageStyle = { 
     backgroundImage: `url(${backgroundImage})`,
@@ -20,27 +22,6 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
     // 當這一頁載入時，立刻通知外層：我現在是第 1 號場景
     sendMessage({ sceneId: 1});
   }, [sendMessage]);
-
-  // 找出 sceneId 為 1 的所有 Assets
-  const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 1) || [];
-
-  // 建立一個產生 Style 的 function
-  const getAssetStyle = (asset) => ({
-    position: 'absolute',
-    left: asset.position.x,
-    top: asset.position.y,
-    width:asset.textWidth,
-    height:asset.textHeight,
-    fontFamily: asset.fontFamily,
-    textAlign:asset.textAlign,
-    fontSize:asset.fontSize,
-    color: asset.color,
-    fontWeight: asset.fontWeight,
-    fontStyle: asset.fontStyle,
-    textDecoration: asset.textDecoration,
-    pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
-    zIndex:"99"
-  });
 
   return (
     <div className='page-container' style={pageStyle}>
@@ -61,7 +42,7 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
         <span className={StartPageStyle.btnText}>Start</span>
       </button>
       {pageAssets.map((asset, index) => (
-        <div key={index} style={getAssetStyle(asset)}>
+        <div key={asset.id || index} style={asset.style}>
           {asset.text}
         </div>
       ))}

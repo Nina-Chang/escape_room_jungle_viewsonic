@@ -1,5 +1,6 @@
 import React, { useMemo, useState,useRef, useEffect } from "react";
 import useSendGameMessage from '../../hooks/useSendGameMessage';
+import usePageAssets from '../../hooks/usePageAssets';
 import SingleChoiceQuizPageStyle from "./SingleChoiceQuizPage.module.css"
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -9,6 +10,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const isProcessing = useRef(false);
     const { sendMessage }=useSendGameMessage()
+    const pageAssets = usePageAssets(cfg.assets, 8);
     const [clickingBtn, setClickingBtn] = useState(null);
 
     useEffect(() => {
@@ -22,27 +24,6 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
         height:'1080px',
         loading:'eager'
     };
-
-    // 找出 sceneId 為 8 的所有 Assets
-    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 8) || [];
-
-    // 建立一個產生 Style 的 function
-    const getAssetStyle = (asset) => ({
-        position: 'absolute',
-        left: asset.position.x,
-        top: asset.position.y,
-        width:asset.textWidth,
-        height:asset.textHeight,
-        fontFamily: asset.fontFamily,
-        textAlign:asset.textAlign,
-        fontSize:asset.fontSize,
-        color: asset.color,
-        fontWeight: asset.fontWeight,
-        fontStyle: asset.fontStyle,
-        textDecoration: asset.textDecoration,
-        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
-        zIndex:"99"
-    });
 
     const scQuestions = useMemo(() => {
         return cfg?.questions?.[0]?.questions?.filter(q => q.type === 'single_choice') || [];
@@ -174,7 +155,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
             </button>
         </div>
         {pageAssets.map((asset, index) => (
-            <div key={index} style={getAssetStyle(asset)}>
+            <div key={asset.id || index} style={asset.style}>
             {asset.text}
             </div>
         ))}

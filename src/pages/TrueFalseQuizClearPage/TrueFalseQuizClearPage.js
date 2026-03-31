@@ -1,6 +1,7 @@
 import TrueFalseQuizClearPageStyle from './TrueFalseQuizClearPage.module.css'
 import useClickAnimation from '../../hooks/useClickAnimation';
 import useSendGameMessage from '../../hooks/useSendGameMessage';
+import usePageAssets from '../../hooks/usePageAssets';
 import { useEffect,useState } from 'react';
 
 const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameConfig : {};
@@ -12,6 +13,7 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
+    const pageAssets = usePageAssets(cfg.assets, 7);
     const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
@@ -40,27 +42,6 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
         height:'1080px',
         loading:'eager'
     };
-
-    // 找出 sceneId 為 7 的所有 Assets
-    const pageAssets = cfg.assets?.filter(asset => asset.sceneId === 7) || [];
-
-    // 建立一個產生 Style 的 function
-    const getAssetStyle = (asset) => ({
-        position: 'absolute',
-        left: asset.position.x,
-        top: asset.position.y,
-        width:asset.textWidth,
-        height:asset.textHeight,
-        fontFamily: asset.fontFamily,
-        textAlign:asset.textAlign,
-        fontSize:asset.fontSize,
-        color: asset.color,
-        fontWeight: asset.fontWeight,
-        fontStyle: asset.fontStyle,
-        textDecoration: asset.textDecoration,
-        pointerEvents: 'none', // 如果只是裝飾文字，防止擋住按鈕點擊
-        zIndex:"99"
-    });
     
     return (
         <div className="page-container" style={pageStyle}>
@@ -83,8 +64,8 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
             {pageAssets.map((asset, index) => (
-                <div key={index} style={getAssetStyle(asset)}>
-                {asset.text}
+                <div key={asset.id || index} style={asset.style}>
+                    {asset.text}
                 </div>
             ))}
         </div>
