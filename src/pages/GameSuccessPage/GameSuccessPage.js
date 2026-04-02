@@ -37,10 +37,9 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
   return (
     <div className="page-container" style={pageStyle}>
       <div className={GameSuccessPageStyle.explanationSection}>
-          <div style={cfg.strings.wholeGameCompletedExplanation.style}>
+          <div style={cfg.strings.wholeGameCompletedExplanation.style} className={GameSuccessPageStyle.explanationText}>
             {cfg.strings.wholeGameCompletedExplanation.text}
           </div>
-          {/* <div className={GameSuccessPageStyle.explanationText}>{cfg.strings.wholeGameCompletedExplanation || "Congratulations! Thanks to your efforts, the team is safe, and the ancient temple has been discovered!"}</div> */}
           <img src='./images/object/jungle_escape_clue_frame.png' style={{transform:'scale(1.3,1)'}} alt="jungle_escape_clue_frame" loading="lazy" decoding="async"/>
           <div className={GameSuccessPageStyle.returnButton}>
             <img
@@ -51,10 +50,25 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
               onClick={()=>handleClickAnimation()} loading="lazy" decoding="async"/>
           </div>
       </div>
-      {pageAssets.map((asset, index) => (
-          <div key={asset.id || index} style={asset.style}>
-          {asset.text}
-          </div>
+      {pageAssets.map((asset) => (
+        <div key={asset.RawId || asset.id} style={asset.style}>
+            {asset.Type === 'Text' ? 
+            (
+                asset.displayContent
+            ) 
+            : (
+                <img 
+                    src={asset.displayContent} 
+                    alt="game-asset" 
+                    style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'contain',
+                        display: 'block' 
+                    }} 
+                />
+            )}
+        </div>
       ))}
     </div>
   )

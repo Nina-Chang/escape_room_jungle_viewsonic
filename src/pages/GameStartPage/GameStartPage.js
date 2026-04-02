@@ -29,13 +29,14 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
             <div className={GameStartPageStyle.avatarsSection}>
                 <img className={GameStartPageStyle.avatarsIcon} src='./images/object/jungle_escape_avatars_icon.png' alt="jungle_escape_team_avatars" loading="lazy" decoding="async"/>
             </div>
-            {/* <div dangerouslySetInnerHTML={{__html:cfg.strings.startGameExplanationText || `[Headquarters]: That's the last we heard. The missing team needs your help. To rescue them,you'll have to solve challenging puzzles and collect vital clues hidden deep within the jungle. Time is running out. Good luck, adventurer.`}} className={GameStartPageStyle.explanationText}>
-            </div> */}
-            {cfg.strings.startGameExplanationText.map((content, index) => (
-                <div key={index} style={content.style}>
-                    {content.text}
-                </div>
-            ))}
+            <div 
+                className={GameStartPageStyle.explanationText} 
+                style={cfg.strings.startGameExplanationText.style} 
+                dangerouslySetInnerHTML={{
+                    __html: (cfg.strings.startGameExplanationText.text || '').replace(/\r\n/g, '<br />')
+                }}
+                >
+            </div>
         </div>
         <button className={GameStartPageStyle.imageButton} 
          onMouseEnter={() => setButtonScale(1.1)}
@@ -45,9 +46,24 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
             <img src='./images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
             <div className={GameStartPageStyle.btnText}>Start Mission</div>
         </button>
-        {pageAssets.map((asset, index) => (
-            <div key={asset.id || index} style={asset.style}>
-            {asset.text}
+        {pageAssets.map((asset) => (
+            <div key={asset.RawId || asset.id} style={asset.style}>
+                {asset.Type === 'Text' ? 
+                (
+                    asset.displayContent
+                ) 
+                : (
+                    <img 
+                        src={asset.displayContent} 
+                        alt="game-asset" 
+                        style={{ 
+                            width: '100%', 
+                            height: '100%', 
+                            objectFit: 'contain',
+                            display: 'block' 
+                        }} 
+                    />
+                )}
             </div>
         ))}
     </div>

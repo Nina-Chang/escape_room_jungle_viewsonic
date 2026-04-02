@@ -50,16 +50,31 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
           onClick={handleClickAnimation}>
             <img src='./images/object/jungle_escape_nect_button.png' alt="Continue" loading="lazy" decoding="async"/>
         </button>
-        <div style={cfg.strings.previousStoryConversation.style}>
+        <div className={StoryProloguePageStyle.conversationText} style={cfg.strings.previousStoryConversation.style}>
           {cfg.strings.previousStoryConversation.text}
         </div>
         {/* <div className={StoryProloguePageStyle.conversationText}>
             {cfg.strings.previousStoryConversation || "[Team Member]:Hello? Can anyone hear me? We're lost...battery dying!"}
         </div> */}
-        {pageAssets.map((asset, index) => (
-            <div key={asset.id || index} style={asset.style}>
-            {asset.text}
-            </div>
+        {pageAssets.map((asset) => (
+          <div key={asset.RawId || asset.id} style={asset.style}>
+              {asset.Type === 'Text' ? 
+              (
+                  asset.displayContent
+              ) 
+              : (
+                  <img 
+                      src={asset.displayContent} 
+                      alt="game-asset" 
+                      style={{ 
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: 'contain',
+                          display: 'block' 
+                      }} 
+                  />
+              )}
+          </div>
         ))}
     </div>
   )

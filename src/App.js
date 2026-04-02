@@ -46,16 +46,16 @@ function App() {
   document.querySelectorAll('.questionText').forEach(el => {
     const len = el.innerText.length;
 
-    if (len > 56) {
-      el.style.fontSize = '15px';
+    if (len > 60) {
+      el.style.fontSize = '16px';
     } else if (len >35) {
-      el.style.fontSize = '20px';
-    } else if (len >22) {
-      el.style.fontSize = '24px';
-    } else if (len >12) {
+      el.style.fontSize = '22px';
+    } else if (len >20) {
       el.style.fontSize = '28px';
-    } else {
+    } else if (len >10) {
       el.style.fontSize = '32px';
+    } else {
+      el.style.fontSize = '36px';
     }
   });
 
