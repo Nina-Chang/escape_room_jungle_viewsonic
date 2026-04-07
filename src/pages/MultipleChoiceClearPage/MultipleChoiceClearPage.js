@@ -61,11 +61,12 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
                 <img src='./images/object/jungle_escape_camera.png' alt="jungle_escape_camera" loading="lazy" decoding="async"/>
             </div>
             <button 
-            disabled={buttonDisabled}
+            // disabled={buttonDisabled}
             onMouseEnter={() => setButtonScale(1.1)}
             onMouseLeave={() => setButtonScale(1)}
             style={{transform: `translateX(-50%) scale(${buttonScale})`}}
-            className={`${MultipleChoiceClearPageStyle.imageButton} ${buttonDisabled&&MultipleChoiceClearPageStyle.buttonDisabled}`} 
+            className={`${MultipleChoiceClearPageStyle.imageButton}`} 
+            // className={`${MultipleChoiceClearPageStyle.imageButton} ${buttonDisabled&&MultipleChoiceClearPageStyle.buttonDisabled}`} 
             onClick={()=>handleClickAnimation()}>
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>

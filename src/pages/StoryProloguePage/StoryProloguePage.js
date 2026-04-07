@@ -42,8 +42,8 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
     <div className="page-container" style={pageStyle}>
         <span className={StoryProloguePageStyle.signalText}>Weak signal...</span>
         <div className={StoryProloguePageStyle.coordinatesText}>3°28'26.6"S<br/>62°12'12.7"W</div>
-        <button className={`${StoryProloguePageStyle.imageButton} ${buttonDisabled&&StoryProloguePageStyle.buttonDisabled}`} 
-          disabled={buttonDisabled}
+        <button className={`${StoryProloguePageStyle.imageButton}`} 
+          // disabled={buttonDisabled}
           onMouseEnter={() => setButtonScale(1.1)}
           onMouseLeave={() => setButtonScale(1)}
           style={{transform: `translate(-50%, -50%) scale(${buttonScale})`}}
@@ -53,9 +53,6 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
         <div className={StoryProloguePageStyle.conversationText} style={cfg.strings.previousStoryConversation.style}>
           {cfg.strings.previousStoryConversation.text}
         </div>
-        {/* <div className={StoryProloguePageStyle.conversationText}>
-            {cfg.strings.previousStoryConversation || "[Team Member]:Hello? Can anyone hear me? We're lost...battery dying!"}
-        </div> */}
         {pageAssets.map((asset) => (
           <div key={asset.RawId || asset.id} style={asset.style}>
               {asset.Type === 'Text' ? 

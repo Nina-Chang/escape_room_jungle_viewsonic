@@ -47,8 +47,8 @@ export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentPro
         <div className={WrongPathPageStyle.titleText}>
             You've lost your way in the jungle...
         </div>
-        <button className={`${WrongPathPageStyle.imageButton} ${buttonDisabled&&WrongPathPageStyle.buttonDisabled}`}
-          disabled={buttonDisabled}
+        <button className={`${WrongPathPageStyle.imageButton} `}
+          // disabled={buttonDisabled}
           onMouseEnter={() => setButtonScale(1.1)}
           onMouseLeave={() => setButtonScale(1)}
           style={{transform: `translateX(-50%) scale(${buttonScale})`}}

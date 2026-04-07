@@ -55,8 +55,10 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
                 <span className={TrueFalseQuizClearPageStyle.clueTextSecondLine}>We lost comms with Fynn.B. Last heard he was going toward the marsh...</span>
                 <img src='./images/object/jungle_escape_notebook.png' alt="jungle_escape_notebook" loading="lazy" decoding="async"/>
             </div>
-            <button className={`${TrueFalseQuizClearPageStyle.imageButton} ${buttonDisabled&&TrueFalseQuizClearPageStyle.buttonDisabled}`} 
-                disabled={buttonDisabled}
+            <button 
+                className={`${TrueFalseQuizClearPageStyle.imageButton}`} 
+                // className={`${TrueFalseQuizClearPageStyle.imageButton} ${buttonDisabled&&TrueFalseQuizClearPageStyle.buttonDisabled}`} 
+                // disabled={buttonDisabled}
                 onMouseEnter={() => setButtonScale(1.1)}
                 onMouseLeave={() => setButtonScale(1)}
                 style={{transform: `translateX(-50%) scale(${buttonScale})`}}
