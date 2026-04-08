@@ -14,7 +14,6 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
     const pageAssets = usePageAssets(cfg.assets, 7);
-    const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
@@ -22,14 +21,11 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
     }, [sendMessage]);
 
     useEffect(()=>{
-        const handleEnded = () => setButtonDisabled(false);
         const audioPlayer=new Audio(cfg.sounds.findItems || './sounds/find items.mp3')
         audioPlayer.volume=0.316
         audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
-        audioPlayer.addEventListener('ended',handleEnded)
     
         return () => {
-          audioPlayer.removeEventListener('ended',handleEnded);
           audioPlayer.pause();
           audioPlayer.src = ""; // 釋放記憶體
         };
@@ -57,8 +53,6 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
             </div>
             <button 
                 className={`${TrueFalseQuizClearPageStyle.imageButton}`} 
-                // className={`${TrueFalseQuizClearPageStyle.imageButton} ${buttonDisabled&&TrueFalseQuizClearPageStyle.buttonDisabled}`} 
-                // disabled={buttonDisabled}
                 onMouseEnter={() => setButtonScale(1.1)}
                 onMouseLeave={() => setButtonScale(1)}
                 style={{transform: `translateX(-50%) scale(${buttonScale})`}}

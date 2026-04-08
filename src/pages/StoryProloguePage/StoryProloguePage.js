@@ -8,7 +8,6 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 
 export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
   const { sendMessage }=useSendGameMessage()
-  const [buttonDisabled, setButtonDisabled] = useState(true)
   const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(()=>navigateTo('gameStart'))
   const pageAssets = usePageAssets(cfg.assets, 2);
 
@@ -18,14 +17,11 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
   }, [sendMessage]);
 
   useEffect(()=>{
-    const handleEnded = () => setButtonDisabled(false);
     const audioPlayer=new Audio(cfg.sounds.signalInterference || './sounds/signal_interference.mp3')
     audioPlayer.volume=0.316;
     audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
-    audioPlayer.addEventListener('ended',handleEnded)
 
     return () => {
-      audioPlayer.removeEventListener('ended',handleEnded);
       audioPlayer.pause();
       audioPlayer.src = ""; // 釋放記憶體
     };
@@ -43,7 +39,6 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
         <span className={StoryProloguePageStyle.signalText}>Weak signal...</span>
         <div className={StoryProloguePageStyle.coordinatesText}>3°28'26.6"S<br/>62°12'12.7"W</div>
         <button className={`${StoryProloguePageStyle.imageButton}`} 
-          // disabled={buttonDisabled}
           onMouseEnter={() => setButtonScale(1.1)}
           onMouseLeave={() => setButtonScale(1)}
           style={{transform: `translate(-50%, -50%) scale(${buttonScale})`}}

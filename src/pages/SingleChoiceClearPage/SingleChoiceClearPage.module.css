@@ -32,7 +32,14 @@
     left:50%;
     transform: translateX(-50%);
 }
-
+.clueText{
+    width: 30px;
+    position: absolute;
+    top:55%;
+    left: 30%;
+    font-size: 24px;
+    color:#ffffff;
+}
 .clickButton{
     position: absolute;
     bottom:9%;
@@ -54,6 +61,10 @@
     transform: translateX(-50%);
 }
 
-.buttonDisabled{
+.itemDisabled{
     cursor: none;
+}
+
+.buttonHidden{
+    visibility:hidden;
 }

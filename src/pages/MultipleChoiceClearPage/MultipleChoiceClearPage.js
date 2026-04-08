@@ -15,7 +15,7 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
     const [isPicReveal, setIsPicReveal] = useState(false)
     const { sendMessage }=useSendGameMessage()
     const pageAssets = usePageAssets(cfg.assets, 11);
-    const [buttonDisabled, setButtonDisabled] = useState(true)
+    const [buttonHidden, setButtonHidden] = useState(true)
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
@@ -23,17 +23,9 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
     }, [sendMessage]);
 
     useEffect(()=>{
-        const handleEnded = () => setButtonDisabled(false);
         const audioPlayer=new Audio(cfg.sounds.findItems || './sounds/find items.mp3')
-        audioPlayer.volume=0.316
+        audioPlayer.volume=0.316;
         audioPlayer.play().catch((e)=>console.log('Audio Failed',e))
-        audioPlayer.addEventListener('ended',handleEnded)
-    
-        return () => {
-            audioPlayer.removeEventListener('ended',handleEnded);
-            audioPlayer.pause();
-            audioPlayer.src = ""; // 釋放記憶體
-        };
     },[])
 
     const pageStyle = { 
@@ -51,7 +43,10 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
                 <img src='./images/object/jungle_escape_clue_frame.png' alt="jungle_escape_true_false_completed" loading="lazy" decoding="async"/>
             </div>
             <div className={MultipleChoiceClearPageStyle.clueSection}>
-                <button onClick={()=>setIsPicReveal(true)}>
+                <button onClick={()=>{
+                    setIsPicReveal(true)
+                    setButtonHidden(false)
+                }}>
                     {
                         isPicReveal?
                         <img src='./images/object/jungle_escape_photo02.png' alt="jungle_escape_photo02" loading="lazy" decoding="async"/>
@@ -61,12 +56,10 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
                 <img src='./images/object/jungle_escape_camera.png' alt="jungle_escape_camera" loading="lazy" decoding="async"/>
             </div>
             <button 
-            // disabled={buttonDisabled}
             onMouseEnter={() => setButtonScale(1.1)}
             onMouseLeave={() => setButtonScale(1)}
             style={{transform: `translateX(-50%) scale(${buttonScale})`}}
-            className={`${MultipleChoiceClearPageStyle.imageButton}`} 
-            // className={`${MultipleChoiceClearPageStyle.imageButton} ${buttonDisabled&&MultipleChoiceClearPageStyle.buttonDisabled}`} 
+            className={`${MultipleChoiceClearPageStyle.imageButton} ${buttonHidden&&MultipleChoiceClearPageStyle.buttonHidden}`} 
             onClick={()=>handleClickAnimation()}>
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>

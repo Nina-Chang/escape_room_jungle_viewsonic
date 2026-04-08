@@ -52,9 +52,30 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         func();
     }
 
+    const handleTrueAnswer=(currentIndex)=>{
+        // 音效
+        const audioPlayer=new Audio(cfg.sounds.correct || './sounds/correct.mp3')
+        audioPlayer.volume=0.316;
+        audioPlayer.play().catch(e => console.error("Audio play failed", e));
+        setTimeout(() => {
+            if(currentIndex===3){
+                handleGameSuccess()
+            }
+            else{
+                setCurrentProblemIndex(currentIndex)
+            }
+        }, 1000);
+    }
+
     const handleNavigateToWrongPath=(currentIndex)=>{
-        setWrongPathBackTo({page:'final clue quiz',problemIndex:currentIndex})
-        navigateTo('wrong path')
+        // 音效
+        const audioPlayer=new Audio(cfg.sounds.wrong || './sounds/wrong.mp3')
+        audioPlayer.volume=0.316;
+        audioPlayer.play().catch(e => console.error("Audio play failed", e));
+        setTimeout(()=>{
+            setWrongPathBackTo({page:'final clue quiz',problemIndex:currentIndex})
+            navigateTo('wrong path')
+        },1000)
     }
 
     const handleGameSuccess=()=>{
@@ -81,7 +102,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                             style={{transform: `scale(${buttonScale.A || 1})`}} 
                             src={problem[0].optionImageSrc[0]} 
                             alt="jungle_escape_id_card01" 
-                            onClick={()=>handleClick('A',()=>setCurrentProblemIndex(1))} loading="lazy" decoding="async"/>
+                            onClick={()=>handleClick('A',()=>handleTrueAnswer(1))} loading="lazy" decoding="async"/>
                         <img 
                             onMouseEnter={() => setButtonScale(prev => ({...prev, B:1.05}))}
                             onMouseLeave={() => setButtonScale(prev => ({...prev, B:1}))}
@@ -123,7 +144,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                                 style={{transform: `scale(${buttonScale.B || 1})`}} 
                                 src={problem[1].optionImageSrc[1]} 
                                 alt="jungle_escape_id_card02" 
-                                onClick={()=>handleClick('B',()=>setCurrentProblemIndex(2))} loading="lazy" decoding="async"/>
+                                onClick={()=>handleClick('B',()=>handleTrueAnswer(2))} loading="lazy" decoding="async"/>
                         </div>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[2]}</div>
@@ -172,7 +193,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                                 style={{transform: `scale(${buttonScale.C || 1})`}} 
                                 src={problem[2].optionImageSrc[2]} 
                                 className={FinalClueQuizPageStyle.answerCustomStyle} alt="jungle_escape_id_card03" width={250} 
-                                onClick={()=>handleClick('C',()=>handleGameSuccess())} loading="lazy" decoding="async"/>    
+                                onClick={()=>handleClick('C',()=>handleTrueAnswer(3))} loading="lazy" decoding="async"/>    
                         </div>
                     </div>
                 </>

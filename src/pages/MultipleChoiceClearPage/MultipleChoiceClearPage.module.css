@@ -58,6 +58,6 @@
     transform: translateX(-50%);
 }
 
-.buttonDisabled{
-    cursor: none;
+.buttonHidden{
+    visibility:hidden;
 }
