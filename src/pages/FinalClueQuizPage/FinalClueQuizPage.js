@@ -64,7 +64,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
             else{
                 setCurrentProblemIndex(currentIndex)
             }
-        }, 1000);
+        }, 500);
     }
 
     const handleNavigateToWrongPath=(currentIndex)=>{
@@ -75,7 +75,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         setTimeout(()=>{
             setWrongPathBackTo({page:'final clue quiz',problemIndex:currentIndex})
             navigateTo('wrong path')
-        },1000)
+        },500)
     }
 
     const handleGameSuccess=()=>{
