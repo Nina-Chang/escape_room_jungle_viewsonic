@@ -9,11 +9,11 @@ const cfg = (typeof window !== 'undefined' && window.gameConfig) ? window.gameCo
 // 關卡順序為：river camp→ swamp trap→ stone maze→ ancient temple
 export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBackTo }) => {
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 4);
+    const pageAssets = usePageAssets(cfg.assets, 5);
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
-        sendMessage({ sceneId: 4});
+        sendMessage({ sceneId: 5});
     }, [sendMessage]);
     
     const explanationText=[

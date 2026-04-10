@@ -13,7 +13,7 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(handleReturnHome)
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 13);
+    const pageAssets = usePageAssets(cfg.assets, 11);
     
     const pageStyle = { 
       backgroundImage: `url(${backgroundImage})`,
@@ -24,7 +24,7 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
     
     useEffect(() => {
       // 當這一頁載入時，立刻通知外層
-      sendMessage({ sceneId: 13});
+      sendMessage({ sceneId: 11});
     }, [sendMessage]);
 
     useEffect(()=>{

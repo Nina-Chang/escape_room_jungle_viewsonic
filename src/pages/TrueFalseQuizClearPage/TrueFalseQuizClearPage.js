@@ -13,11 +13,11 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 7);
+    const pageAssets = usePageAssets(cfg.assets, 9);
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
-        sendMessage({ sceneId: 7});
+        sendMessage({ sceneId: 9});
     }, [sendMessage]);
 
     useEffect(()=>{

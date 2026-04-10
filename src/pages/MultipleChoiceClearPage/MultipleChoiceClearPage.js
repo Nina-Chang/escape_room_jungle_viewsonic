@@ -14,12 +14,12 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const [isPicReveal, setIsPicReveal] = useState(false)
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 11);
+    const pageAssets = usePageAssets(cfg.assets, 9);
     const [buttonHidden, setButtonHidden] = useState(true)
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
-        sendMessage({ sceneId: 11});
+        sendMessage({ sceneId: 9});
     }, [sendMessage]);
 
     useEffect(()=>{

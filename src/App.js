@@ -138,24 +138,24 @@ function App() {
         {/* 場景3 */}
         {page === 'gameStart' && <GameStartPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameStart} />}
         {/* 場景4 */}
-        {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} currentStep={currentStepOnMap} setWrongPathBackTo={setWrongPathBackTo}/>}
-        {/* 場景5 */}
         {page === 'wrong path' && <WrongPathPage navigateTo={navigateTo} backgroundImage={backgroundImage.wrongPath} backTo={wrongPathBackTo} setCurrentProblemIndex={setCurrentProblemIndex} />}
+        {/* 場景5 */}
+        {page === 'map' && <MapPage navigateTo={navigateTo} backgroundImage={backgroundImage.map} currentStep={currentStepOnMap} setWrongPathBackTo={setWrongPathBackTo}/>}
         {/* 場景6 */}
         {page === 'true false quiz' && <TrueFalseQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.trueFalseQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
-        {/* 場景7 */}
+        {/* 場景9 */}
         {page === 'true false quiz clear' && <TrueFalseQuizClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
-        {/* 場景8 */}
+        {/* 場景7 */}
         {page === 'single choice quiz' && <SingleChoiceQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.choiceQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
         {/* 場景9 */}
         {page === 'single choice quiz clear' && <SingleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap} bgmAudio={audioRef.current}/>}
-        {/* 場景10 */}
+        {/* 場景8 */}
         {page === 'multiple choice quiz' && <MultipleChoiceQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.choiceQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
-        {/* 場景11 */}
+        {/* 場景9 */}
         {page === 'multiple choice quiz clear' && <MultipleChoiceClearPage navigateTo={navigateTo} backgroundImage={backgroundImage.quizClear} setCurrentStepOnMap={setCurrentStepOnMap}/>}
-        {/* 場景12 */}
+        {/* 場景10 */}
         {page === 'final clue quiz' && <FinalClueQuizPage navigateTo={navigateTo} backgroundImage={backgroundImage.finalClueQuiz} setWrongPathBackTo={setWrongPathBackTo} currentProblemIndex={currentProblemIndex} setCurrentProblemIndex={setCurrentProblemIndex}/>}
-        {/* 場景13 */}
+        {/* 場景11 */}
         {page === 'game success' && <GameSuccessPage navigateTo={navigateTo} backgroundImage={backgroundImage.gameSuccess} bgmAudio={audioRef.current} setCurrentStepOnMap={setCurrentStepOnMap}/>}
 
         <audio ref={audioRef} src={cfg.sounds.bgm || "./sounds/african-background-music-tribal-kongo-nigeria-tanzania.mp3"} preload="auto" />    

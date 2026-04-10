@@ -10,12 +10,12 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
     const [isCorrect, setIsCorrect] = useState(initialButtonState) // 0:false 1:true -1:not yet to choose
     const isProcessing = useRef(false);
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 8);
+    const pageAssets = usePageAssets(cfg.assets, 7);
     const [clickingBtn, setClickingBtn] = useState(null);
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
-        sendMessage({ sceneId: 8});
+        sendMessage({ sceneId: 7});
     }, [sendMessage]);
     
     const pageStyle = { 

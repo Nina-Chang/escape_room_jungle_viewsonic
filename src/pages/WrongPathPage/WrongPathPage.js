@@ -13,11 +13,11 @@ export const WrongPathPage = ({ navigateTo, backgroundImage,backTo,setCurrentPro
     }
     const { buttonScale,setButtonScale, handleClickAnimation }=useClickAnimation(reset)
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 5);
+    const pageAssets = usePageAssets(cfg.assets, 4);
 
     useEffect(() => {
       // 當這一頁載入時，立刻通知外層
-      sendMessage({ sceneId: 5});
+      sendMessage({ sceneId: 4});
     }, [sendMessage]);
 
     useEffect(()=>{

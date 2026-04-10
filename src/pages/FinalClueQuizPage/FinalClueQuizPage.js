@@ -9,11 +9,11 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
     const initialButtonScale={A:1,B:1,C:1}
     const [buttonScale, setButtonScale] = useState(initialButtonScale);
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 12);
+    const pageAssets = usePageAssets(cfg.assets, 10);
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
-        sendMessage({ sceneId: 12});
+        sendMessage({ sceneId: 10});
     }, [sendMessage]);
 
     const pageStyle = { 

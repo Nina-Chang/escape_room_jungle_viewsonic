@@ -12,11 +12,11 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
     const isProcessing = useRef(false);
     const [clickingBtn, setClickingBtn] = useState(null);
     const { sendMessage }=useSendGameMessage()
-    const pageAssets = usePageAssets(cfg.assets, 10);
+    const pageAssets = usePageAssets(cfg.assets, 8);
 
     useEffect(() => {
         // 當這一頁載入時，立刻通知外層
-        sendMessage({ sceneId: 10});
+        sendMessage({ sceneId: 8});
     }, [sendMessage]);
     
     const pageStyle = { 
