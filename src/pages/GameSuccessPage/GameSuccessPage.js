@@ -50,6 +50,13 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
               onClick={()=>handleClickAnimation()} loading="lazy" decoding="async"/>
           </div>
       </div>
+      {
+        cfg.isSubscribe===0
+        &&
+        <div className='logo-gray'>
+          <img src="./images/object/logo-gray.png" alt="logo" ></img>
+        </div>
+      }
       {pageAssets.map((asset) => (
         <div key={asset.RawId || asset.id} style={asset.style}>
             {asset.Type === 'Text' ? 

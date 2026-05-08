@@ -89,7 +89,6 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         <div className={FinalClueQuizPageStyle.quizSection}>
             <div className={FinalClueQuizPageStyle.explanationSection}>Assemble the clues you've gathered. Only then will you uncover the truth and complete the rescue.</div>
             <img src='./images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" loading="lazy" decoding="async"/>
-
             {
                 currentProblemIndex===0
                 &&
@@ -198,27 +197,35 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                     </div>
                 </>
             }
-            {pageAssets.map((asset) => (
-                <div key={asset.RawId || asset.id} style={asset.style}>
-                    {asset.Type === 'Text' ? 
-                    (
-                        asset.displayContent
-                    ) 
-                    : (
-                        <img 
-                            src={asset.displayContent} 
-                            alt="game-asset" 
-                            style={{ 
-                                width: '100%', 
-                                height: '100%', 
-                                objectFit: 'contain',
-                                display: 'block' 
-                            }} 
-                        />
-                    )}
-                </div>
-            ))}
+           
         </div>
+        {
+            cfg.isSubscribe===0
+            &&
+            <div className='logo-gray'>
+                <img src="./images/object/logo-gray.png" alt="logo" ></img>
+            </div>
+        }
+        {pageAssets.map((asset) => (
+            <div key={asset.RawId || asset.id} style={asset.style}>
+                {asset.Type === 'Text' ? 
+                (
+                    asset.displayContent
+                ) 
+                : (
+                    <img 
+                        src={asset.displayContent} 
+                        alt="game-asset" 
+                        style={{ 
+                            width: '100%', 
+                            height: '100%', 
+                            objectFit: 'contain',
+                            display: 'block' 
+                        }} 
+                    />
+                )}
+            </div>
+        ))}
     </div>
   )
 }

@@ -197,6 +197,13 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
                 <img src='./images/object/jungle_escape_submit_button.png' alt="Submit" loading="lazy" decoding="async"/>
             </button>
         </div>
+        {
+            cfg.isSubscribe===0
+            &&
+            <div className='logo-gray'>
+                <img src="./images/object/logo-gray.png" alt="logo" ></img>
+            </div>
+        }
         {pageAssets.map((asset) => (
             <div key={asset.RawId || asset.id} style={asset.style}>
                 {asset.Type === 'Text' ? 

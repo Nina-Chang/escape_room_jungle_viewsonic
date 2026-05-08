@@ -39,6 +39,13 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
         <img src='./images/object/jungle_escape_start_button.png' alt="Start Button" loading="lazy" decoding="async" />
         <span className={StartPageStyle.btnText}>Start</span>
       </button>
+      {
+        cfg.isSubscribe===0
+        &&
+        <div className='logo-gray'>
+          <img src="./images/object/logo-gray.png" alt="logo" ></img>
+        </div>
+      }
       {pageAssets.map((asset) => (
         <div key={asset.RawId || asset.id} style={asset.style}>
             {asset.Type === 'Text' ? 
@@ -58,7 +65,7 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
                 />
             )}
         </div>
-    ))}
+      ))}
     </div>
   )
 }

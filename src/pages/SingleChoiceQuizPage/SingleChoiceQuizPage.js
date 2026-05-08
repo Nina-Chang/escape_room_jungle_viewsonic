@@ -154,6 +154,13 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
                 <AnswerBackground status={cButtonItem.status}/>
             </button>
         </div>
+        {
+            cfg.isSubscribe===0
+            &&
+            <div className='logo-gray'>
+                <img src="./images/object/logo-gray.png" alt="logo" ></img>
+            </div>
+        }
         {pageAssets.map((asset) => (
             <div key={asset.RawId || asset.id} style={asset.style}>
                 {asset.Type === 'Text' ? 

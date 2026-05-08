@@ -48,6 +48,13 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
         <div className={StoryProloguePageStyle.conversationText} style={cfg.strings.previousStoryConversation.style}>
           {cfg.strings.previousStoryConversation.text}
         </div>
+        {
+          cfg.isSubscribe===0
+          &&
+          <div className='logo-gray'>
+            <img src="./images/object/logo-gray.png" alt="logo" ></img>
+          </div>
+        }
         {pageAssets.map((asset) => (
           <div key={asset.RawId || asset.id} style={asset.style}>
               {asset.Type === 'Text' ? 

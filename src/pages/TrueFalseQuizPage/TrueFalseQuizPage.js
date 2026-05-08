@@ -149,6 +149,13 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 <AnswerIcon isTrueButton={false} status={falseItem.status}/>
             </button>
         </div>
+        {
+            cfg.isSubscribe===0
+            &&
+            <div className='logo-gray'>
+            <img src="./images/object/logo-gray.png" alt="logo" ></img>
+            </div>
+        }
         {pageAssets.map((asset) => (
             <div key={asset.RawId || asset.id} style={asset.style}>
                 {asset.Type === 'Text' ? 

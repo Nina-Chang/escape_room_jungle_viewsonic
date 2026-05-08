@@ -46,6 +46,13 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
             <img src='./images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
             <div className={GameStartPageStyle.btnText}>Start Mission</div>
         </button>
+        {
+            cfg.isSubscribe===0
+            &&
+            <div className='logo-gray'>
+                <img src="./images/object/logo-gray.png" alt="logo" ></img>
+            </div>
+        }
         {pageAssets.map((asset) => (
             <div key={asset.RawId || asset.id} style={asset.style}>
                 {asset.Type === 'Text' ? 

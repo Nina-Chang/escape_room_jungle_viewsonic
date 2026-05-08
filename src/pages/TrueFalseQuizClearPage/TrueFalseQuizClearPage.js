@@ -59,6 +59,13 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
                 onClick={handleClickAnimation}>
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
+            {
+                cfg.isSubscribe===0
+                &&
+                <div className='logo-gray'>
+                    <img src="./images/object/logo-gray.png" alt="logo" ></img>
+                </div>
+            }
             {pageAssets.map((asset) => (
                 <div key={asset.RawId || asset.id} style={asset.style}>
                     {asset.Type === 'Text' ? 
