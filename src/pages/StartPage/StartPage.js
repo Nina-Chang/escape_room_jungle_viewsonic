@@ -40,7 +40,7 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
         <span className={StartPageStyle.btnText}>Start</span>
       </button>
       {
-        cfg.isSubscribe===0
+        cfg.settings.isSubscribe===0
         &&
         <div className='logo-gray'>
           <img src="./images/object/logo-gray.png" alt="logo" ></img>
