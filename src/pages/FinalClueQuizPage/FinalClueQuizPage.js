@@ -200,7 +200,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
            
         </div>
         {
-            cfg.settings.isSubscribe===0
+            cfg.settings.isSubscribe===false
             &&
             <div className='logo-gray'>
                 <img src="./images/object/logo-gray.png" alt="logo" ></img>

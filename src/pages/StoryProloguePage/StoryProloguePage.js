@@ -49,7 +49,7 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
           {cfg.strings.previousStoryConversation.text}
         </div>
         {
-          cfg.settings.isSubscribe===0
+          cfg.settings.isSubscribe===false
           &&
           <div className='logo-gray'>
             <img src="./images/object/logo-gray.png" alt="logo" ></img>

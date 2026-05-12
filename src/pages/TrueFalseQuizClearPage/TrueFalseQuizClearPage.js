@@ -60,7 +60,7 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
                 <img src='./images/object/jungle_escape_nect_button.png' alt="Return to Map" loading="lazy" decoding="async"/>
             </button>
             {
-                cfg.settings.isSubscribe===0
+                cfg.settings.isSubscribe===false
                 &&
                 <div className='logo-gray'>
                     <img src="./images/object/logo-gray.png" alt="logo" ></img>
