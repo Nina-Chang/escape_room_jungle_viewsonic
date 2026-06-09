@@ -37,7 +37,7 @@ export const GameSuccessPage = ({ navigateTo, backgroundImage,bgmAudio,setCurren
   return (
     <div className="page-container" style={pageStyle}>
       <div className={GameSuccessPageStyle.explanationSection}>
-          <div style={{color:`${cfg.themeForegroundColor}`,...cfg.strings.wholeGameCompletedExplanation.style}} className={GameSuccessPageStyle.explanationText}>
+          <div style={{color:`${cfg.settings.themeForegroundColor}`,...cfg.strings.wholeGameCompletedExplanation.style}} className={GameSuccessPageStyle.explanationText}>
             {cfg.strings.wholeGameCompletedExplanation.text}
           </div>
           <img src='./images/object/jungle_escape_clue_frame.png' style={{transform:'scale(1.3,1)'}} alt="jungle_escape_clue_frame" loading="lazy" decoding="async"/>

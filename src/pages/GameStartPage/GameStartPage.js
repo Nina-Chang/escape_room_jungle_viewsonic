@@ -31,7 +31,7 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
             </div>
             <div 
                 className={GameStartPageStyle.explanationText} 
-                style={{color:`${cfg.themeForegroundColor}`,...cfg.strings.startGameExplanationText.style}}
+                style={{color:`${cfg.settings.themeForegroundColor}`,...cfg.strings.startGameExplanationText.style}}
                 dangerouslySetInnerHTML={{
                     __html: (cfg.strings.startGameExplanationText.text || '').replace(/\r\n/g, '<br />')
                 }}
@@ -44,7 +44,7 @@ export const GameStartPage = ({ navigateTo, backgroundImage }) => {
          style={{transform: `translate(-50%, -50%) scale(${buttonScale})`}}
          onClick={handleClickAnimation}>
             <img src='./images/object/jungle_escape_mission_button.png' alt="Continue" loading="lazy" decoding="async"/>
-            <div className={GameStartPageStyle.btnText} style={{color:`${cfg.themeForegroundColor}`}}>Start Mission</div>
+            <div className={GameStartPageStyle.btnText} style={{color:`${cfg.settings.themeForegroundColor}`}}>Start Mission</div>
         </button>
         {
             cfg.settings.isSubscribe===false

@@ -87,7 +87,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
   return (
     <div className="page-container" style={pageStyle}>
         <div className={FinalClueQuizPageStyle.quizSection}>
-            <div className={FinalClueQuizPageStyle.explanationSection} style={{color:`${cfg.themeForegroundColor}`}}>
+            <div className={FinalClueQuizPageStyle.explanationSection} style={{color:`${cfg.settings.themeForegroundColor}`}}>
                 Assemble the clues you've gathered. Only then will you uncover the truth and complete the rescue.
             </div>
             <img src='./images/object/jungle_escape_question_frame03.png' alt="jungle_escape_question_frame03" loading="lazy" decoding="async"/>
@@ -95,7 +95,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 currentProblemIndex===0
                 &&
                 <>
-                    <div className={FinalClueQuizPageStyle.questionText} style={{color:`${cfg.themeForegroundColor}`}}>{problem[0].question}</div>
+                    <div className={FinalClueQuizPageStyle.questionText} style={{color:`${cfg.settings.themeForegroundColor}`}}>{problem[0].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionSection}>
                         <img 
                             onMouseEnter={() => setButtonScale(prev => ({...prev, A:1.05}))}
@@ -125,7 +125,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 currentProblemIndex===1
                 &&
                 <>
-                    <div className={FinalClueQuizPageStyle.questionText} style={{color:`${cfg.themeForegroundColor}`}}>{problem[1].question}</div>
+                    <div className={FinalClueQuizPageStyle.questionText} style={{color:`${cfg.settings.themeForegroundColor}`}}>{problem[1].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[1].option[0]}</div>
@@ -164,7 +164,7 @@ export const FinalClueQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
                 currentProblemIndex===2
                 &&
                 <>
-                    <div className={FinalClueQuizPageStyle.questionText} style={{color:`${cfg.themeForegroundColor}`}}>{problem[2].question}</div>
+                    <div className={FinalClueQuizPageStyle.questionText} style={{color:`${cfg.settings.themeForegroundColor}`}}>{problem[2].question}</div>
                     <div className={FinalClueQuizPageStyle.answerOptionWithTextSection}>
                         <div className={FinalClueQuizPageStyle.answerOptionWithText}>
                             <div className={FinalClueQuizPageStyle.answerText}>{problem[2].option[0]}</div>

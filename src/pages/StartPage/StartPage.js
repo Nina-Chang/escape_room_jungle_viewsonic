@@ -25,10 +25,10 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
 
   return (
     <div className='page-container' style={pageStyle}>
-      <div className={StartPageStyle.title} style={{color:`${cfg.themeForegroundColor}`,...cfg.strings.startTitle.style}}>
+      <div className={StartPageStyle.title} style={{color:`${cfg.settings.themeForegroundColor}`,...cfg.strings.startTitle.style}}>
         {cfg.strings.startTitle.text}
       </div>
-      <div className={StartPageStyle.subTitle} style={{color:`${cfg.themeForegroundColor}`,...cfg.strings.startSubtitle.style}}>
+      <div className={StartPageStyle.subTitle} style={{color:`${cfg.settings.themeForegroundColor}`,...cfg.strings.startSubtitle.style}}>
         {cfg.strings.startSubtitle.text}
       </div>
       <button className={StartPageStyle.imageButton} 
@@ -37,7 +37,7 @@ export const StartPage = ({navigateTo,backgroundImage,onStartGame}) => {
         style={{transform: `translate(-50%, -50%) scale(${buttonScale})`}}
         onClick={handleClickAnimation}>
         <img src='./images/object/jungle_escape_start_button.png' alt="Start Button" loading="lazy" decoding="async" />
-        <span className={StartPageStyle.btnText} style={{color:`${cfg.themeForegroundColor}`}}>Start</span>
+        <span className={StartPageStyle.btnText} style={{color:`${cfg.settings.themeForegroundColor}`}}>Start</span>
       </button>
       {
         cfg.settings.isSubscribe===false

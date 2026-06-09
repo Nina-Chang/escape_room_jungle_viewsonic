@@ -125,10 +125,10 @@ export const TrueFalseQuizPage = ({ navigateTo, backgroundImage,setWrongPathBack
         <div className={TrueFalseQuizPageStyle.questionSection}>
             <img src='./images/object/jungle_escape_question_frame01.png' alt="jungle_escape_question_frame01" loading="lazy" decoding="async" />
         </div>
-        <span className={TrueFalseQuizPageStyle.questionIndexText} style={{color:`${cfg.themeForegroundColor}`}}>
+        <span className={TrueFalseQuizPageStyle.questionIndexText} style={{color:`${cfg.settings.themeForegroundColor}`}}>
             {currentProblemIndex+1}/{totalProblemSum}
         </span>
-        <span className={TrueFalseQuizPageStyle.questionText} style={{color:`${cfg.themeForegroundColor}`}}>
+        <span className={TrueFalseQuizPageStyle.questionText} style={{color:`${cfg.settings.themeForegroundColor}`}}>
             {tfQuestions[currentProblemIndex]?.question || ``}
         </span>
         <div className={TrueFalseQuizPageStyle.trueButtonIcon}>

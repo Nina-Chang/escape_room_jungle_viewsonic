@@ -191,7 +191,7 @@ export const MapPage = ({ navigateTo, backgroundImage,currentStep,setWrongPathBa
             <div className={MapPageStyle.mapSection}>
                 <img src='./images/object/jungle_escape_map.png' alt="jungle_escape_map.png" loading="lazy" decoding="async"/>
             </div>
-            <div className={MapPageStyle.explanationText} style={{color:`${cfg.themeForegroundColor}`}}>
+            <div className={MapPageStyle.explanationText} style={{color:`${cfg.settings.themeForegroundColor}`}}>
                 {explanationText[currentStep-1].text}
             </div>
             {locations.map((location) => (

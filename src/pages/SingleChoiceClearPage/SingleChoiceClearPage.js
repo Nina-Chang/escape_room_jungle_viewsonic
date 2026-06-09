@@ -61,8 +61,8 @@ export const SingleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrentSt
     return (
         <div className="page-container" style={pageStyle}>
             <div className={SingleChoiceClearPageStyle.explanationSection}>
-                <span className={SingleChoiceClearPageStyle.explanationTextFirstLine} style={{color:`${cfg.themeForegroundColor}`}}>You found...</span>
-                <span className={SingleChoiceClearPageStyle.explanationTextSecondLine} style={{color:`${cfg.themeForegroundColor}`}}>A Walkie Talkie!</span>
+                <span className={SingleChoiceClearPageStyle.explanationTextFirstLine} style={{color:`${cfg.settings.themeForegroundColor}`}}>You found...</span>
+                <span className={SingleChoiceClearPageStyle.explanationTextSecondLine} style={{color:`${cfg.settings.themeForegroundColor}`}}>A Walkie Talkie!</span>
                 <img src='./images/object/jungle_escape_clue_frame.png' alt="jungle_escape_true_false_completed" loading="lazy" decoding="async"/>
             </div>
             <div className={`${SingleChoiceClearPageStyle.clueSection} ${itemDisabled&&SingleChoiceClearPageStyle.itemDisabled}`}> 

@@ -42,13 +42,13 @@ export const TrueFalseQuizClearPage = ({ navigateTo, backgroundImage,setCurrentS
     return (
         <div className="page-container" style={pageStyle}>
             <div className={TrueFalseQuizClearPageStyle.explanationSection}>
-                <span className={TrueFalseQuizClearPageStyle.explanationTextFirstLine} style={{color:`${cfg.themeForegroundColor}`}}>You found...</span>
-                <span className={TrueFalseQuizClearPageStyle.explanationTextSecondLine} style={{color:`${cfg.themeForegroundColor}`}}>A Notebook!</span>
+                <span className={TrueFalseQuizClearPageStyle.explanationTextFirstLine} style={{color:`${cfg.settings.themeForegroundColor}`}}>You found...</span>
+                <span className={TrueFalseQuizClearPageStyle.explanationTextSecondLine} style={{color:`${cfg.settings.themeForegroundColor}`}}>A Notebook!</span>
                 <img src='./images/object/jungle_escape_clue_frame.png' alt="jungle_escape_true_false_completed" loading="lazy" decoding="async"/>
             </div>
             <div className={TrueFalseQuizClearPageStyle.clueSection}>
-                <span className={TrueFalseQuizClearPageStyle.clueTextFirstLine} style={{color:`${cfg.themeForegroundColor}`}}>DATE: 08/16</span>
-                <span className={TrueFalseQuizClearPageStyle.clueTextSecondLine} style={{color:`${cfg.themeForegroundColor}`}}>We lost comms with Fynn.B. Last heard he was going toward the marsh...</span>
+                <span className={TrueFalseQuizClearPageStyle.clueTextFirstLine} style={{color:`${cfg.settings.themeForegroundColor}`}}>DATE: 08/16</span>
+                <span className={TrueFalseQuizClearPageStyle.clueTextSecondLine} style={{color:`${cfg.settings.themeForegroundColor}`}}>We lost comms with Fynn.B. Last heard he was going toward the marsh...</span>
                 <img src='./images/object/jungle_escape_notebook.png' alt="jungle_escape_notebook" loading="lazy" decoding="async"/>
             </div>
             <button 
