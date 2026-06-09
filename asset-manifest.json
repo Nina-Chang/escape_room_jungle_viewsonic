@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/escape_room_jungle_viewsonic/static/css/main.f92908de.css",
-    "main.js": "/escape_room_jungle_viewsonic/static/js/main.83046667.js",
+    "main.js": "/escape_room_jungle_viewsonic/static/js/main.26d97713.js",
     "static/js/453.bfc0d360.chunk.js": "/escape_room_jungle_viewsonic/static/js/453.bfc0d360.chunk.js",
     "index.html": "/escape_room_jungle_viewsonic/index.html",
     "main.f92908de.css.map": "/escape_room_jungle_viewsonic/static/css/main.f92908de.css.map",
-    "main.83046667.js.map": "/escape_room_jungle_viewsonic/static/js/main.83046667.js.map",
+    "main.26d97713.js.map": "/escape_room_jungle_viewsonic/static/js/main.26d97713.js.map",
     "453.bfc0d360.chunk.js.map": "/escape_room_jungle_viewsonic/static/js/453.bfc0d360.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f92908de.css",
-    "static/js/main.83046667.js"
+    "static/js/main.26d97713.js"
   ]
 }
