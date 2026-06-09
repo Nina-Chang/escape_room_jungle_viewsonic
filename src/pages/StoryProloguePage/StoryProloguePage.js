@@ -45,7 +45,7 @@ export const StoryProloguePage = ({ navigateTo, backgroundImage }) => {
           onClick={handleClickAnimation}>
             <img src='./images/object/jungle_escape_nect_button.png' alt="Continue" loading="lazy" decoding="async"/>
         </button>
-        <div className={StoryProloguePageStyle.conversationText} style={cfg.strings.previousStoryConversation.style}>
+        <div className={StoryProloguePageStyle.conversationText} style={{color:`${cfg.themeForegroundColor}`,...cfg.strings.previousStoryConversation.style}}>
           {cfg.strings.previousStoryConversation.text}
         </div>
         {

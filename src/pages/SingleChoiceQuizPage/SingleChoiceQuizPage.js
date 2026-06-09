@@ -125,15 +125,16 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
         <div className={SingleChoiceQuizPageStyle.questionSection}>
             <img src='./images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" decoding="async" />
         </div>
-        <span className={SingleChoiceQuizPageStyle.questionIndexText}>
+        <span className={SingleChoiceQuizPageStyle.questionIndexText} style={{color:`${cfg.themeForegroundColor}`}}>
             {trueFalseQuizSum+currentProblemIndex+1}/{totalProblemSum}
         </span>
-        <span className={SingleChoiceQuizPageStyle.questionText}>
+        <span className={SingleChoiceQuizPageStyle.questionText} style={{color:`${cfg.themeForegroundColor}`}}>
             {scQuestions[currentProblemIndex].question || ``}
         </span>
         <div className={SingleChoiceQuizPageStyle.answerSection}>
             <button 
             disabled={isProcessing.current} 
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'A' ? SingleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>{handleClick('A',scQuestions[currentProblemIndex]?.options[0])}}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{scQuestions[currentProblemIndex]?.options[0] || `A`}</div>
@@ -141,6 +142,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
             </button>
             <button 
             disabled={isProcessing.current} 
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'B' ? SingleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('B',`${scQuestions[currentProblemIndex]?.options[1]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{scQuestions[currentProblemIndex]?.options[1] || `B`}</div>
@@ -148,6 +150,7 @@ export const SingleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPathB
             </button>
             <button 
             disabled={isProcessing.current} 
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${SingleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'C' ? SingleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('C',`${scQuestions[currentProblemIndex]?.options[2]}`)}>
                 <div className={SingleChoiceQuizPageStyle.answerText}>{scQuestions[currentProblemIndex]?.options[2] || `C`}</div>

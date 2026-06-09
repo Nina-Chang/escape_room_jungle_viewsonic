@@ -154,15 +154,16 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
         <div className={MultipleChoiceQuizPageStyle.quizSection}>
             <img src='./images/object/jungle_escape_question_frame02.png' alt="jungle_escape_single_selection_frame01" loading="lazy" decoding="async" />
         </div>
-        <div className={MultipleChoiceQuizPageStyle.questionIndexText}>
+        <div className={MultipleChoiceQuizPageStyle.questionIndexText} style={{color:`${cfg.themeForegroundColor}`}}>
             {prevQuestionsCount+currentProblemIndex+1}/{totalProblemSum}
         </div>
-        <div className={MultipleChoiceQuizPageStyle.questionText}>
+        <div className={MultipleChoiceQuizPageStyle.questionText} style={{color:`${cfg.themeForegroundColor}`}}>
             {currentQ?.question || `Is the object you found a compass?`}
         </div>
         <div className={MultipleChoiceQuizPageStyle.answerSection}>
             <button 
             disabled={isProcessing.current}
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'A' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('A')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[0] || `A`}</span>
@@ -170,6 +171,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             </button>
             <button 
             disabled={isProcessing.current}
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'B' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('B')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[1] || `B`}</span>
@@ -177,6 +179,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             </button>
             <button 
             disabled={isProcessing.current}
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'C' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('C')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[2] || `C`}</span>
@@ -184,6 +187,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             </button>
             <button 
             disabled={isProcessing.current}
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'D' ? MultipleChoiceQuizPageStyle.clicking : ''}`}
             onClick={()=>handleClick('D')}>
                 <span className={MultipleChoiceQuizPageStyle.answerText}>{currentQ?.options[3] || `D`}</span>
@@ -191,6 +195,7 @@ export const MultipleChoiceQuizPage = ({ navigateTo, backgroundImage,setWrongPat
             </button>
             <button 
             disabled={isProcessing.current} 
+            style={{color:`${cfg.themeForegroundColor}`}}
             className={`${MultipleChoiceQuizPageStyle.imageButton} ${clickingBtn === 'submit' ? MultipleChoiceQuizPageStyle.clicking : ''} ${buttonHidden&&MultipleChoiceQuizPageStyle.buttonHidden}`} 
             onClick={()=>handleSubmitClick()}>
                 <span className={MultipleChoiceQuizPageStyle.submitButtonText}>Submit</span>

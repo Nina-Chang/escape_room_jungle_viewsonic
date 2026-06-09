@@ -38,8 +38,8 @@ export const MultipleChoiceClearPage = ({ navigateTo, backgroundImage,setCurrent
     return (
         <div className="page-container" style={pageStyle}>
             <div className={MultipleChoiceClearPageStyle.explanationSection}>
-                <div className={MultipleChoiceClearPageStyle.explanationTextFirstLine}>You found...</div>
-                <div className={MultipleChoiceClearPageStyle.explanationTextSecondLine}>A Photo!</div>
+                <div className={MultipleChoiceClearPageStyle.explanationTextFirstLine} style={{color:`${cfg.themeForegroundColor}`}}>You found...</div>
+                <div className={MultipleChoiceClearPageStyle.explanationTextSecondLine} style={{color:`${cfg.themeForegroundColor}`}}>A Photo!</div>
                 <img src='./images/object/jungle_escape_clue_frame.png' alt="jungle_escape_true_false_completed" loading="lazy" decoding="async"/>
             </div>
             <div className={MultipleChoiceClearPageStyle.clueSection}>
